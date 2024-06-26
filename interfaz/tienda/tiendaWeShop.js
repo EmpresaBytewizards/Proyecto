@@ -10,31 +10,35 @@ const imagenes=[
 ];
 
 const TIEMPO_INTERVALO_MILESIMAS_SEG = 2500;
-let imagen=document.querySelector('#imagen');
-let posicionActual=0;
-let intervalo=setInterval(pasarFoto, TIEMPO_INTERVALO_MILESIMAS_SEG);
+let $imagen=document.querySelector('#imagen');
+let $posicionActual=0;
+let $intervalo=setInterval(pasarFoto, TIEMPO_INTERVALO_MILESIMAS_SEG);
 let $botonRetroceder = document.querySelector('#retroceder');
 let $botonAvanzar = document.querySelector('#avanzar');
-}
+
 
 function pasarFoto() {
-    if(posicionActual >= imagenes.length - 1) {
-        posicionActual = 0;
+    if($posicionActual >= imagenes.length - 1) {
+        $posicionActual = 0;
     } else {
-        posicionActual++;
+        $posicionActual++;
     }
     renderizarImagen();
 }
 
 function retrocederFoto() {
-    if(posicionActual <= 0) {
-        posicionActual = imagenes.length - 1;
+    if($posicionActual <= 0) {
+        $posicionActual = imagenes.length - 1;
     } else {
-        posicionActual--;
+        $posicionActual--;
     }
     renderizarImagen();
 }
 
 function renderizarImagen () {
-    $imagen.style.backgroundImage = `url(${imagenes[posicionActual]})`;
+    $imagen.style.backgroundImage = `url(${imagenes[$posicionActual]})`;
+}
+$botonAvanzar.addEventListener('click', pasarFoto);
+$botonRetroceder.addEventListener('click', retrocederFoto);
+renderizarImagen();
 }
