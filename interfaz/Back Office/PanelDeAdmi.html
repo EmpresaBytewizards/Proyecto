@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>PANEL DE ADMINISTRADOR</title>
+        <link rel="stylesheet" href="PanleDeAdmi.css">
+    </head>
+    <body>
+        <main class="panel-administrador">
+            <h1>PANEL DE ADMINISTRADOR</h1>
+            <h2>Ingrese los datos para autenticar usuario</h2>
+            <br>
+            <!--Nombre del vendedor-->
+            <label for="NombreVen">Ingrese Nombre</label>
+            <br>
+            <input class="cajaDeTexto" type="text" id="NombreVen" placeholder="Ej: Juan">
+            <br>
+            <!--Apellido del vendedor-->
+            <label for="ApellidoVen">Ingrese Apellido</label>
+            <br>
+            <input class="cajaDeTexto" type="text" id="ApellidoVen" placeholder="Ej: Gonzales">
+            <br>
+            <!--C.I del vendedor-->
+            <label for="C.I-Ven">Ingrese C.I</label>
+            <br>
+            <input class="cajaDeTexto" type="numer" id="C.I-Ven" placeholder="Ej: 52878823 lo debe ingresar tal cual al ejemplo">
+            <br>
+            <!--Email del vendedor-->
+            <label for="EmailVen">Ingrese Email</label>
+            <br>
+            <input class="cajaDeTexto" type="text" id="EmailVen" placeholder="Email">
+            <br>
+            <!--Numero de teléfono del vendedor-->
+            <label for="NumeroTel">Ingrese Numero de Telefono</label>
+            <br>
+            <input class="cajaDeTexto" type="numer" id="NumeroTel" placeholder="Esta opcion esta en desarrollo">
+            <br>
+            <!--Direccion del local del vendedor-->
+            <label for="DireccionVen">Ingrese Direccion de su local</label>
+            <br>
+            <input class="cajaDeTexto" type="text" id="DireccionVen" placeholder="Direccion">
+            <br>
+            <input class="botonValidar" type="submit" value="Validar datos y enviar al servidor">
+            <br>
+            <br>
+        </main>
+        <footer class="Copy">Este es el panel de administracion de vendedores y sus productos de S.I.G.T.O</footer>
+        <script src="jquery-3.7.1.min.js"></script>
+        <script src="PanelDeAdmi.js"></script>
+    </body>
+</html>

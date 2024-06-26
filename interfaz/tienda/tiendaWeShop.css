@@ -1,0 +1,128 @@
+/*body{
+    margin: 0;
+}
+
+header{
+    display: flex;
+    background-color: dimgray;
+    height: 60px;
+    align-items: center;
+    padding: 10px; 
+    
+}
+.logo {
+    display: flex;
+    
+}
+
+.logo-weShop {
+    height: 50px;
+    margin-right: 10px;
+}
+.icon{
+    width: 50px;
+}
+
+.Buscador{
+    display: flex;
+    
+}
+.Botones-de-encabezado{
+    
+    margin: 0 auto;
+}
+
+.nav-botonesbanner{
+    display: flex;
+}
+
+.nav-botonesEnlace{
+    display: flex;
+    margin:auto;
+    
+}
+.lupa{
+width: 20px;
+}
+*/
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+header{
+    padding: 10px 20px;
+    background-color: rgb(72, 72, 72);
+}
+
+table{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.logo img{
+    height: 70px;
+    margin-left: 70px;
+    cursor:pointer;
+}
+
+.BarraDeBuscador{
+    width: 100%;
+    padding: 0 20px;
+   
+}
+
+.BarraDeBuscador input{
+    width: 60%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid rgb(72, 72, 72);
+    border-radius: 4px;
+    margin-right: 10px;
+
+}
+
+.Registro-InicioDeSesion{
+    text-align: right;
+    white-space: nowrap;
+}
+
+.Registro-InicioDeSesion nav a{
+    padding: 10px 20px;
+    background-color: rgb(255, 50, 0);
+    border: 1px solid rgb(255, 255, 255);
+    border-radius: 4px;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    margin-left: 20px;
+}
+
+
+.BotonesDeNavegacion{
+    text-align: center;
+    padding-top: 10px;
+}
+
+.BotonesDeNavegacion nav a{
+    padding: 10px;
+    background-color: rgb(255, 50, 0);;
+    border: 1px solid rgb(255, 255, 255);;
+    color: rgb(255, 255, 255);
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 0 10px;
+}
+.lupa{
+    width: 30px;
+    color:white;
+    
+}
+.carrito{
+    width: 50px;
+    color: white;
+    margin-left:30px;
+    cursor:pointer;
+}

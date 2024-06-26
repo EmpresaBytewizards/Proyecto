@@ -1,0 +1,47 @@
+*{
+
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; 
+}
+
+
+.panel-registro {
+    
+    width:50%;
+    background:  rgb(72, 72, 72);
+    padding: 60px;
+    margin:auto;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color:white;
+    border-radius: 30px;
+    box-shadow: 7px 13px 37px #000;
+    
+}
+
+.btnCrearCuentas{
+    margin-top: 300px;
+    text-align: right;
+    white-space: nowrap;
+}
+
+.btnCrearCuentas nav a{
+    
+    padding: 10px 20px;
+    background-color: rgb(255, 50, 0);
+    border: 1px solid rgb(255, 255, 255);
+    border-radius: 4px;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    margin-left: 20px;
+}
+
+
+.Copy{
+    display:Flex;
+    justify-content: space-around;
+    color:black;
+    width:75%;
+    
+    
+}
