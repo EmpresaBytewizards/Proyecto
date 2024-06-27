@@ -1,50 +1,4 @@
-/*body{
-    margin: 0;
-}
 
-header{
-    display: flex;
-    background-color: dimgray;
-    height: 60px;
-    align-items: center;
-    padding: 10px; 
-    
-}
-.logo {
-    display: flex;
-    
-}
-
-.logo-weShop {
-    height: 50px;
-    margin-right: 10px;
-}
-.icon{
-    width: 50px;
-}
-
-.Buscador{
-    display: flex;
-    
-}
-.Botones-de-encabezado{
-    
-    margin: 0 auto;
-}
-
-.nav-botonesbanner{
-    display: flex;
-}
-
-.nav-botonesEnlace{
-    display: flex;
-    margin:auto;
-    
-}
-.lupa{
-width: 20px;
-}
-*/
 
 *{
     box-sizing: border-box;
@@ -108,8 +62,8 @@ table{
 
 .BotonesDeNavegacion nav a{
     padding: 10px;
-    background-color: rgb(255, 50, 0);
-    border: 1px solid rgb(255, 255, 255);
+    background-color: rgb(255, 50, 0);;
+    border: 1px solid rgb(255, 255, 255);;
     color: rgb(255, 255, 255);
     border-radius: 4px;
     cursor: pointer;
@@ -126,13 +80,19 @@ table{
     margin-left:30px;
     cursor:pointer;
 }
+
+
 .carousel {
-    max-width: 800px;
+    max-width: 600px;
+    max-height: 600px;
     margin: 0 auto;
     display: flex;
+
 }
-#imagen {
+#imagen  {
     width: 100%;
     height: 400px;
     background-size: cover;
+
 }
+
