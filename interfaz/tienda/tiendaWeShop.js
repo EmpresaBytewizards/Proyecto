@@ -48,13 +48,12 @@ window.onload = function () {
     const IMAGENES = [
         'imgprueba.jpg',
         'imgprueba2.jpg',
-        'imgprueba3.jpg',
         'imgprueba4.jpg',
         'imgprueba5.jpg',
         'imgprueba6.jpg'
 
     ];
-    const TIEMPO_INTERVALO_MILESIMAS_SEG = 1000;
+    const TIEMPO_INTERVALO_MILESIMAS_SEG = 2000;
     let posicionActual = 0;
     let $imagen = document.querySelector('#imagen');
     let intervalo;
