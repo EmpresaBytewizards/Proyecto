@@ -133,8 +133,15 @@ figcaption article{
 }
 
 #mas_productos{
-    background-color: chocolate;
+   
+    width: 400px;
+    height: 400px;
     
+}
+#mas_vendidos{
+    
+    width: 400px;
+    height: 400px;
 }
 article{
     position: absolute;
@@ -142,10 +149,15 @@ article{
     grid-template-columns: repeat(3, 1fr);
     gap: 5px;
     background-color: chocolate;
+
 }
 
 figure{
     background-color: white;
+    
+}
+#precio_actual{
+    color: green;
 }
 
 
