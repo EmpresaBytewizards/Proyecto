@@ -1,48 +1,3 @@
-/*
-window.onload = function(){
-    const imagenes=[
-    'img prueba.jpg',
-    'img prueba2.jpg',
-    'img prueba3.jpg',
-    'img prueba4.jpg',
-    'img prueba5.jpg',
-    'img prueba6.jpg'
-
-    ];
-
-    const TIEMPO_INTERVALO_MILESIMAS_SEG = 1000;
-    let $imagen=document.querySelector('#imagen');
-    let posicionActual = 0;
-    let intervalo;
-
-
-    function pasarFoto() {
-        if(posicionActual >= imagenes.length - 1) {
-            posicionActual = 0;
-        } else {
-            posicionActual++;
-        }
-        renderizarImagen();
-    }
-
-    function retrocederFoto() {
-        if(posicionActual <= 0) {
-            posicionActual = imagenes.length - 1;
-        } else {
-            posicionActual--;
-        }
-        renderizarImagen();
-    }
-
-    function renderizarImagen () {
-        $imagen.style.backgroundImage = `url(${imagenes[posicionActual]})`;
-    }
-
-
-
-}
-*/
-
 window.onload = function () {
     // Variables
     const IMAGENES = [
@@ -91,3 +46,15 @@ window.onload = function () {
     renderizarImagen();
     playIntervalo();
 }
+
+document.getElementById('btn_carrito').onclick = function(){
+
+    document.getElementById('contenido_carrito').showModal();
+
+};
+
+document.getElementById('cerrar_contenido').onclick = function(){
+
+    document.getElementById('contenido_carrito').close();
+
+};

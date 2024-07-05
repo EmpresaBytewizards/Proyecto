@@ -160,4 +160,11 @@ figure{
     color: green;
 }
 
-
+#btn_carrito{
+    display:contents; /*he que el boton no aparesca pero si la imagen */
+}
+dialog{
+    text-align: center;
+    width: 300px;
+    height: 200px;
+}
