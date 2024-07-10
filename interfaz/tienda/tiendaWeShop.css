@@ -189,3 +189,14 @@ align-items: center;
 background-color: rgba(224, 130, 63, 0.678);
 
 }
+#descripcón{
+   background-color:bisque;
+}
+#precio{
+    text-align: center;
+    font-size: 55px;
+}
+#cantidad{
+    text-align:end;
+    font-size: 20px;
+}
