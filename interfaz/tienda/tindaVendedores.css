@@ -120,98 +120,54 @@ h3{
     height: 100%; 
     background-size: cover; /*FRANCISCO Cubre todo el area(fondo) */
 }
-
-article img {
-    width: 300px; 
-    height: auto; 
+#prox_descuentos{
+    max-width: 700px;
+    max-height: 700px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-figcaption article{
-    text-align: center;
-    font-family: Arial;
-}
-
-#mas_productos{
-   
-    width: 400px;
-    height: 400px;
-    
-}
-#mas_vendidos{
-    
-    width: 400px;
-    height: 300px;
+img{
+    max-width: 200px;
+    max-height: 100px;
 }
 article{
     position: absolute;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
     gap: 5px;
-    background-color: chocolate;
-
-}
-
-figure{
     background-color: white;
-    
-}
-#precio_actual{
-    color: green;
-}
 
-#btn_carrito{
-    display:contents; /*he que el boton no aparesca pero si la imagen */
 }
-dialog{
-    text-align: center;
-    width: 300px;
-    height: 200px;
+#mostrar_imagen{
+    max-width: 500px;
+    max-height: 500px;
 }
-/*******************************/
-/*******************************/
-/*******************************/
-/* esto es pal templai */
-
 textarea {
     resize: none;
   }
-  #h_templai{
-color: black;
-}
-#area_comentar{
-    grid-area: 'myArea';
-}
-#a_templai{
-background-color: dimgray;
-display: grid;
-grid-template: 250px / auto auto auto;
-grid-template:'myArea . .';
-align-items: center;
+
+button{
+    background-color: darksalmon;
+    border-color: black;
 
 }
-#a_templai button{
-background-color: rgba(224, 130, 63, 0.678);
 
-}
-#descripcón{
-   background-color:bisque;
-}
-#precio{
+#area_vender{
     text-align: center;
-    font-size: 55px;
 }
-#cantidad{
-    text-align:end;
-    font-size: 20px;
+
+#Pagos{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
 }
-#comprar{
-    border: none;
-    border-radius: 10px;
-    
+
+#ganancias_totales{
+   color: green;
 }
-#btn_comentar{
-    border: none;
-    border-radius: 10px;
+#perdidas_reclamos{
+    color: red;
 }
-/*******************************/
-/*******************************/
-/* lo de arriba es del templeit */
+#registrio_paga{
+    text-align: center;
+}
