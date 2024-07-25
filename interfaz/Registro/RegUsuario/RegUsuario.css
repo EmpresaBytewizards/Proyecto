@@ -6,11 +6,19 @@
     
 }
 
+.LogoWeShop{
+
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+}
 
 header{
     display: flex;
     justify-content: center;
     font-family: "Roboto", sans-serif;
+    font-weight: 100;
     font-style: italic;
     color: rgb(255, 255, 255);
     padding: 10px 20px;
@@ -18,12 +26,13 @@ header{
     /*background-color: rgb(255, 50, 0); Naranja */
 }
 
-.panel-registro {
+.registro-usuario{
     margin-top: 50px;
     width:50%;
     background-color: rgb(255, 50, 0);
     /*background:  rgb(72, 72, 72); Gris*/
     font-family: "Roboto", sans-serif;
+    font-weight: 100;
     font-style: italic;
     padding: 60px;
     margin:auto;
@@ -34,28 +43,32 @@ header{
     
 }
 
-.btnCrearCuentas{
+.btnContinuar{
     
-    text-align: right;
+    text-align:left;
     white-space: nowrap;
 }
 
-.btnCrearCuentas nav a{
+.btnContinuar nav a{
     
     padding: 10px 20px;
     background:  rgb(72, 72, 72);
     border: 1px solid rgb(255, 255, 255);
-    font-family: "Roboto", sans-serif; 
+    font-family: "Roboto", sans-serif;
+    font-weight: 100;
     font-style: italic;
-    font-size: 20px;
-    font-weight: 500;
-    /* font-weight este codigo sirve pra el grosor de la letra*/
-    border-radius: 10px;
+    border-radius: 4px;
     color: rgb(255, 255, 255);
     cursor: pointer;
-    margin-left: 50px;
+    margin-left: 450px;
 }
 
+.barra_input{
+
+    margin-left: 10px;
+    display: flex;
+    justify-content: center;
+}
 
 .Copy{
     display:Flex;
