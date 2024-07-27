@@ -120,7 +120,7 @@ h3{
 
 article img {
     width: 300px; 
-    height: auto; 
+    height: 250px; 
 }
 figcaption article{
     text-align: center;
@@ -208,6 +208,10 @@ background-color: rgba(224, 130, 63, 0.678);
 #btn_comentar{
     border: none;
     border-radius: 10px;
+}
+#img_producto{
+    width: 300px;
+    height: 300px ;
 }
 /*******************************/
 /*******************************/

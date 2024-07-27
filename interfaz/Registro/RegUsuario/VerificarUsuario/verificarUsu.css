@@ -1,0 +1,50 @@
+*{
+
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; 
+    
+}
+
+.LogoWeShop{
+
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+}
+
+header{
+    display: flex;
+    justify-content: center;
+    font-family: "Roboto", sans-serif;
+    font-weight: 100;
+    font-style: italic;
+    color: rgb(255, 255, 255);
+    padding: 10px 20px;
+    background:  rgb(72, 72, 72);
+    /*background-color: rgb(255, 50, 0); Naranja */
+}
+.panel-registro{
+    margin-top: 50px;
+    width:50%;
+    background-color:rgb(184, 174, 174);
+    /*background:  rgb(72, 72, 72); Gris*/
+    font-family: "Roboto", sans-serif;
+    font-weight: 100;
+    font-style: italic;
+    padding: 60px;
+    margin:auto;
+    color: rgb(255, 255, 255);
+    border-radius: 30px;
+    box-shadow: 1px 1px 10px #000;
+    /* cambiar el tamaño de las letras de h2 y h3 con font-size*/
+    
+}
+
+.btn_verificar{
+
+}
+.btn_reenviar{
+
+}
