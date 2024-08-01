@@ -18,7 +18,7 @@ header{
     /*background-color: rgb(255, 50, 0); Naranja */
 }
 
-.panel-registro {
+.panelRegistro {
     margin-top: 50px;
     width:50%;
     background-color: rgb(255, 50, 0);
@@ -34,13 +34,13 @@ header{
     
 }
 
-.btnCrearCuentas{
+.botonCrearCuentas{
     
     text-align: right;
     white-space: nowrap;
 }
 
-.btnCrearCuentas nav a{
+.botonCrearCuentas nav a{
     
     padding: 10px 20px;
     background:  rgb(72, 72, 72);

@@ -25,7 +25,7 @@ header{
     background:  rgb(72, 72, 72);
     /*background-color: rgb(255, 50, 0); Naranja */
 }
-.panelVerificarUsuComprador{
+.panelVerificacionEmpresa{
     margin-top: 50px;
     width:50%;
     background-color:rgb(184, 174, 174);
@@ -44,16 +44,17 @@ header{
 p{
     color:black;
 }
+#verificacion_Empresa{
 
-.verificacion{
     width: 50%;
 }
-#btn_verificar{
+
+#btn_verificar_Empresa{
 
     background-color: rgb(255, 50, 0);
     color: rgb(255, 255, 255);
 }
-#btn_reenviar{
+#btn_reenviar_Empresa{
 
     background-color: rgb(255, 255, 255);
     color: rgb(255, 50, 0);
