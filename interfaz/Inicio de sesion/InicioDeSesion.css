@@ -6,7 +6,10 @@
     
 }
 
-
+h2{
+    display: flex;
+    justify-content: center;
+}
 header{
     display: flex;
     justify-content: center;
@@ -17,6 +20,7 @@ header{
     background:  rgb(72, 72, 72);
     /*background-color: rgb(255, 50, 0); Naranja */
 }
+
 .LogoWeShop{
 
     height: 70px;
@@ -25,9 +29,9 @@ header{
     cursor: pointer;
 }
 
-.panelRegistro {
+.panelInicioDeSecion{
     margin-top: 50px;
-    width:50%;
+    width:60%;
     background-color: rgb(255, 50, 0);
     /*background:  rgb(72, 72, 72); Gris*/
     font-family: "Roboto", sans-serif;
@@ -41,13 +45,13 @@ header{
     
 }
 
-.botonCrearCuentas{
+.botonIniciarSecion{
     
     text-align: right;
     white-space: nowrap;
 }
 
-.botonCrearCuentas nav a{
+.botonIniciarSecion nav a{
     
     padding: 10px 20px;
     background:  rgb(72, 72, 72);
