@@ -19,13 +19,13 @@
         </header>
         <br>
         <br>
-        <main class="panelVerificarUsuComprador">
+        <form class="panelVerificarUsuComprador">
             <h2>Verificar direccion de correo electronico.</h2>
             <p>Para verificar su correo electronico, hemos enviado un codigo de segurudad a su correo por tiempo limitado</p>
             <br>
-            <label>Insertar codigo</label>
+            <label for="verificacion_Comprador">Insertar codigo</label>
             <br>
-            <input type="text" id="verificacion_Comprador">
+            <input type="text" id="verificacion_Comprador" required="required">
             <br>
             <br>
             <button id="btn_verificar_Comprador">Verificar</button>
@@ -36,7 +36,7 @@
             <br>
             <p>Tiene que estar de acuerdo con nuestros terminos y condiciones</p>
 
-        </main>
+        </form>
         <footer class="Copy">Logueo de Usuarios</footer>
         <script src="jquery-3.7.1.min.js"></script>
         <script src="verificarUsu.js"></script>

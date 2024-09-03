@@ -79,3 +79,49 @@ header{
     
     
 }
+
+/* Actualizacion CSS Gonzalo Garcia */
+.required {
+    padding-left: 0rem;
+    text-align: left;
+    font-size: 1rem;
+}
+
+.reject {
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.accept {
+    color: rgb(255, 255, 255);
+
+}
+
+.accept::after {
+    content: " ✅";
+}
+
+/* Estilo para el botón personalizado */
+.btn {
+    background-color: #ffffff; /* Color de fondo */
+    color: white; /* Color del texto blanco */
+    border: none; /* Sin borde */
+    padding: 10px 20px; /* Espaciado interior */
+    font-size: 25px; /* Tamaño de fuente */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Cursor en forma de mano */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Transiciones suaves */
+    justify-content: center;
+}
+
+.btn:hover {
+    background-color: #a7a7a7; /* Color de fondo azul oscuro al pasar el ratón */
+    transform: scale(1.05); /* Escala el botón ligeramente */
+}
+
+.btn:focus {
+    outline: none; /* Elimina el borde de enfoque */
+}
+
+.btn:active {
+    background-color: #8d8d8d; /* Color de fondo más oscuro cuando se hace clic */
+}
