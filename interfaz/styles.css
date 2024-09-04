@@ -12,7 +12,7 @@
     font-weight: bold
 }
 body{
-    background-color: chocolate;
+    background-color: rgb(255, 106, 0);
 }
 .blackbar {
     text-align: center;
@@ -274,21 +274,17 @@ main{
 
 
 
-
-
-
-
 /* FOOTER */
 
 footer {
     display: flex;
     justify-content: center;
-    background-color: black;
+    background-color:#333;
     color: white;
 }
 
 footer li {
-    color: white;
+    color: black;
 }
 
 footer div {
