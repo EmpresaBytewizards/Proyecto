@@ -18,33 +18,36 @@
             <br>
         </header>
         <br>
-        <main class="registroUsuario">
+        <form class="registroUsuario">
             <h2>Crear cuenta</h2>
-            <label>Tu nombre</label>
-            <input type="text" id="nombre_usucomprador" class="ingresoDeDatos">
+            <label for="nombre_usucomprador">Tu nombre</label>
+            <input type="text" id="nombre_usucomprador" class="ingresoDeDatos" required="required">
             <br>
-            <label>Gmail</label>
-            <input type="text" id="gmail_comprador" class="ingresoDeDatos">
+            <label for="gmail_comprador">Gmail</label>
+            <input type="email" id="gmail_comprador" class="ingresoDeDatos" required="required">
             <br>
-            <label>Contrasena</label>
-            <input type="text" id="contraseña_comprador" class="ingresoDeDatos">
-            <h6>La contraseña debe tener al menos 8 caracteres y tener un numero como minimo.</h6>
-            <h6>Puede usar caracteres especiales si lo desea (no es obligatorio).</h6>
-            <br>
-            <label>Confirmacion de contrasena</label>
-            <input type="text" id="confirmar_contraseña" class="ingresoDeDatos">
+            <label for="contraseña_comprador">Contraseña</label>
+            <input type="password" id="contraseña_comprador" class="ingresoDeDatos" required="required">
+            <br><ul class="required">
+                <li id="caractMin" class="reject"> Minimo 5 characters. </li>
+                <li id="mayMin" class="reject"> Minimo 1 letra mayuscula. </li>
+                <li id="minMin" class="reject"> Minimo 1 letra minuscula. </li>
+                <li id="minNum" class="reject"> Al menos 1 numero. </li>
+            </ul>
+            <label for="confirmar_contraseña">Confirmacion de contraseña</label>
+            <input type="password" id="confirmar_contraseña" class="ingresoDeDatos" required="required">
             <br>
             <table>
                 <tr>
                     <td class="btnContinuar">
                         <nav>
-                            <a href="VerificarUsuario/verificarUsu.html">Continuar</a>
+                            <button class="btn" formaction="VerificarUsuario/verificarUsu.html">Continuar</button>
                         </nav>
                     </td>
                 </tr>
             </table>
 
-        </main>
+        </form>
         <br>
         <br>
         <footer class="Copy">Usuarios</footer>

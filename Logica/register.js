@@ -1,9 +1,9 @@
-document.querySelector('#contraseña_comprador').addEventListener('input', validatePassword);
-document.querySelector('#confirmar_contraseña').addEventListener('input', validatePassword);
+document.querySelector('#password').addEventListener('input', validatePassword);
+document.querySelector('#password2').addEventListener('input', validatePassword);
 
 function validatePassword() {
-    const password = document.getElementById('contraseña_comprador').value;
-    const password2 = document.getElementById('confirmar_contraseña').value;
+    const password = document.getElementById('password').value;
+    const password2 = document.getElementById('password2').value;
 
     const caractMin = document.getElementById('caractMin');
     const mayMin = document.getElementById('mayMin');
@@ -54,16 +54,16 @@ function validatePassword() {
 
     // Verificar si las contraseñas coinciden
     if (password !== password2) {
-        document.getElementById('confirmar_contraseña').setCustomValidity("The passwords do not match.");
+        document.getElementById('password2').setCustomValidity("The passwords do not match.");
     } else {
-        document.getElementById('confirmar_contraseña').setCustomValidity('');
+        document.getElementById('password2').setCustomValidity('');
     }
 
     // Mensaje de que si la contraseña no cumple con los criterios
     if (!isValid) {
-        document.getElementById('contraseña_comprador').setCustomValidity("The password does not meet the requirements.");
+        document.getElementById('password').setCustomValidity("The password does not meet the requirements.");
     } else {
-        document.getElementById('contraseña_comprador').setCustomValidity('');
+        document.getElementById('password').setCustomValidity('');
     }
 }
 

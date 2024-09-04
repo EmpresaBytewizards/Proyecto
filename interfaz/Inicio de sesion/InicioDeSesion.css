@@ -42,7 +42,6 @@ header{
     border-radius: 30px;
     box-shadow: 1px 1px 10px #000;
     /* cambiar el tamaño de las letras de h2 y h3 con font-size*/
-    
 }
 
 .botonIniciarSecion{
@@ -75,4 +74,14 @@ header{
     width:75%;
     
     
+}
+
+/* Edicion Gonzalo Garcia */
+nav{
+    display: flex;
+    justify-content: center;
+}
+
+tr{
+    display: flex;
 }
