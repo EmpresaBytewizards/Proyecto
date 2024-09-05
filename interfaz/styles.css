@@ -38,10 +38,11 @@ header {
     
 }
 #logo_pagina{
-    height: 5rem;
-    margin-left: 5rem;
+    height: 3rem;
+    margin-left: 3rem;
     cursor:pointer;
 }
+
 nav {
     display: flex;
     justify-content: space-around;
@@ -120,12 +121,13 @@ nav {
 }
 
 .toggle--dropdown {
-    display: flex;
+    display: block ruby;
     flex-direction: column;
     justify-content: space-around;
     gap: 1rem;
     padding: 1rem 1rem;
     border-radius: 10px;
+    right: -1400%;
 }
 
 
@@ -295,6 +297,7 @@ footer div {
     padding: 1rem 0;
     justify-content: center;
 }
+
 
 
 @media (min-width: 600px) {
@@ -614,5 +617,32 @@ button {
 #serviceSelector {
     height: 1.5rem;
     width: 4rem;
+}
+/* carrusel */
+.concarrusel {
+    margin: 1;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 20rem;
+    background-color: #f4f4f4;
+}
+
+.carrusel {
+    width: 80%;
+    height: 10rem;
+    overflow: hidden;
+    position: relative;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.publi {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    transition: background-image 0.5s ease-in-out;
 }
 
