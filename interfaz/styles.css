@@ -323,7 +323,6 @@ footer div {
         gap: 2rem;
         margin-right: 1rem;
         background-color: transparent;
-        TEXT-COLOR
     }
 
     .dropdown li {
@@ -534,6 +533,7 @@ button {
 .exitArticle {
     background: none;
     border: none;
+    color: black;
 }
 
 .imgArticlePage {
