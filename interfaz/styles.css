@@ -8,7 +8,7 @@
     text-decoration: none;
     box-sizing: border-box;
     appearance: none;
-    color: black;
+    color: white;
     font-weight: bold
 }
 body{
@@ -16,27 +16,26 @@ body{
 }
 .blackbar {
     text-align: center;
-    background-color: black;
+    background-color:rgb(255, 106, 0);
     color: white;
-    height: 10px;
+    height: 15px;
     font-size: 10px;
 }
 
 header {
     display: flex;
     flex-direction: column;
-    height: 100%;
-    justify-content: space-between;
-    gap: 1rem;
-    background-color:#333;
     
+    justify-content: space-between;
+    background-color:#333;
+    border-bottom-left-radius: 50%;
 }
 
 .header__top {
     display: flex;
     flex-direction: column;
-    padding: 2rem 3rem;
-    gap: 1rem;
+    padding: 1rem;
+    
 }
 #logo_pagina{
     height: 5rem;
@@ -139,13 +138,12 @@ main{
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 1rem;
     margin-bottom: 1rem;
     gap: 1rem;
     min-height: 80vh;
     background-color: #9e9892;
-    border-top-left-radius: 3rem;
-    border-bottom-right-radius: 3rem;
+    border-top-right-radius: 10%;
+    border-bottom-left-radius: 10%;
     
 }
 .renderZone{
@@ -167,19 +165,21 @@ main{
     align-items: center; /* Ensure the image is centered vertically */
     width: 100px;
     height: 100px;
+    background-color: none;
 }
 
 .photoContainer img {
     max-width: 100%;
     max-height: 100%;
     object-fit: contain;
+    background-color: none;
     border-radius: 10px; /* Add this if you want rounded corners on the image */
 }
 .productWrap{
-    background-color: rgb(255, 50, 0);
+    background-color: white;
     border-radius: 20px;
     padding: 1rem;
-    border: 1px solid black;
+    border: 3px solid rgb(255, 106, 0);
     width: 150px;
     height: 250px;
     display: flex;
@@ -190,6 +190,7 @@ main{
 }
 .productWrap span{
     font-weight: bolder;
+    color: black;
 }
 
 .title{
@@ -200,8 +201,8 @@ main{
 }
 
 .addCart{
-    background-color: rgb(88, 88, 88);
-    color: white;
+    background-color: rgb(255, 106, 0);
+    color:black;
     font-weight: bolder;
     border: 1px solid red;
     border-radius: 20px;
@@ -281,16 +282,17 @@ footer {
     justify-content: center;
     background-color:#333;
     color: white;
+    border-top-right-radius: 50%;
 }
 
 footer li {
-    color: black;
+    color: rgb(255, 255, 255);
 }
 
 footer div {
     display: flex;
     width: 70%;
-    padding: 2rem 0;
+    padding: 1rem 0;
     justify-content: center;
 }
 
@@ -321,6 +323,7 @@ footer div {
         gap: 2rem;
         margin-right: 1rem;
         background-color: transparent;
+        TEXT-COLOR
     }
 
     .dropdown li {
