@@ -29,7 +29,7 @@ fetch('http://localhost/bytewizzards/API/conectarAPI.php') // Primer render con 
     }
 }).catch((error) => console.log(error.message));
 
-function renderAll(titulo, imagen, precio_base, id, habilitacionProducto, stock) { //Funcion de renderizado de items
+function renderAll(titulo, imagen, precio_base, id_producto, habilitacionProducto, stock) { //Funcion de renderizado de items
     if (habilitacionProducto == "Deshabilitado") {
         // Si el producto no esta habilitado no se renderiza ni se hace nada 
         return;
@@ -46,7 +46,7 @@ function renderAll(titulo, imagen, precio_base, id, habilitacionProducto, stock)
     img.classList.add("imageClick");
     img.src = `${imagen}`;
     img.alt = `${titulo}`;
-    img.id = `${id}`; 
+    img.id = `${id_producto}`; 
 
     const productName = document.createElement("span");
     productName.classList.add("titulo");
@@ -64,7 +64,7 @@ function renderAll(titulo, imagen, precio_base, id, habilitacionProducto, stock)
     const addCart = document.createElement("button");
     addCart.classList.add("addCart");
     addCart.textContent = "Añadir al Carrito";
-    addCart.id = `${id}`; 
+    addCart.id = `${id_producto}`; 
     addCart.disabled = stock === 0; // Deshabilita si el stock es igual a 0
     if(addCart.disabled) {
         addCart.textContent = "No hay STOCK";
@@ -77,8 +77,8 @@ function renderAll(titulo, imagen, precio_base, id, habilitacionProducto, stock)
 }
 
 // Categorias: 
-function capture(event) { //Agarra el nombre de la categoria al clickearla 
-    if (event.target.classList.contains('category')) { //Si el elemento clickeado es una categoria capturamos la informacion
+function capture(event) { 
+    if (event.target.classList.contains('category')) { //Si el elemento clickeado es una categoria 
         event.preventDefault();
         const renderZone = document.querySelector(".renderZone");       
         renderZone.innerHTML = ``; //Limpia los elementos para renderizarlos despues
@@ -90,9 +90,9 @@ function capture(event) { //Agarra el nombre de la categoria al clickearla
 
         for (let i = 0; i < listProducts.length; i++) {
             if (categoryEv == "CATALOG") {
-                renderAll(listProducts[i].titulo, listProducts[i].imagen, listProducts[i].precio_base, listProducts[i].id_producto, listProducts[i].habilitacionProducto);
+                renderAll(listProducts[i].titulo, listProducts[i].imagen, listProducts[i].precio_base, listProducts[i].id_producto, listProducts[i].habilitacionProducto, listProducts[i].stock);
             } else if (listProducts[i].categoria == categoryEv) {
-                renderAll(listProducts[i].titulo, listProducts[i].imagen, listProducts[i].precio_base, listProducts[i].id_producto, listProducts[i].habilitacionProducto);
+                renderAll(listProducts[i].titulo, listProducts[i].imagen, listProducts[i].precio_base, listProducts[i].id_producto, listProducts[i].habilitacionProducto, listProducts[i].stock);
             }
         }
     }
@@ -143,7 +143,7 @@ function searchProducts(search, searchCATALOG) {
     // Filtra productos por busqueda
     listProducts.forEach(product => {
         if (product.titulo.toLowerCase().includes(search) || search === '') {
-            renderAll(product.titulo, product.imagen, product.precio_base, product.id_producto, product.habilitacionProducto);
+            renderAll(product.titulo, product.imagen, product.precio_base, product.id_producto, product.habilitacionProducto, product.stock);
         }
     });
     
@@ -169,13 +169,13 @@ logoPagina.addEventListener("click", (event) => {
     categoryName.innerText = "CATALOGO";
 
     for (let i = 0; i < listProducts.length; i++) {
-        renderAll(listProducts[i].titulo, listProducts[i].imagen, listProducts[i].precio_base, listProducts[i].id_producto, listProducts[i].habilitacionProducto);
+        renderAll(listProducts[i].titulo, listProducts[i].imagen, listProducts[i].precio_base, listProducts[i].id_producto, listProducts[i].habilitacionProducto, listProducts[i].stock);
     }
 });
 
 document.addEventListener('click', capture);
 
-function renderCartItem(titulo, price, id) {
+function renderCartItem(titulo, precio_base, id_producto) {
     const cartItems = document.querySelector('.cartItems');
 
     const productCart = document.createElement("div");
@@ -187,7 +187,7 @@ function renderCartItem(titulo, price, id) {
 
     const cartPrice = document.createElement("p");
     cartPrice.classList.add("cart__price");
-    cartPrice.textContent = `$${price}`;
+    cartPrice.textContent = `$${precio_base}`;
 
     const deleteButton = document.createElement("button");
     deleteButton.classList.add('btnCarrito');
@@ -206,21 +206,21 @@ function updateTotalPrice() {
     let totalPrice = 0;
 
     cartItems.forEach(item => {
-        const price = parseFloat(item.querySelector('.cart__price').textContent.replace('$', ''));
-        totalPrice += price;
+        const precio_base = parseFloat(item.querySelector('.cart__price').textContent.replace('$', ''));
+        totalPrice += precio_base;
     });
 
     document.querySelector('.checkout span').textContent = `TOTAL: $${totalPrice.toFixed(2)}`;
 }
 
 // Función para renderizar el artículo en la página de artículo
-function renderArticleItem(titulo, price, image, id, descripcion, stock, nombre_empresa) {
-    document.querySelector('.articlePageTitle').textContent = `${titulo} - $${price}`;
+function renderArticleItem(titulo, precio_base, image, id_producto, descripcion, stock, nombre_empresa) {
+    document.querySelector('.articlePageTitle').textContent = `${titulo} - $${precio_base}`;
     document.querySelector('.imgArticlePage').src = image;
     document.querySelector('.imgArticlePage').alt = titulo;
-    document.querySelector('.buyItem').id = id;
+    document.querySelector('.buyItem').id = id_producto;
     const descripcionConSaltos = descripcion.replace(/\n/g, '<br>'); 
-    document.querySelector('.descriptionArticleText').innerText = descripcionConSaltos;
+    document.querySelector('.descriptionArticleText').innerHTML = descripcionConSaltos;
     document.querySelector('.empresaTexto').innerText = 'Publicado por: '+nombre_empresa;
     document.querySelector('.stockTexto').innerText = 'STOCK: '+stock;
     if(stock == 0) {

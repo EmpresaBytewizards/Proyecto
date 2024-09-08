@@ -235,6 +235,7 @@ main{
 .inactive {
     display: none;
 }
+
 .cart {
     position: fixed;
     left: 50%;
