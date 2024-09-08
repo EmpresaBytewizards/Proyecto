@@ -15,7 +15,7 @@
     <header>
         <div class="header__top">
             <div class="logo__container">
-                <a href="./index.html" class="material-symbols-outlined category" data-category="CATALOG"><img id="logo_pagina" src="tienda/Logopagina tr borde.png"></a>
+                <img id="logo_pagina" src="tienda/Logopagina tr borde.png" data-category="CATALOG">
             </div>
             <nav>
                 
@@ -23,15 +23,16 @@
                     <span id="menu__icon" class="material-symbols-outlined">menu</span>
                     
                     <ul class="dropdown">
-                        <li><a href="#" class="category" data-category="electronics">Electronics</a></li>
-                        <li><a href="#" class="category" data-category="jewelery">Jewlery</a></li>
-                        <li><a href="#" class="category" data-category="men's clothing">Men's</a></li>
-                        <li><a href="#" class="category" data-category="women's clothing">Women's</a></li>
-                        <li><a href="#" class="category" data-category="deals">Deals</a></li>
+                        <li><a href="#" class="category" data-category="tecnologia">Tecnologia</a></li>
+                        <li><a href="#" class="category" data-category="joyeria">Joyeria</a></li>
+                        <li><a href="#" class="category" data-category="ropa">Ropa</a></li>
+                        <li><a href="#" class="category" data-category="animales">Animales</a></li>
+                        <li><a href="#" class="category" data-category="consumibles">Consumibles</a></li>
+                        <li><a href="#" class="category" data-category="juegos">Juegos</a></li>
                     </ul>
                 </div>
                 <form action="" class="search">
-                    <input class="searchBar" type="search" placeholder="Search...">
+                    <input class="searchBar" type="search" placeholder="Buscar...">
                     <button class="material-symbols-outlined">
                         search
                     </button>
@@ -56,7 +57,7 @@
         <script src="carrusel.js"></script>
 
         <div class="flexCenter">
-            <h1 class="categoryName">CATALOG</h1>
+            <h1 class="categoryName">CATALOGO</h1>
         </div>
         <div class="renderZone">
         </div>
@@ -84,13 +85,16 @@
         
         <div class="login-container">
             <div class="loggin__title">
-                <button alt="carrito" class="btnLoggin" onclick="toggleLoggin()"> <span class="material-symbols-outlined">close</span> </button>      
-                <h1>Login</h1>
+                <button alt="carrito" class="btnLoggin" onclick="toggleLoggin()"> <span class="material-symbols-outlined closeLogin">close</span> </button>      
+                <h1 id="logintitulo">Inicio de Sesion</h1>
             </div>
             <form>
-                <button class="continueLoggin" >iniciar sección</button>
-                <button class="continueLoggin">registrarme</button>
-                <p><a href="register.html">Don't have an account yet? Register now!</a></p>
+                <label for="email">Email/Nombre:</label>
+                <input type="text" id="email" name="email" required>
+                <label for="password">Contraseña:</label>
+                <input type="password" id="password" name="password" required>
+                <button type="submit" class="continueLoggin">Iniciar Sesion</button>
+                <p><a href="register.html">¿Aun no tienes una cuenta? ¡Registrate ahora!</a></p>
             </form>
         </div>
     </section>
@@ -104,17 +108,21 @@
                 <img src="" class="imgArticlePage">
                 <h1 class="articlePageTitle"> </h1>
             </div>
-            <button type="submit" class="buyItem">Add to Cart</button>
-            
+            <button type="submit" class="buyItem">Añadir al Carro</button>
+            <div class="descriptionArticle">
+                <h3 id="descripcionTexto"> Descripcion: </h3>
+                <br>
+                <p class="descriptionArticleText"> </p>
+            </div>
             <div class="commentSection">
-                <h2> Comment this! </h2>
+                <h2> ¡Comentar! </h2>
                 <form class="commentForm">
                     <div class="formGroup">
-                        <label for="nick">Nick: Anonymous </label>
-                        <label for="comment">Commentary:</label>
+                        <label for="nick">Nombre: Anonimo </label>
+                        <label for="comment">Comentario:</label>
                         <textarea id="comment" class="inputComment" rows="8" required></textarea>
                     </div>
-                    <button class="sendbtn">Send</button>
+                    <button class="sendbtn">Enviar</button>
                 </form>
             </div>
             
@@ -147,9 +155,9 @@
         </div>
     </footer>
 </body>
-<script src="../Logica/main.js"></script>
-<script src="../Logica/commentary.js"></script>
-<script src="../Logica/jquery-3.7.1.min.js"></script>
+<script src="main.js"></script>
+<script src="commentary.js"></script>
+<script src="jquery-3.7.1.min.js"></script>
 </html>
 
 <!-- <div class="">
