@@ -25,11 +25,11 @@ fetch('http://localhost/bytewizzards/API/conectarAPI.php') // Primer render con 
 .then(json => {
     listProducts = json;
     for (let i = 0; i < json.length; i++) {
-        renderAll(json[i].titulo, json[i].imagen, json[i].precio_base, json[i].id_producto, json[i].habilitacionProducto);
+        renderAll(json[i].titulo, json[i].imagen, json[i].precio_base, json[i].id_producto, json[i].habilitacionProducto, json[i].stock);
     }
 }).catch((error) => console.log(error.message));
 
-function renderAll(titulo, imagen, precio_base, id, habilitacionProducto) { //Funcion de renderizado de items
+function renderAll(titulo, imagen, precio_base, id, habilitacionProducto, stock) { //Funcion de renderizado de items
     if (habilitacionProducto == "Deshabilitado") {
         // Si el producto no esta habilitado no se renderiza ni se hace nada 
         return;
@@ -63,9 +63,12 @@ function renderAll(titulo, imagen, precio_base, id, habilitacionProducto) { //Fu
 
     const addCart = document.createElement("button");
     addCart.classList.add("addCart");
-    addCart.textContent = "Add To Cart";
+    addCart.textContent = "Añadir al Carrito";
     addCart.id = `${id}`; 
-
+    addCart.disabled = stock === 0; // Deshabilita si el stock es igual a 0
+    if(addCart.disabled) {
+        addCart.textContent = "No hay STOCK";
+    }
     productWrap.classList.add("productWrap");
     productWrap.append(photoContainer);
     photoContainer.append(img);
@@ -114,7 +117,7 @@ function capture(event) { //Agarra el nombre de la categoria al clickearla
         const productId = event.target.id; // Capturar el id del producto
         console.log(`Product ID: ${productId}`);
         const product = listProducts.find(item => item.id_producto == productId);
-        renderArticleItem(product.titulo, product.precio_base, product.imagen, product.id_producto, product.descripcion);
+        renderArticleItem(product.titulo, product.precio_base, product.imagen, product.id_producto, product.descripcion, product.stock, product.nombre_empresa);
         document.querySelector(".articlePage").classList.toggle("active");
         document.querySelector(".articlePage").classList.toggle("inactive");
     }
@@ -211,11 +214,20 @@ function updateTotalPrice() {
 }
 
 // Función para renderizar el artículo en la página de artículo
-function renderArticleItem(titulo, price, image, id, descripcion) {
+function renderArticleItem(titulo, price, image, id, descripcion, stock, nombre_empresa) {
     document.querySelector('.articlePageTitle').textContent = `${titulo} - $${price}`;
     document.querySelector('.imgArticlePage').src = image;
     document.querySelector('.imgArticlePage').alt = titulo;
     document.querySelector('.buyItem').id = id;
     const descripcionConSaltos = descripcion.replace(/\n/g, '<br>'); 
-    document.querySelector('.descriptionArticleText').innerHTML = descripcionConSaltos;
+    document.querySelector('.descriptionArticleText').innerText = descripcionConSaltos;
+    document.querySelector('.empresaTexto').innerText = 'Publicado por: '+nombre_empresa;
+    document.querySelector('.stockTexto').innerText = 'STOCK: '+stock;
+    if(stock == 0) {
+        document.querySelector('.buyItem').disabled = true;
+        document.querySelector('.buyItem').innerText = "No hay STOCK";
+    }else{
+        document.querySelector('.buyItem').disabled = false;
+        document.querySelector('.buyItem').innerText = "Añadir al Carro";
+    }
 }

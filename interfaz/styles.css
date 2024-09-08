@@ -208,16 +208,16 @@ main{
     font-weight: bolder;
     border: 1px solid red;
     border-radius: 20px;
-    padding: 5px;
+    padding: 3px;
 }
 
 .addCart:hover {
     background-color: rgb(184, 77, 0); 
-    transform: scale(1.07); /* ETamaño del boton */
+    transform: scale(1.04); /* ETamaño del boton */
 }
 
 .addCart:active {
-    background-color: rgb(59, 59, 59); /* Color de fondo más oscuro cuando se hace clic */
+    background-color: rgb(136, 57, 0); /* Color de fondo más oscuro cuando se hace clic */
     transform: scale(0.95);
 }
 
@@ -399,6 +399,7 @@ button {
     margin-left: -0.5rem;
     border: 2px solid #ccc;
     border-radius: 20px;
+    color: black;
 }
 
 .continueLoggin {
@@ -509,11 +510,14 @@ button {
     color: rgb(81, 81, 81);
 }
 
-#descripcionTexto {
+#descripcionTexto, .stockTexto, #empresaText {
     color: black;
     font-weight: bold;
     size: 10px;
+    text-align: center;
 }
+
+
 
 .buyItem {
     width: 100%;
@@ -674,3 +678,14 @@ button {
     color: rgb(83, 83, 83);
 }
 
+/* Botones deshabilitados */
+
+button:disabled {
+    background-color: #ccc; 
+    color: #666; 
+    cursor: not-allowed; 
+    opacity: 0.6; 
+}
+.addCart:disabled:hover, .addCart:disabled:active {
+    transform: none;
+}
