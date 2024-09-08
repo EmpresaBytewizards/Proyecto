@@ -616,6 +616,7 @@ button {
     box-sizing: border-box;
     resize: none;
     font-family: Arial, sans-serif;
+    color: black;
 }
 
 .sendbtn {

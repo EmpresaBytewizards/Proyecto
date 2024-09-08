@@ -54,14 +54,14 @@ function validatePassword() {
 
     // Verificar si las contraseñas coinciden
     if (password !== password2) {
-        document.getElementById('password2').setCustomValidity("The passwords do not match.");
+        document.getElementById('password2').setCustomValidity("Las contraseñas no coinciden.");
     } else {
         document.getElementById('password2').setCustomValidity('');
     }
 
     // Mensaje de que si la contraseña no cumple con los criterios
     if (!isValid) {
-        document.getElementById('password').setCustomValidity("The password does not meet the requirements.");
+        document.getElementById('password').setCustomValidity("La contraseña no cumple los requerimientos.");
     } else {
         document.getElementById('password').setCustomValidity('');
     }
