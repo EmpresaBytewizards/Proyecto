@@ -191,7 +191,7 @@ function renderCartItem(titulo, precio_base, id_producto) {
 
     const deleteButton = document.createElement("button");
     deleteButton.classList.add('btnCarrito');
-    deleteButton.innerHTML = '<span class="material-symbols-outlined">delete</span>';
+    deleteButton.innerHTML = '<span class="material-symbols-outlined delCart">delete</span>';
     deleteButton.addEventListener('click', () => {
         productCart.remove();
         updateTotalPrice();

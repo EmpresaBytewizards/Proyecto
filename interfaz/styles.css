@@ -221,7 +221,7 @@ main{
     transform: scale(0.95);
 }
 
-/* CART */
+/* CARRITO */
 
 .btnCarrito{
     background: none;
@@ -237,13 +237,14 @@ main{
 }
 
 .cart {
+    border-radius: 10px;
     position: fixed;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
     width: 50vw;
     height: 50vh;
-    background-color: darkgray;
+    background-color: rgb(255, 106, 0);
     /*display: flex; */
     flex-direction: column;
     padding: 1rem;
@@ -253,8 +254,57 @@ main{
     resize: both;
 }
 
+.cartContainer {
+    background-color:#ffffff;
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 0 5rem rgba(0, 0, 0, 0.1);
+    color: black;
+}
+
+.closeCarrito {
+    color: black;
+}
+
+.total {
+    color: black;
+}
+
+.delCart {
+    color: black;
+}
+
+.cart__price {
+    color: black;
+}
+
+.paybtn {
+    width: 100%;
+    padding: 0.6rem;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+    border: none;
+    border-radius: 20px;
+    background-color: rgb(255, 106, 0);
+    transition: background-color 0.5s ease;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.paybtn:hover {
+    background-color: rgb(195, 81, 0);
+}
+
 .cart h1 {
     text-align: center;
+    color: black;
+}
+
+.cart__name {
+    text-align: center;
+    color: black;
+    font-size: 17px;
 }
 
 .product__cart {
@@ -263,7 +313,7 @@ main{
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid black;
-
+    color: black;
 }
 
 .checkout {
@@ -272,6 +322,7 @@ main{
     justify-content: center;
     align-items: center;
     gap: 10px;
+    color: black;
 }
 
 
