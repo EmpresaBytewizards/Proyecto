@@ -626,6 +626,7 @@ button {
 }
 
 
+
 /* Comentarios dentro de Articulo */
 .commentSection {
     background-color: #fff;
@@ -741,4 +742,301 @@ button:disabled {
 }
 .addCart:disabled:hover, .addCart:disabled:active {
     transform: none;
+}
+
+/* Añadir Productos */
+
+.btnAddProduct{
+    background: none;
+    border: none;
+}
+
+.productAdd {
+    border-radius: 10px;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 50vw;
+    height: 50vh;
+    background-color: rgb(255, 106, 0);
+    /*display: flex; */
+    flex-direction: column;
+    padding: 1rem;
+    gap: 1rem;
+    overflow: scroll;
+    flex-direction: column;
+    resize: both;
+}
+
+.productAdd-container {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 0 5rem rgba(0, 0, 0, 0.1);
+}
+
+.productAdd-container h1 {
+    text-align: center;
+}
+
+.productAdd-container h2 {
+    margin-bottom: 1.5rem;
+}
+
+.productAdd-container label {
+    display: block;
+    margin-top: 1rem;
+    color: black;
+}
+
+#addProductTitle{
+    color: black;
+}
+
+.productAdd input {
+    width: 100%;
+    padding: 0.6rem;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+    margin-right: 1rem;
+    margin-left: -0.5rem;
+    border: 2px solid #ccc;
+    border-radius: 20px;
+    color: black;
+}
+
+.continueAddProduct {
+    width: 100%;
+    padding: 0.6rem;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+    border: none;
+    border-radius: 20px;
+    background-color: rgb(255, 106, 0);
+    transition: background-color 0.5s ease;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.continueAddProduct:hover {
+    background-color: rgb(184, 77, 0);
+}
+
+#descripcionProducto {
+    color: black;
+    height: 10rem;
+    width: 100%;
+    resize: none;
+}
+
+#condicionProducto {
+    color: black; 
+    width: 200px; 
+    height: 40px; 
+    padding: 5px 10px; 
+    border: 2px solid #ccc; 
+    border-radius: 5px; 
+    font-size: 16px; 
+    appearance: none; 
+    cursor: pointer; 
+}
+
+#condicionProducto:focus {
+    border-color: black; 
+    outline: none; 
+    color: black;
+}
+
+#condicionProducto option {
+    color: black;
+}
+
+#categoriaProducto {
+    color: black; 
+    width: 200px; 
+    height: 40px; 
+    padding: 5px 10px; 
+    border: 2px solid #ccc; 
+    border-radius: 5px; 
+    font-size: 16px; 
+    appearance: none; 
+    cursor: pointer; 
+}
+
+
+#categoriaProducto:focus {
+    border-color: black; 
+    outline: none; 
+    color: black;
+}
+
+#categoriaProducto option {
+    color: black;
+}
+
+/* Editar productos */
+
+.editArticle{
+    background-color: rgb(255, 106, 0);
+    color:black;
+    font-weight: bolder;
+    border: 1px solid red;
+    border-radius: 20px;
+    padding: 3px;
+}
+
+.editArticle:hover {
+    background-color: rgb(184, 77, 0); 
+    transform: scale(1.04); /* ETamaño del boton */
+}
+
+.editArticle:active {
+    background-color: rgb(136, 57, 0); /* Color de fondo más oscuro cuando se hace clic */
+    transform: scale(0.95);
+}
+
+
+.productEdit {
+    border-radius: 10px;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 50vw;
+    height: 50vh;
+    background-color: rgb(255, 106, 0);
+    /*display: flex; */
+    flex-direction: column;
+    padding: 1rem;
+    gap: 1rem;
+    overflow: scroll;
+    flex-direction: column;
+    resize: both;
+}
+
+.productEdit-container {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 0 5rem rgba(0, 0, 0, 0.1);
+}
+
+.productEdit-container h1 {
+    text-align: center;
+}
+
+.productEdit-container h2 {
+    margin-bottom: 1.5rem;
+}
+
+.productEdit-container label {
+    display: block;
+    margin-top: 1rem;
+    color: black;
+}
+
+#editProductTitle{
+    color: black;
+}
+
+.productEdit input {
+    width: 100%;
+    padding: 0.6rem;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+    margin-right: 1rem;
+    margin-left: -0.5rem;
+    border: 2px solid #ccc;
+    border-radius: 20px;
+    color: black;
+}
+
+.continueEditProduct {
+    width: 100%;
+    padding: 0.6rem;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+    border: none;
+    border-radius: 20px;
+    background-color: rgb(255, 106, 0);
+    transition: background-color 0.5s ease;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.continueEditProduct:hover {
+    background-color: rgb(184, 77, 0);
+}
+
+#editDescripcionProducto {
+    color: black;
+    height: 10rem;
+    width: 100%;
+    resize: none;
+}
+
+#editCondicionProducto, #habilitacionProducto {
+    color: black; 
+    width: 200px; 
+    height: 40px; 
+    padding: 5px 10px; 
+    border: 2px solid #ccc; 
+    border-radius: 5px; 
+    font-size: 16px; 
+    appearance: none; 
+    cursor: pointer; 
+}
+
+#editCondicionProducto:focus, #habilitacionProducto:focus {
+    border-color: black; 
+    outline: none; 
+    color: black;
+}
+
+#editCondicionProducto option, #habilitacionProducto option {
+    color: black;
+}
+
+#editCategoriaProducto {
+    color: black; 
+    width: 200px; 
+    height: 40px; 
+    padding: 5px 10px; 
+    border: 2px solid #ccc; 
+    border-radius: 5px; 
+    font-size: 16px; 
+    appearance: none; 
+    cursor: pointer; 
+}
+
+
+#editCategoriaProducto:focus {
+    border-color: black; 
+    outline: none; 
+    color: black;
+}
+
+#editCategoriaProducto option {
+    color: black;
+}
+
+.editarItem {
+    width: 100%;
+    padding: 0.6rem;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+    border: none;
+    border-radius: 20px;
+    background-color: rgb(255, 106, 0);
+    transition: background-color 0.5s ease;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.editarItem:hover {
+    background-color: rgb(195, 81, 0);
 }

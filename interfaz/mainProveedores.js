@@ -1,19 +1,25 @@
 const dropdownIcon = document.querySelector("#menu__icon");
 const dropdown = document.querySelector(".dropdown");
-const productsCartId = {};
 dropdownIcon.addEventListener("click", () => {
     dropdown.classList.toggle("toggle--dropdown");
 });
 
 // Abrir y cerrar el carrito
-function toggleCarrito() {
-    document.querySelector(".cart").classList.toggle("active");
-    document.querySelector(".cart").classList.toggle("inactive");
+function toggleAñadirProducto() {
+    document.querySelector(".productAdd").classList.toggle("active");
+    document.querySelector(".productAdd").classList.toggle("inactive");
 }
 
 function toggleLoggin() {
     document.querySelector(".loggin").classList.toggle("active");
     document.querySelector(".loggin").classList.toggle("inactive");
+}
+
+
+function toggleEditarProducto() {
+    document.querySelector(".productEdit").classList.toggle("active");
+    document.querySelector(".productEdit").classList.toggle("inactive");
+
 }
 
 // RENDER SECTION
@@ -25,12 +31,12 @@ fetch('http://localhost/bytewizzards/API/conectarAPI.php') // Primer render con 
 .then(json => {
     listProducts = json;
     for (let i = 0; i < json.length; i++) {
-        renderAll(json[i].titulo, json[i].imagen, json[i].precio_base, json[i].id_producto, json[i].habilitacion_producto, json[i].stock);
+        renderAll(json[i].titulo, json[i].imagen, json[i].precio_base, json[i].id_producto, json[i].habilitacion_producto, json[i].stock, json[i].nombre_empresa);
     }
 }).catch((error) => console.log(error.message));
 
-function renderAll(titulo, imagen, precio_base, id_producto, habilitacion_producto, stock) { //Funcion de renderizado de items
-    if (habilitacion_producto == "Deshabilitado") {
+function renderAll(titulo, imagen, precio_base, id_producto, habilitacion_producto, stock, nombre_empresa) { //Funcion de renderizado de items
+    if (nombre_empresa != "ByteWizzards") {
         // Si el producto no esta habilitado no se renderiza ni se hace nada 
         return;
     }
@@ -61,18 +67,15 @@ function renderAll(titulo, imagen, precio_base, id_producto, habilitacion_produc
     productPrice.classList.add("price");
     productPrice.textContent = "$" + `${precio_base}`;
 
-    const addCart = document.createElement("button");
-    addCart.classList.add("addCart");
-    addCart.textContent = "Añadir al Carrito";
-    addCart.id = `${id_producto}`; 
-    addCart.disabled = stock === 0; // Deshabilita si el stock es igual a 0
-    if(addCart.disabled) {
-        addCart.textContent = "No hay STOCK";
-    }
+    const editArticle = document.createElement("button");
+    editArticle.classList.add("editArticle");
+    editArticle.onclick = toggleEditarProducto; 
+    editArticle.textContent = "Editar";
+    editArticle.id = `${id_producto}`; 
     productWrap.classList.add("productWrap");
     productWrap.append(photoContainer);
     photoContainer.append(img);
-    productWrap.append(productName, productPrice, addCart);
+    productWrap.append(productName, productPrice, editArticle);
     renderZone.append(productWrap);
 }
 
@@ -90,27 +93,23 @@ function capture(event) {
 
         for (let i = 0; i < listProducts.length; i++) {
             if (categoryEv == "CATALOG") {
-                renderAll(listProducts[i].titulo, listProducts[i].imagen, listProducts[i].precio_base, listProducts[i].id_producto, listProducts[i].habilitacion_producto, listProducts[i].stock);
+                renderAll(listProducts[i].titulo, listProducts[i].imagen, listProducts[i].precio_base, listProducts[i].id_producto, listProducts[i].habilitacion_producto, listProducts[i].stock, listProducts[i].nombre_empresa);
             } else if (listProducts[i].categoria == categoryEv) {
-                renderAll(listProducts[i].titulo, listProducts[i].imagen, listProducts[i].precio_base, listProducts[i].id_producto, listProducts[i].habilitacion_producto, listProducts[i].stock);
+                renderAll(listProducts[i].titulo, listProducts[i].imagen, listProducts[i].precio_base, listProducts[i].id_producto, listProducts[i].habilitacion_producto, listProducts[i].stock, listProducts[i].nombre_empresa);
             }
         }
     }
 
-    if (event.target.classList.contains('addCart')) { // Si el elemento clickeado es el botón de añadir al carrito o addtocart de la pagina
+    if (event.target.classList.contains('editArticle')) { // Si el elemento clickeado es el botón de editar articulo
         const productId = event.target.id; // Capturar el id del producto
         console.log(`Product ID: ${productId}`);
         const product = listProducts.find(item => item.id_producto == productId);
-        renderCartItem(product.titulo, product.precio_base, product.id_producto,);
-        updateTotalPrice();
     }
 
-    if (event.target.classList.contains('buyItem')) { // Si el elemento clickeado es el botón de añadir al carrito o buyItem
+    if (event.target.classList.contains('editarItem')) { // Si el elemento clickeado es el boton de editar 
         const productId = event.target.id; // Capturar el id del producto
         console.log(`Product ID: ${productId}`);
         const product = listProducts.find(item => item.id_producto == productId);
-        renderCartItem(product.titulo, product.precio_base, product.id_producto);
-        updateTotalPrice();
     }
 
     if (event.target.classList.contains('imageClick')) { // Si el elemento clickeado es la imagen de un artículo
@@ -125,6 +124,16 @@ function capture(event) {
     if (event.target.classList.contains('exitArticle')) { // Si el elemento clickeado es el botón de salir de la página del artículo
         document.querySelector(".articlePage").classList.toggle("active");
         document.querySelector(".articlePage").classList.toggle("inactive");
+    }
+
+    if (event.target.classList.contains('editArticle')) {
+        const productId = event.target.id;
+        editarProducto(productId);
+    }
+    
+    if (event.target.classList.contains('editarItem')) {
+        const productId = event.target.id;
+        editarProducto(productId);
     }
 }
 
@@ -143,7 +152,7 @@ function searchProducts(search, searchCATALOG) {
     // Filtra productos por busqueda
     listProducts.forEach(product => {
         if (product.titulo.toLowerCase().includes(search) || search === '') {
-            renderAll(product.titulo, product.imagen, product.precio_base, product.id_producto, product.habilitacion_producto, product.stock);
+            renderAll(product.titulo, product.imagen, product.precio_base, product.id_producto, product.habilitacion_producto, product.stock, product.nombre_empresa);
         }
     });
     
@@ -169,65 +178,116 @@ logoPagina.addEventListener("click", (event) => {
     categoryName.innerText = "CATALOGO";
 
     for (let i = 0; i < listProducts.length; i++) {
-        renderAll(listProducts[i].titulo, listProducts[i].imagen, listProducts[i].precio_base, listProducts[i].id_producto, listProducts[i].habilitacion_producto, listProducts[i].stock);
+        renderAll(listProducts[i].titulo, listProducts[i].imagen, listProducts[i].precio_base, listProducts[i].id_producto, listProducts[i].habilitacion_producto, listProducts[i].stock, listProducts[i].nombre_empresa);
     }
 });
 
 document.addEventListener('click', capture);
-
-function renderCartItem(titulo, precio_base, id_producto) {
-    const cartItems = document.querySelector('.cartItems');
-
-    const productCart = document.createElement("div");
-    productCart.classList.add("product__cart");
-
-    const cartName = document.createElement("h2");
-    cartName.classList.add("cart__name");
-    cartName.textContent = titulo;
-
-    const cartPrice = document.createElement("p");
-    cartPrice.classList.add("cart__price");
-    cartPrice.textContent = `$${precio_base}`;
-
-    const deleteButton = document.createElement("button");
-    deleteButton.classList.add('btnCarrito');
-    deleteButton.innerHTML = '<span class="material-symbols-outlined delCart">delete</span>';
-    deleteButton.addEventListener('click', () => {
-        productCart.remove();
-        updateTotalPrice();
-    });
-
-    productCart.append(cartName, cartPrice, deleteButton);
-    cartItems.append(productCart);
-}
-
-function updateTotalPrice() {
-    const cartItems = document.querySelectorAll('.product__cart');
-    let totalPrice = 0;
-
-    cartItems.forEach(item => {
-        const precio_base = parseFloat(item.querySelector('.cart__price').textContent.replace('$', ''));
-        totalPrice += precio_base;
-    });
-
-    document.querySelector('.checkout span').textContent = `TOTAL: $${totalPrice.toFixed(2)}`;
-}
 
 // Función para renderizar el artículo en la página de artículo
 function renderArticleItem(titulo, precio_base, image, id_producto, descripcion, stock, nombre_empresa) {
     document.querySelector('.articlePageTitle').textContent = `${titulo} - $${precio_base}`;
     document.querySelector('.imgArticlePage').src = image;
     document.querySelector('.imgArticlePage').alt = titulo;
-    document.querySelector('.buyItem').id = id_producto;
+    document.querySelector('.editarItem').id = id_producto;
     const descripcionConSaltos = descripcion.replace(/\n/g, '<br>'); 
     document.querySelector('.descriptionArticleText').innerHTML = descripcionConSaltos;
     document.querySelector('.empresaTexto').innerText = 'Publicado por: '+nombre_empresa;
     document.querySelector('.stockTexto').innerText = 'STOCK: '+stock;
-    if(stock == 0) {
-        document.querySelector('.buyItem').disabled = true;
-        document.querySelector('.buyItem').innerText = "No hay STOCK";
-    }else{
-        document.querySelector('.buyItem').disabled = false;
-        document.querySelector('.buyItem').innerText = "Añadir al Carro";
-    }
 }
+
+
+document.getElementById('productForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    // Recolectar los datos del formulario
+    const formData = new FormData(this);
+    const data = {};
+    formData.forEach((value, key) => {
+        data[key] = value;
+    });
+
+    // Enviar los datos al servidor
+    fetch('http://localhost/bytewizzards/API/crearArticulos.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data.message);
+        alert("¡Articulo creado exitosamente!");
+        location.reload();
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function editarProducto(productId) {
+    fetch(`http://localhost/bytewizzards/API/conectarAPI.php?id=${productId}`)
+      .then(response => response.json())
+      .then(producto => {
+        console.log(producto); // Añade esto para ver la respuesta del servidor
+        document.getElementById('habilitacionProducto').value = producto.habilitacion_producto || '';
+        document.getElementById('editProductId').value = producto.id_producto || '';
+        document.getElementById('editNombreProducto').value = producto.titulo || '';
+        document.getElementById('editStockProducto').value = producto.stock || '';
+        document.getElementById('editProductImage').value = producto.imagen || '';
+        document.getElementById('editPrecioProducto').value = producto.precio_base || '';
+        document.getElementById('editCondicionProducto').value = producto.condicion || '';
+        document.getElementById('editCategoriaProducto').value = producto.categoria || '';
+        document.getElementById('editDescripcionProducto').value = producto.descripcion || '';
+  
+        document.getElementById('editProductSection').classList.remove('inactive');
+      })
+      .catch(error => console.error('Error al obtener el producto:', error));
+  }
+  
+
+// Función para manejar la actualización del producto
+document.getElementById('editProductForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    // Recolectar los datos del formulario de edición
+    const formData = new FormData(this);
+    const data = {};
+    formData.forEach((value, key) => {
+      data[key] = value;
+    });
+
+    // Enviar los datos al servidor para actualizar el producto
+    fetch('http://localhost/bytewizzards/API/editarArticulos.php', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(responseData => {
+      console.log(responseData.message);
+      alert("¡Articulo editado exitosamente!")
+      location.reload();
+    })
+    .catch(error => console.error('Error al actualizar el producto:', error));
+});

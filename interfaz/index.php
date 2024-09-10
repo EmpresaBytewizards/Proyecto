@@ -39,7 +39,7 @@
                 </form>
 
                 <div class="icons">
-                    <button alt="carrito" class="btnLoggin" onclick="toggleLoggin()"> <span class="material-symbols-outlined">passkey</span> </button>
+                    <button alt="cuenta" class="btnLoggin" onclick="toggleLoggin()"> <span class="material-symbols-outlined">passkey</span> </button>
                     <button alt="carrito" class="btnCarrito" onclick="toggleCarrito()"> <span class="material-symbols-outlined">shopping_cart</span> </button>
                 </div>
             </nav>
@@ -66,18 +66,19 @@
         
     </main>
     <section class="cart inactive">
+        <div class="cartContainer">
+            <div class="cart__title">
+                <button class="btnCarrito" onclick="toggleCarrito()"> <span class="material-symbols-outlined closeCarrito"> close </span> </button>
+                
+                <h1>CARRITO</h1>
+            </div>
+            <div class="cartItems"> <!-- Lugar de renderizado del carrito -->
 
-        <div class="cart__title">
-            <button class="btnCarrito" onclick="toggleCarrito()"> <span class="material-symbols-outlined"> close </span> </button>
-            
-            <h1>CART</h1>
-        </div>
-        <div class="cartItems"> <!-- Aquí se renderizarán los items del carrito -->
-
-        </div> 
-        <div class="checkout">
-            <span>TOTAL: $0.00</span>
-            <button>CHECK OUT</button>
+            </div> 
+            <div class="checkout">
+                <span class="total">TOTAL: $0.00</span>
+                <button class="paybtn">Pasar al Pago</button>
+            </div>
         </div>
     </section>
 
@@ -109,6 +110,12 @@
                 <h1 class="articlePageTitle"> </h1>
             </div>
             <button type="submit" class="buyItem">Añadir al Carro</button>
+            <br>
+            <div class="stockYempresa">
+                <h3 id="stockArticleText" class="stockTexto"> STOCK: </h3>
+                <h3 id="empresaText" class="empresaTexto"> Publicador: </h3>
+            </div>
+            <br>
             <div class="descriptionArticle">
                 <h3 id="descripcionTexto"> Descripcion: </h3>
                 <br>

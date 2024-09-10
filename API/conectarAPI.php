@@ -1,6 +1,6 @@
 <?php
 $host = 'localhost';
-$dbname = 'ecommerce_bd';
+$dbname = 'basefinal';
 $username = 'root';
 $password = '';
 header('Content-Type: application/json');
@@ -19,10 +19,25 @@ try {
 
 
 // Obtener todos los productos 
-if($_SERVER['REQUEST_METHOD'] === 'GET') {
-    $stmt = $pdo->prepare("SELECT * FROM producto");
-    $stmt->execute();
-    $productos = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    echo json_encode($productos);
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+    // Verifica si se ha proporcionado un ID
+    if (isset($_GET['id'])) {
+        $id = $_GET['id'];
+        $stmt = $pdo->prepare("SELECT * FROM producto WHERE id_producto = ?");
+        $stmt->execute([$id]);
+        $producto = $stmt->fetch(PDO::FETCH_ASSOC);
+        echo json_encode($producto);
+    } else {
+        // Obtener todos los productos
+        $stmt = $pdo->prepare("SELECT * FROM producto");
+        $stmt->execute();
+        $productos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($productos);
+    }
 }
+
+
+
+
+
 ?>

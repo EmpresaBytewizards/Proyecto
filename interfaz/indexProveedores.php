@@ -12,7 +12,7 @@
 
 <body>
 
-    <header>
+    <header> 
         <div class="header__top">
             <div class="logo__container">
                 <img id="logo_pagina" src="tienda/Logopagina tr borde.png" data-category="CATALOG">
@@ -39,8 +39,8 @@
                 </form>
 
                 <div class="icons">
-                    <button alt="cuenta" class="btnLoggin" onclick="toggleLoggin()"> <span class="material-symbols-outlined">passkey</span> </button>
-                    <button alt="carrito" class="btnCarrito" onclick="toggleCarrito()"> <span class="material-symbols-outlined">shopping_cart</span> </button>
+                    <button alt="iniciarSesion" class="btnLoggin" onclick="toggleLoggin()"> <span class="material-symbols-outlined">passkey</span> </button>
+                    <button alt="añadirProducto" class="btnAddProduct" onclick="toggleAñadirProducto()"> <span class="material-symbols-outlined">add</span> </button>
                 </div>
             </nav>
         </div>
@@ -65,20 +65,41 @@
 
         
     </main>
-    <section class="cart inactive">
-        <div class="cartContainer">
-            <div class="cart__title">
-                <button class="btnCarrito" onclick="toggleCarrito()"> <span class="material-symbols-outlined closeCarrito"> close </span> </button>
-                
-                <h1>CARRITO</h1>
+    <section class="productAdd inactive">
+        <div class="productAdd-container">
+            <div class="productAdd__title">
+                <button alt="añadirProducto" class="btnLoggin" onclick="toggleAñadirProducto()"> 
+                    <span class="material-symbols-outlined closeLogin">close</span>
+                </button>      
+                <h1 id="addProductTitle">Añadir Productos</h1>
             </div>
-            <div class="cartItems"> <!-- Lugar de renderizado del carrito -->
-
-            </div> 
-            <div class="checkout">
-                <span class="total">TOTAL: $0.00</span>
-                <button class="paybtn">Pasar al Pago</button>
-            </div>
+            <form id="productForm">
+                <label for="nombreProducto">Nombre del Producto:</label>
+                <input type="text" id="nombreProducto" name="nombreProducto" required>
+                <label for="stockProducto">STOCK Inicial:</label>
+                <input type="number" id="stockProducto" name="stockProducto" required>
+                <label for="addProductImage">Imagen:</label>
+                <input type="url" id="addProductImage" name="addProductImage" required>
+                <label for="precioProducto">Precio del Producto:</label>
+                <input type="number" id="precioProducto" name="precioProducto" step="0.01" min="0" required>
+                <label for="condicionProducto">Condición del Producto:</label>
+                <select id="condicionProducto" name="condicionProducto" required>
+                    <option value="Primera Mano">Primera Mano</option>
+                    <option value="Segunda Mano">Segunda Mano</option>
+                </select>
+                <label for="categoriaProducto">Categoria del Producto:</label>
+                <select id="categoriaProducto" name="categoriaProducto" required>
+                    <option value="tecnologia">Tecnologia</option>
+                    <option value="joyeria">Joyeria</option>
+                    <option value="ropa">Ropa</option>
+                    <option value="animales">Animales</option>
+                    <option value="consumibles">Consumibles</option>
+                    <option value="juegos">Juegos</option>
+                </select>
+                <label for="descripcionProducto">Descripcion del Producto por unidad:</label>
+                <textarea id="descripcionProducto" name="descripcionProducto" required></textarea>
+                <button type="submit" class="continueAddProduct">Añadir Producto</button>
+            </form>
         </div>
     </section>
 
@@ -109,7 +130,7 @@
                 <img src="" class="imgArticlePage">
                 <h1 class="articlePageTitle"> </h1>
             </div>
-            <button type="submit" class="buyItem">Añadir al Carro</button>
+            <button type="submit" class="editarItem">Editar</button>
             <br>
             <div class="stockYempresa">
                 <h3 id="stockArticleText" class="stockTexto"> STOCK: </h3>
@@ -136,6 +157,49 @@
         </div>
     </section>
 
+    <section class="productEdit inactive" id="editProductSection">
+        <div class="productEdit-container">
+          <div class="productEdit__title">
+            <button class="btnLoggin" onclick="toggleEditarProducto()"> 
+              <span class="material-symbols-outlined closeLogin">close</span> 
+            </button>
+            <h1 id="editProductTitle">Editar Producto</h1>
+          </div>
+          <form id="editProductForm">
+            <label for="habilitacionProducto">Habilitacion del Producto:</label>
+            <select id="habilitacionProducto" name="habilitacionProducto" required>
+                <option value="Habilitado">Habilitado</option>
+                <option value="Deshabilitado">Deshabilitado</option>
+            </select>
+            <input type="hidden" id="editProductId" name="editProductId">
+            <label for="editNombreProducto">Nombre del Producto:</label>
+            <input type="text" id="editNombreProducto" name="editNombreProducto" required>
+            <label for="editStockProducto">STOCK:</label>
+            <input type="number" id="editStockProducto" name="editStockProducto" required>
+            <label for="editProductImage">Imagen:</label>
+            <input type="url" id="editProductImage" name="editProductImage" required>
+            <label for="editPrecioProducto">Precio del Producto:</label>
+            <input type="number" id="editPrecioProducto" name="editPrecioProducto" step="0.01" min="0" required>
+            <label for="editCondicionProducto">Condición del Producto:</label>
+            <select id="editCondicionProducto" name="editCondicionProducto" required>
+              <option value="Primera Mano">Primera Mano</option>
+              <option value="Segunda Mano">Segunda Mano</option>
+            </select>
+            <label for="editCategoriaProducto">Categoria del Producto:</label>
+            <select id="editCategoriaProducto" name="editCategoriaProducto" required>
+              <option value="tecnologia">Tecnologia</option>
+              <option value="joyeria">Joyeria</option>
+              <option value="ropa">Ropa</option>
+              <option value="animales">Animales</option>
+              <option value="consumibles">Consumibles</option>
+              <option value="juegos">Juegos</option>
+            </select>
+            <label for="editDescripcionProducto">Descripcion del Producto:</label>
+            <textarea id="editDescripcionProducto" name="editDescripcionProducto" required></textarea>
+            <button type="submit" class="continueAddProduct">Guardar Cambios</button>
+          </form>
+        </div>
+      </section>
 
     <footer>
         <div>
@@ -162,7 +226,7 @@
         </div>
     </footer>
 </body>
-<script src="main.js"></script>
+<script src="mainProveedores.js"></script>
 <script src="commentary.js"></script>
 <script src="jquery-3.7.1.min.js"></script>
 </html>
