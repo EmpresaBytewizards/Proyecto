@@ -44,6 +44,12 @@ class ApiUsuarios
 
             // Generar un token de sesión
             session_start();
+
+            if (isset($_COOKIE['session_token'])) {
+                // Para eliminar la cookie, se establece con un tiempo de expiración en el pasado
+                setcookie('session_token', '', time() - 3600, "/"); 
+            }
+
             $_SESSION['user_id'] = $usuarioId; // Guardar el ID del nuevo usuario en la sesión
             setcookie('session_token', session_id(), time() + (60 * 5), "/"); // Almacenar el ID de la sesión en una cookie y el tiempo para que expire el token(30 dias es 86400 * 30).
 

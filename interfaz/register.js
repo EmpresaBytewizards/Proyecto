@@ -92,7 +92,7 @@ document.getElementById('formRegistro').addEventListener('submit', function(even
     .then(response => response.json())
     .then(responseData => {
       console.log(responseData.message);
-      alert("¡Cuenta creada exitosamente!")
-      location.reload();
+      alert("¡Cuenta creada exitosamente!");
+      location.href = "index.php";
     }).catch(error => alert('Error al crear a:', error));
 });
