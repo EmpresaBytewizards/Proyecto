@@ -65,5 +65,34 @@ function validatePassword() {
     } else {
         document.getElementById('password').setCustomValidity('');
     }
+    
 }
 
+
+
+// Función para manejar la creacion de usuarios
+document.getElementById('formRegistro').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    // Recolectar los datos del formulario de creacion de usuarios
+    const formData = new FormData(this);
+    const data = {};
+    formData.forEach((value, key) => {
+      data[key] = value;
+    });
+
+    // Enviar los datos al servidor para actualizar el producto
+    fetch('http://localhost/bytewizards/API/crearCuenta.php', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(responseData => {
+      console.log(responseData.message);
+      alert("¡Cuenta creada exitosamente!")
+      location.reload();
+    }).catch(error => alert('Error al crear a:', error));
+});

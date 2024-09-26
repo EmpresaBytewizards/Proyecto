@@ -26,7 +26,7 @@ function toggleEditarProducto() {
 
 let listProducts = []; //Tienda con los items del JSON
 
-fetch('http://localhost/bytewizzards/API/conectarAPI.php') // Primer render con todos los items
+fetch('http://localhost/bytewizards/API/index.php') // Primer render con todos los items
 .then(res => res.json())
 .then(json => {
     listProducts = json;
@@ -197,7 +197,7 @@ function renderArticleItem(titulo, precio_base, image, id_producto, descripcion,
 }
 
 
-document.getElementById('productForm').addEventListener('submit', function(event) {
+/*document.getElementById('productForm').addEventListener('submit', function(event) {
     event.preventDefault();
 
     // Recolectar los datos del formulario
@@ -208,7 +208,7 @@ document.getElementById('productForm').addEventListener('submit', function(event
     });
 
     // Enviar los datos al servidor
-    fetch('http://localhost/bytewizzards/API/crearArticulos.php', {
+    fetch('http://localhost/bytewizards/API/index.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -222,29 +222,54 @@ document.getElementById('productForm').addEventListener('submit', function(event
         location.reload();
     })
     .catch(error => {
-        console.error('Error:', error);
+        alert('Error al crear el articulo:', error);
+        location.reload();
+    });
+});
+*/
+
+document.getElementById('productForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    // Recolectar los datos del formulario
+    const formData = new FormData(this);
+    const data = {};
+    formData.forEach((value, key) => {
+        data[key] = value;
+    });
+
+    // Enviar los datos al servidor
+    fetch('http://localhost/bytewizards/API/index.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => {
+        if (!response.ok) {
+            // Si la respuesta no es un código 2xx, lanzamos un error
+            throw new Error(`Error en la respuesta del servidor: ${response.status}`);
+        }
+        return response.json(); // Intentar convertir la respuesta a JSON
+    })
+    .then(data => {
+        console.log(data.message);
+        alert("¡Artículo creado exitosamente!");
+        location.reload();
+    })
+    .catch(error => {
+        console.error('Error detectado:', error); // Mostrar el error en la consola
+        alert('Error al crear el artículo: ' + error.message);
+        location.reload();
     });
 });
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 function editarProducto(productId) {
-    fetch(`http://localhost/bytewizzards/API/conectarAPI.php?id=${productId}`)
+    fetch(`http://localhost/bytewizards/API/index.php?id=${productId}`)
       .then(response => response.json())
       .then(producto => {
         console.log(producto); // Añade esto para ver la respuesta del servidor
@@ -276,8 +301,8 @@ document.getElementById('editProductForm').addEventListener('submit', function(e
     });
 
     // Enviar los datos al servidor para actualizar el producto
-    fetch('http://localhost/bytewizzards/API/editarArticulos.php', {
-      method: 'POST',
+    fetch('http://localhost/bytewizards/API/index.php', {
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -289,5 +314,5 @@ document.getElementById('editProductForm').addEventListener('submit', function(e
       alert("¡Articulo editado exitosamente!")
       location.reload();
     })
-    .catch(error => console.error('Error al actualizar el producto:', error));
+    .catch(error => alert('Error al actualizar el producto:', error));
 });

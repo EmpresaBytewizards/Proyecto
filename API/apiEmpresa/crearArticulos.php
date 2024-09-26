@@ -3,6 +3,7 @@
     $dbname = 'basefinal';
     $username = 'root';
     $password = '';
+    
     header('Content-Type: application/json');
 
     header('Access-Control-Allow-Origin: *'); // Permitir solicitudes de cualquier origen

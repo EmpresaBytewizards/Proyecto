@@ -40,21 +40,18 @@
 
                 <div class="icons">
                     <button alt="iniciarSesion" class="btnLoggin" onclick="toggleLoggin()"> <span class="material-symbols-outlined">passkey</span> </button>
-                    <button alt="añadirProducto" class="btnAddProduct" onclick="toggleAñadirProducto()"> <span class="material-symbols-outlined">add</span> </button>
                 </div>
             </nav>
         </div>
         <div class="blackbar">FREE SHIPPING AND RETURNS </div>
     </header>
     <main>
-        <!--<section class="concarrusel">-->
+        <!--<Añadir Productos>-->
            <br>
-            <div class="carrusel">
-                <div id="publi" class="publi"></div>
+            <div class="entradaProducto">
+                <button alt="añadirProducto" class="btnAddProduct" onclick="toggleAñadirProducto()"> <span class="addProductADD">+</span> Añadir Productos </button>
             </div>
         
-    
-        <script src="carrusel.js"></script>
 
         <div class="flexCenter">
             <h1 class="categoryName">CATALOGO</h1>
@@ -116,7 +113,7 @@
                 <label for="password">Contraseña:</label>
                 <input type="password" id="password" name="password" required>
                 <button type="submit" class="continueLoggin">Iniciar Sesion</button>
-                <p><a href="register.html">¿Aun no tienes una cuenta? ¡Registrate ahora!</a></p>
+                <p><a href="register.php">¿Aun no tienes una cuenta? ¡Registrate ahora!</a></p>
             </form>
         </div>
     </section>

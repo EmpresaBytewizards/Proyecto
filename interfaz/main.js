@@ -20,7 +20,7 @@ function toggleLoggin() {
 
 let listProducts = []; //Tienda con los items del JSON
 
-fetch('http://localhost/bytewizzards/API/conectarAPI.php') // Primer render con todos los items
+fetch('http://localhost/bytewizards/API/index.php') // Primer render con todos los items
 .then(res => res.json())
 .then(json => {
     listProducts = json;

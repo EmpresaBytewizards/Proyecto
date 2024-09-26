@@ -78,6 +78,7 @@
             <div class="checkout">
                 <span class="total">TOTAL: $0.00</span>
                 <button class="paybtn">Pasar al Pago</button>
+                <span style="color: black"> (Se aplicaran impuestos correspondientes despues de pasar al pago) </span>
             </div>
         </div>
     </section>
@@ -95,7 +96,7 @@
                 <label for="password">Contraseña:</label>
                 <input type="password" id="password" name="password" required>
                 <button type="submit" class="continueLoggin">Iniciar Sesion</button>
-                <p><a href="register.html">¿Aun no tienes una cuenta? ¡Registrate ahora!</a></p>
+                <p><a href="register.php">¿Aun no tienes una cuenta? ¡Registrate ahora!</a></p>
             </form>
         </div>
     </section>

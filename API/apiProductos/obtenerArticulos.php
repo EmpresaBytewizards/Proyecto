@@ -18,6 +18,8 @@ try {
 
 
 
+
+
 // Obtener todos los productos 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     // Verifica si se ha proporcionado un ID

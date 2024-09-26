@@ -209,6 +209,8 @@ main{
     border: 1px solid red;
     border-radius: 20px;
     padding: 3px;
+    transition: background-color 0.5s ease;
+    transition: size 5s ease;
 }
 
 .addCart:hover {
@@ -747,8 +749,23 @@ button:disabled {
 /* Añadir Productos */
 
 .btnAddProduct{
-    background: none;
-    border: none;
+    width: 100%;
+    padding: 10px;
+    background-color: rgb(255, 106, 0);
+    color: #fff;
+    border-color: rgb(253, 84, 0);
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.5s ease;
+}
+
+.btnAddProduct:hover {
+    background-color: rgb(184, 77, 0);
+}
+
+.addProductADD {
+    font-size: 18px;
 }
 
 .productAdd {
@@ -833,7 +850,7 @@ button:disabled {
 
 #condicionProducto {
     color: black; 
-    width: 200px; 
+    width: 100%; 
     height: 40px; 
     padding: 5px 10px; 
     border: 2px solid #ccc; 
@@ -855,7 +872,7 @@ button:disabled {
 
 #categoriaProducto {
     color: black; 
-    width: 200px; 
+    width: 100%; 
     height: 40px; 
     padding: 5px 10px; 
     border: 2px solid #ccc; 
@@ -980,7 +997,7 @@ button:disabled {
 
 #editCondicionProducto, #habilitacionProducto {
     color: black; 
-    width: 200px; 
+    width: 100%; 
     height: 40px; 
     padding: 5px 10px; 
     border: 2px solid #ccc; 
@@ -1002,7 +1019,7 @@ button:disabled {
 
 #editCategoriaProducto {
     color: black; 
-    width: 200px; 
+    width: 100%; 
     height: 40px; 
     padding: 5px 10px; 
     border: 2px solid #ccc; 
