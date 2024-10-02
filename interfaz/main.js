@@ -129,9 +129,10 @@ function capture(event) {
 }
 
 // Buscador
-document.querySelector('.searchBar').addEventListener('input', (event) => {
-    const search = event.target.value.toLowerCase(); // Para la busqueda por nombre 
-    const searchCATALOG = event.target.value; // Para el texto de CATALOG 
+document.querySelector('.search').addEventListener('submit', (event) => {
+    event.preventDefault();
+    const search = document.querySelector(".searchBar").value.toLowerCase(); // Para la busqueda por nombre 
+    const searchCATALOG = document.querySelector(".searchBar").value; // Para el texto de CATALOG 
     searchProducts(search, searchCATALOG);
 });
 

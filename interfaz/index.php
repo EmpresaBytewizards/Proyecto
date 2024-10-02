@@ -33,7 +33,7 @@
                 </div>
                 <form action="" class="search">
                     <input class="searchBar" type="search" placeholder="Buscar...">
-                    <button class="material-symbols-outlined">
+                    <button type="submit" class="material-symbols-outlined">
                         search
                     </button>
                 </form>

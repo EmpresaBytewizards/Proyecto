@@ -32,7 +32,7 @@ class ApiUsuarios
         //    echo "¡Contraseña incorrecta!";
         //}
 
-        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT); // Tú sólo recibes la contraseña del usuario que inicia sesión, la encriptas y comparas los dos hashes.
 
         // Preparar la consulta
         $stmt = $this->pdo->prepare("INSERT INTO usuario (nombre_usu, mail_usu, contrasena_usu, direccion_usu) VALUES (?, ?, ?, ?)");

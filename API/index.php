@@ -154,6 +154,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt = $pdo->query("SELECT MAX(id_producto) FROM producto");
     $ultimoIdProducto = $stmt->fetchColumn();
     $nuevoIdProducto = $ultimoIdProducto ? $ultimoIdProducto + 1 : 1;
+    $idImagen = $nuevoIdProducto;
 
     // Este método ya maneja el JSON
     $producto->agregar($nuevoIdProducto, $nombreProducto, $imagenProducto, $precioProducto, $condicionProducto, $stockProducto, $nombreEmpresa, $descripcionProducto, $categoriaProducto, $habilitacion_producto);
