@@ -242,11 +242,9 @@ document.getElementById('productForm').addEventListener('submit', function(event
     // Enviar los datos al servidor
     fetch('http://localhost/bytewizards/API/index.php', {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
+        body: formData
     })
+    
     .then(response => {
         if (!response.ok) {
             // Si la respuesta no es un código 2xx, lanzamos un error
@@ -262,7 +260,6 @@ document.getElementById('productForm').addEventListener('submit', function(event
     .catch(error => {
         console.error('Error detectado:', error); // Mostrar el error en la consola
         alert('Error al crear el artículo: ' + error.message);
-        location.reload();
     });
 });
 
@@ -278,7 +275,7 @@ function editarProducto(productId) {
         document.getElementById('editProductId').value = producto.id_producto || '';
         document.getElementById('editNombreProducto').value = producto.titulo || '';
         document.getElementById('editStockProducto').value = producto.stock || '';
-        document.getElementById('editProductImage').value = producto.imagen || '';
+        // document.getElementById('editProductImage').value = producto.imagen || '';
         document.getElementById('editPrecioProducto').value = producto.precio_base || '';
         document.getElementById('editCondicionProducto').value = producto.condicion || '';
         document.getElementById('editCategoriaProducto').value = producto.categoria || '';
@@ -298,22 +295,29 @@ document.getElementById('editProductForm').addEventListener('submit', function(e
     const formData = new FormData(this);
     const data = {};
     formData.forEach((value, key) => {
-      data[key] = value;
+        data[key] = value;
     });
 
-    // Enviar los datos al servidor para actualizar el producto
+    // Enviar los datos al servidor
     fetch('http://localhost/bytewizards/API/index.php', {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
+        method: 'PUT',
+        body: formData
     })
-    .then(response => response.json())
-    .then(responseData => {
-      console.log(responseData.message);
-      alert("¡Articulo editado exitosamente!")
-      location.reload();
+    
+    .then(response => {
+        if (!response.ok) {
+            // Si la respuesta no es un código 2xx, lanzamos un error
+            throw new Error(`Error en la respuesta del servidor: ${response.status}`);
+        }
+        return response.json(); // Intentar convertir la respuesta a JSON
     })
-    .catch(error => alert('Error al actualizar el producto:', error));
+    .then(data => {
+        console.log(data.message);
+        alert("¡Artículo editado exitosamente!");
+
+    })
+    .catch(error => {
+        console.error('Error detectado:', error); // Mostrar el error en la consola
+        alert('Error al editar el artículo: ' + error.message);
+    });
 });

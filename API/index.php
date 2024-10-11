@@ -4,6 +4,7 @@ header('Access-Control-Allow-Origin: *'); // Permitir solicitudes de cualquier o
 header('Access-Control-Allow-Methods: GET, POST, PUT'); // Métodos HTTP permitidos
 header('Access-Control-Allow-Headers: Content-Type'); // Encabezados permitidos
 require("ConexionDB.php");
+require("subirImagenes.php"); 
 
 
 class ApiProductos 
@@ -34,12 +35,12 @@ class ApiProductos
         }
     }
 
-    public function agregar($nuevoIdProducto, $nombreProducto, $imagenProducto, $precioProducto, $condicionProducto, $stockProducto, $nombreEmpresa, $descripcionProducto, $categoriaProducto, $habilitacion_producto)
+    public function agregar($nuevoIdProducto, $nombreProducto, $urlImagen, $precioProducto, $condicionProducto, $stockProducto, $nombreEmpresa, $descripcionProducto, $categoriaProducto, $habilitacion_producto)
     {
         $stmt = $this->pdo->prepare("INSERT INTO producto (id_producto, titulo, imagen, precio_base, condicion, stock, nombre_empresa, descripcion, categoria, habilitacion_producto) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
         // Ejecutar la consulta
-        if ($stmt->execute([$nuevoIdProducto, $nombreProducto, $imagenProducto, $precioProducto, $condicionProducto, $stockProducto, $nombreEmpresa, $descripcionProducto, $categoriaProducto, $habilitacion_producto])) {
+        if ($stmt->execute([$nuevoIdProducto, $nombreProducto, $urlImagen, $precioProducto, $condicionProducto, $stockProducto, $nombreEmpresa, $descripcionProducto, $categoriaProducto, $habilitacion_producto])) {
             echo json_encode(['message' => 'Producto creado exitosamente']);
         } else {
             echo json_encode(['message' => 'Error al crear producto']);
@@ -121,20 +122,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     // Obtener los datos JSON del cuerpo de la solicitud
-    $input = file_get_contents('php://input');
-    $data = json_decode($input, true);
+    // $input = file_get_contents('php://input');
+    // $data = json_decode($input, true);
 
-    $nombreProducto = isset($data['nombreProducto']) ? $data['nombreProducto'] : null;
-    $imagenProducto = isset($data['addProductImage']) ? $data['addProductImage'] : null;
-    $precioProducto = isset($data['precioProducto']) ? $data['precioProducto'] : null;
-    $condicionProducto = isset($data['condicionProducto']) ? $data['condicionProducto'] : null;
-    $stockProducto = isset($data['stockProducto']) ? $data['stockProducto'] : null;
-    $descripcionProducto = isset($data['descripcionProducto']) ? $data['descripcionProducto'] : null;
-    $categoriaProducto = isset($data['categoriaProducto']) ? $data['categoriaProducto'] : null;
+    // $nombreProducto = isset($data['nombreProducto']) ? $data['nombreProducto'] : null;
+    // $precioProducto = isset($data['precioProducto']) ? $data['precioProducto'] : null;
+    // $condicionProducto = isset($data['condicionProducto']) ? $data['condicionProducto'] : null;
+    // $stockProducto = isset($data['stockProducto']) ? $data['stockProducto'] : null;
+    // $descripcionProducto = isset($data['descripcionProducto']) ? $data['descripcionProducto'] : null;
+    // $categoriaProducto = isset($data['categoriaProducto']) ? $data['categoriaProducto'] : null;
+
+    $nombreProducto = $_POST['nombreProducto'];
+    $precioProducto = $_POST['precioProducto'];
+    $condicionProducto = $_POST['condicionProducto'];
+    $stockProducto = $_POST['stockProducto'];
+    $descripcionProducto = $_POST['descripcionProducto'];
+    $categoriaProducto = $_POST['categoriaProducto'];
     $missingFields = [];
 
     if ($nombreProducto === null) $missingFields[] = 'nombreProducto';
-    if ($imagenProducto === null) $missingFields[] = 'addProductImage';
     if ($precioProducto === null) $missingFields[] = 'precioProducto';
     if ($condicionProducto === null) $missingFields[] = 'condicionProducto';
     if ($stockProducto === null) $missingFields[] = 'stockProducto';
@@ -155,38 +161,50 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $ultimoIdProducto = $stmt->fetchColumn();
     $nuevoIdProducto = $ultimoIdProducto ? $ultimoIdProducto + 1 : 1;
     $idImagen = $nuevoIdProducto;
+    
+    // Validar si se subió una imagen
+    if (isset($_FILES['addProductImage']) && $_FILES['addProductImage']['error'] === UPLOAD_ERR_OK) {
+        // Crear una instancia del cargador de imágenes
+        $uploader = new ImageUploader();
+        $urlImagen = $uploader->uploadImage($_FILES['addProductImage'], $idImagen); // Intentar subir la imagen
 
+        // Verificar si la subida de la imagen fue exitosa
+        if (strpos($urlImagen, 'Error:') === 0) {
+            // Mensaje de error al subir la imagen
+            echo json_encode(['message' => $urlImagen]);
+            exit; // Terminar la ejecución
+        }
+    } else {
+        // Mensaje de error si no se subió la imagen o hubo un problema
+        echo json_encode(['message' => 'Error: No se subió la imagen o hubo un problema durante la subida.']);
+        exit; // Terminar la ejecución
+    }
+    $urlImagen = "../api/assets/" . $urlImagen;
     // Este método ya maneja el JSON
-    $producto->agregar($nuevoIdProducto, $nombreProducto, $imagenProducto, $precioProducto, $condicionProducto, $stockProducto, $nombreEmpresa, $descripcionProducto, $categoriaProducto, $habilitacion_producto);
+    $producto->agregar($nuevoIdProducto, $nombreProducto, $urlImagen, $precioProducto, $condicionProducto, $stockProducto, $nombreEmpresa, $descripcionProducto, $categoriaProducto, $habilitacion_producto);
 }
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
 
-    $input = file_get_contents('php://input');
-    $data = json_decode($input, true);
+    $data = json_decode(file_get_contents('php://input'), true);
+    
+    $idProducto = $data['editProductId']; 
+    $nombreProducto = $data['editNombreProducto'];
+    $precioProducto = $data['editPrecioProducto'];
+    $condicionProducto = $data['editCondicionProducto'];
+    $stockProducto = $data['editStockProducto'];
+    $descripcionProducto = $data['editDescripcionProducto'];
+    $categoriaProducto = $data['editCategoriaProducto'];
+    $habilitacion_producto = $data['habilitacionProducto'];
 
-    // Verificar si el JSON está bien formado
-    if ($data === null) {
-        echo json_encode(['message' => 'Datos JSON mal formados']);
-        exit;
-    }
+    // Ahora puedes usar estas variables como lo harías normalmente
 
-    // Recolectar los datos del formulario
-    $idProducto = isset($data['editProductId']) ? $data['editProductId'] : null;
-    $nombreProducto = isset($data['editNombreProducto']) ? $data['editNombreProducto'] : null;
-    $imagenProducto = isset($data['editProductImage']) ? $data['editProductImage'] : null;
-    $precioProducto = isset($data['editPrecioProducto']) ? $data['editPrecioProducto'] : null;
-    $condicionProducto = isset($data['editCondicionProducto']) ? $data['editCondicionProducto'] : null;
-    $stockProducto = isset($data['editStockProducto']) ? $data['editStockProducto'] : null;
-    $descripcionProducto = isset($data['editDescripcionProducto']) ? $data['editDescripcionProducto'] : null;
-    $categoriaProducto = isset($data['editCategoriaProducto']) ? $data['editCategoriaProducto'] : null;
-    $habilitacion_producto = isset($data['habilitacionProducto']) ? $data['habilitacionProducto'] : null;
+
+    $missingFields = [];
 
     // Verificar si faltan campos
-    $missingFields = [];
     if ($nombreProducto === null) $missingFields[] = 'editNombreProducto';
-    if ($imagenProducto === null) $missingFields[] = 'editProductImage';
     if ($precioProducto === null) $missingFields[] = 'editPrecioProducto';
     if ($condicionProducto === null) $missingFields[] = 'editCondicionProducto';
     if ($stockProducto === null) $missingFields[] = 'editStockProducto';
@@ -199,11 +217,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
         exit;
     }
 
-    // Crear o editar producto
-    $nombreEmpresa = 'ByteWizzards';  // Valor estático
+    $nombreEmpresa = 'ByteWizzards'; // Valor estático
 
-    // Ejecutar la función de editar
-    $result = $producto->editar($nombreProducto, $imagenProducto, $precioProducto, $condicionProducto, $stockProducto, $descripcionProducto, $categoriaProducto, $habilitacion_producto, $idProducto);
+    // Validar si se subió una imagen
+    if (isset($_FILES['editProductImage']) && $_FILES['editProductImage']['error'] === UPLOAD_ERR_OK) {
+        // Crear una instancia del cargador de imágenes
+        $uploader = new ImageUploader();
+        $urlImagen = $uploader->uploadImage($_FILES['editProductImage'], $idProducto); // Intentar subir la imagen
+
+        // Verificar si la subida de la imagen fue exitosa
+        if (strpos($urlImagen, 'Error:') === 0) {
+            // Mensaje de error al subir la imagen
+            echo json_encode(['message' => $urlImagen]);
+            exit; // Terminar la ejecución
+        }
+
+        // Formatear el enlace de la imagen
+        $urlImagen = "../api/assets/" . $urlImagen;
+    } else {
+        // En caso de que no se haya subido una imagen, no se actualiza la imagen
+        echo json_encode(['message' => 'Error: No se subió la imagen o hubo un problema durante la subida.']);
+        exit; // Terminar la ejecución si no hay imagen
+    }
+
+    // Ejecutar la función de editar con la nueva URL de la imagen
+    $result = $producto->editar($nombreProducto, $urlImagen, $precioProducto, $condicionProducto, $stockProducto, $descripcionProducto, $categoriaProducto, $habilitacion_producto, $idProducto);
 
     // Verificar si la edición fue exitosa
     if ($result) {

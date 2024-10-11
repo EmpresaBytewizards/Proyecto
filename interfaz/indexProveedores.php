@@ -76,7 +76,7 @@
                 <label for="stockProducto">STOCK Inicial:</label>
                 <input type="number" id="stockProducto" name="stockProducto" required>
                 <label for="addProductImage">Imagen:</label>
-                <input type="url" id="addProductImage" name="addProductImage" required>
+                <input type="file" id="addProductImage" name="addProductImage" required>
                 <label for="precioProducto">Precio del Producto:</label>
                 <input type="number" id="precioProducto" name="precioProducto" step="0.01" min="0" required>
                 <label for="condicionProducto">Condición del Producto:</label>
@@ -174,7 +174,7 @@
             <label for="editStockProducto">STOCK:</label>
             <input type="number" id="editStockProducto" name="editStockProducto" required>
             <label for="editProductImage">Imagen:</label>
-            <input type="url" id="editProductImage" name="editProductImage" required>
+            <input type="file" id="editProductImage" name="editProductImage" required>
             <label for="editPrecioProducto">Precio del Producto:</label>
             <input type="number" id="editPrecioProducto" name="editPrecioProducto" step="0.01" min="0" required>
             <label for="editCondicionProducto">Condición del Producto:</label>

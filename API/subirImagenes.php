@@ -3,7 +3,7 @@ class ImageUploader
 {
     private $uploadDir;
 
-    public function __construct($directory = '../assets/')
+    public function __construct($directory = 'assets/')
     {
         $this->uploadDir = $directory;
         $this->createUploadDir();
@@ -20,7 +20,7 @@ class ImageUploader
     }
 
     // Método para subir la imagen
-    public function uploadImage($file)
+    public function uploadImage($file, $idImagen)
     {
         // Verificar si el archivo fue subido
         if (!isset($file) || $file['error'] !== UPLOAD_ERR_OK) {
@@ -48,7 +48,7 @@ class ImageUploader
         }
 
         // Renombrar archivo para evitar colisiones
-        $newFileName = uniqid() . "." . $imageFileType;
+        $newFileName = $idImagen . ".png";
         $targetFile = $this->uploadDir . $newFileName;
 
         // Mover la imagen subida al directorio especificado

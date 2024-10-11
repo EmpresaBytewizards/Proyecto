@@ -77,6 +77,7 @@ function renderAll(titulo, imagen, precio_base, id_producto, habilitacion_produc
 }
 
 // Categorias: 
+//chequea que clases tiene el elemento que esta capturando 
 function capture(event) { 
     if (event.target.classList.contains('category')) { //Si el elemento clickeado es una categoria 
         event.preventDefault();
@@ -131,7 +132,7 @@ function capture(event) {
 // Buscador
 document.querySelector('.search').addEventListener('submit', (event) => {
     event.preventDefault();
-    const search = document.querySelector(".searchBar").value.toLowerCase(); // Para la busqueda por nombre 
+    const search = document.querySelector(".searchBar").value.toLowerCase(); //convierte a minuscula para la busqueda por nombre 
     const searchCATALOG = document.querySelector(".searchBar").value; // Para el texto de CATALOG 
     searchProducts(search, searchCATALOG);
 });
@@ -157,25 +158,22 @@ function searchProducts(search, searchCATALOG) {
 }
 
 
-
+//resetea el catalogo al presionar el logo de la página
 const logoPagina = document.querySelector("#logo_pagina");
-
 logoPagina.addEventListener("click", (event) => {
     event.preventDefault(); 
-
     const renderZone = document.querySelector(".renderZone");
     renderZone.innerHTML = ``; 
-
     let categoryName = document.querySelector(".categoryName");
     categoryName.innerText = "CATALOGO";
-
     for (let i = 0; i < listProducts.length; i++) {
         renderAll(listProducts[i].titulo, listProducts[i].imagen, listProducts[i].precio_base, listProducts[i].id_producto, listProducts[i].habilitacion_producto, listProducts[i].stock);
     }
 });
 
+//carrito
 document.addEventListener('click', capture);
-
+//muestra los atributos para ponerlo en el carrito y los renderisa
 function renderCartItem(titulo, precio_base, id_producto) {
     const cartItems = document.querySelector('.cartItems');
 
@@ -202,10 +200,11 @@ function renderCartItem(titulo, precio_base, id_producto) {
     cartItems.append(productCart);
 }
 
+//actualiza el precio total
 function updateTotalPrice() {
     const cartItems = document.querySelectorAll('.product__cart');
     let totalPrice = 0;
-
+//por cada objeto del carrito combierte el texto de precio del producto en un float remobiendo caracteres no deseados y los suma al total
     cartItems.forEach(item => {
         const precio_base = parseFloat(item.querySelector('.cart__price').textContent.replace('$', ''));
         totalPrice += precio_base;
