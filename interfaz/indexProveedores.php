@@ -174,7 +174,7 @@
             <label for="editStockProducto">STOCK:</label>
             <input type="number" id="editStockProducto" name="editStockProducto" required>
             <label for="editProductImage">Imagen:</label>
-            <input type="file" id="editProductImage" name="editProductImage" required>
+            <input type="file" id="editProductImage" name="editProductImage">
             <label for="editPrecioProducto">Precio del Producto:</label>
             <input type="number" id="editPrecioProducto" name="editPrecioProducto" step="0.01" min="0" required>
             <label for="editCondicionProducto">Condición del Producto:</label>

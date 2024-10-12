@@ -291,33 +291,67 @@ function editarProducto(productId) {
 document.getElementById('editProductForm').addEventListener('submit', function(event) {
     event.preventDefault();
 
-    // Recolectar los datos del formulario de edición
+    // Recolectar los datos del formulario sin la imagen
     const formData = new FormData(this);
     const data = {};
     formData.forEach((value, key) => {
-        data[key] = value;
+        if (key !== 'editProductImage') { // Excluir la imagen
+            data[key] = value;
+        }
     });
 
-    // Enviar los datos al servidor
+    // Enviar los datos del formulario al servidor sin la imagen
     fetch('http://localhost/bytewizards/API/index.php', {
         method: 'PUT',
-        body: formData
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
     })
-    
     .then(response => {
         if (!response.ok) {
-            // Si la respuesta no es un código 2xx, lanzamos un error
             throw new Error(`Error en la respuesta del servidor: ${response.status}`);
         }
-        return response.json(); // Intentar convertir la respuesta a JSON
+        return response.json();
     })
     .then(data => {
         console.log(data.message);
         alert("¡Artículo editado exitosamente!");
 
+        // Verificar si se está enviando una imagen
+        const fileInput = document.querySelector('[name="editProductImage"]');
+        if (fileInput && fileInput.files.length > 0) {
+            const imageFormData = new FormData();
+            imageFormData.append('editProductImage', fileInput.files[0]); // Añadir la imagen al FormData
+            imageFormData.append('editProductId', document.querySelector('[name="editProductId"]').value); // Enviar el ID del producto
+
+            // Enviar la imagen en una solicitud separada
+            fetch('http://localhost/bytewizards/API/imagenesEditar.php', {
+                method: 'POST', // Mejor usar POST para archivos
+                body: imageFormData
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Error en la respuesta del servidor al subir la imagen: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log(data.message);
+                // Recargar la página si todo ha sido exitoso
+                location.reload();
+            })
+            .catch(error => {
+                console.error('Error detectado al subir la imagen:', error);
+                alert('Error al subir la imagen: ' + error.message);
+            });
+        } else {
+            // Si no se subió una imagen, recargar la página inmediatamente
+            location.reload();
+        }
     })
     .catch(error => {
-        console.error('Error detectado:', error); // Mostrar el error en la consola
+        console.error('Error detectado:', error);
         alert('Error al editar el artículo: ' + error.message);
     });
 });

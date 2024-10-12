@@ -47,13 +47,13 @@ class ApiProductos
         }
     }
 
-    public function editar($nombreProducto, $imagenProducto, $precioProducto, $condicionProducto, $stockProducto, $descripcionProducto, $categoriaProducto, $habilitacion_producto, $idProducto)
+    public function editar($nombreProducto, $precioProducto, $condicionProducto, $stockProducto, $descripcionProducto, $categoriaProducto, $habilitacion_producto, $idProducto)
     {
     // Editar producto existente (UPDATE)
-    $stmt = $this->pdo->prepare("UPDATE producto SET titulo = ?, imagen = ?, precio_base = ?, condicion = ?, stock = ?, descripcion = ?, categoria = ?, habilitacion_producto = ? WHERE id_producto = ?");
+    $stmt = $this->pdo->prepare("UPDATE producto SET titulo = ?, precio_base = ?, condicion = ?, stock = ?, descripcion = ?, categoria = ?, habilitacion_producto = ? WHERE id_producto = ?");
 
     // Ejecutar la consulta y devolver el resultado
-    return $stmt->execute([$nombreProducto, $imagenProducto, $precioProducto, $condicionProducto, $stockProducto, $descripcionProducto, $categoriaProducto, $habilitacion_producto, $idProducto]);
+    return $stmt->execute([$nombreProducto, $precioProducto, $condicionProducto, $stockProducto, $descripcionProducto, $categoriaProducto, $habilitacion_producto, $idProducto]);
     }
 
 }
@@ -187,8 +187,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
 
-    $data = json_decode(file_get_contents('php://input'), true);
-    
+
+    // Leer los datos JSON
+    $input = file_get_contents("php://input");
+    $data = json_decode($input, true);
+
+
+    // Ahora puedes acceder a los datos del formulario
     $idProducto = $data['editProductId']; 
     $nombreProducto = $data['editNombreProducto'];
     $precioProducto = $data['editPrecioProducto'];
@@ -198,19 +203,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
     $categoriaProducto = $data['editCategoriaProducto'];
     $habilitacion_producto = $data['habilitacionProducto'];
 
+
     // Ahora puedes usar estas variables como lo harías normalmente
 
 
     $missingFields = [];
 
     // Verificar si faltan campos
-    if ($nombreProducto === null) $missingFields[] = 'editNombreProducto';
-    if ($precioProducto === null) $missingFields[] = 'editPrecioProducto';
-    if ($condicionProducto === null) $missingFields[] = 'editCondicionProducto';
-    if ($stockProducto === null) $missingFields[] = 'editStockProducto';
-    if ($descripcionProducto === null) $missingFields[] = 'editDescripcionProducto';
-    if ($categoriaProducto === null) $missingFields[] = 'editCategoriaProducto';
-    if ($habilitacion_producto === null) $missingFields[] = 'habilitacionProducto';
+    if (empty($nombreProducto)) $missingFields[] = 'editNombreProducto';
+    if (empty($precioProducto)) $missingFields[] = 'editPrecioProducto';
+    if (empty($condicionProducto)) $missingFields[] = 'editCondicionProducto';
+    if (empty($stockProducto)) $missingFields[] = 'editStockProducto';
+    if (empty($descripcionProducto)) $missingFields[] = 'editDescripcionProducto';
+    if (empty($categoriaProducto)) $missingFields[] = 'editCategoriaProducto';
+    if (empty($habilitacion_producto)) $missingFields[] = 'habilitacionProducto';
+
 
     if (!empty($missingFields)) {
         echo json_encode(['message' => 'Faltan datos del formulario', 'fields' => $missingFields]);
@@ -219,29 +226,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
 
     $nombreEmpresa = 'ByteWizzards'; // Valor estático
 
-    // Validar si se subió una imagen
-    if (isset($_FILES['editProductImage']) && $_FILES['editProductImage']['error'] === UPLOAD_ERR_OK) {
-        // Crear una instancia del cargador de imágenes
-        $uploader = new ImageUploader();
-        $urlImagen = $uploader->uploadImage($_FILES['editProductImage'], $idProducto); // Intentar subir la imagen
-
-        // Verificar si la subida de la imagen fue exitosa
-        if (strpos($urlImagen, 'Error:') === 0) {
-            // Mensaje de error al subir la imagen
-            echo json_encode(['message' => $urlImagen]);
-            exit; // Terminar la ejecución
-        }
-
-        // Formatear el enlace de la imagen
-        $urlImagen = "../api/assets/" . $urlImagen;
-    } else {
-        // En caso de que no se haya subido una imagen, no se actualiza la imagen
-        echo json_encode(['message' => 'Error: No se subió la imagen o hubo un problema durante la subida.']);
-        exit; // Terminar la ejecución si no hay imagen
-    }
-
-    // Ejecutar la función de editar con la nueva URL de la imagen
-    $result = $producto->editar($nombreProducto, $urlImagen, $precioProducto, $condicionProducto, $stockProducto, $descripcionProducto, $categoriaProducto, $habilitacion_producto, $idProducto);
+    
+    // Ejecutar la función de editar
+    $result = $producto->editar($nombreProducto, $precioProducto, $condicionProducto, $stockProducto, $descripcionProducto, $categoriaProducto, $habilitacion_producto, $idProducto);
 
     // Verificar si la edición fue exitosa
     if ($result) {
