@@ -27,8 +27,8 @@
                         <li><a href="#" class="category" data-category="joyeria">Joyeria</a></li>
                         <li><a href="#" class="category" data-category="ropa">Ropa</a></li>
                         <li><a href="#" class="category" data-category="animales">Animales</a></li>
-                        <li><a href="#" class="category" data-category="consumibles">Consumibles</a></li>
                         <li><a href="#" class="category" data-category="juegos">Juegos</a></li>
+                        <li><a href="#" class="category" data-category="otros">Otros</a></li>
                     </ul>
                 </div>
                 <form action="" class="search">
@@ -43,7 +43,7 @@
                 </div>
             </nav>
         </div>
-        <div class="blackbar">FREE SHIPPING AND RETURNS </div>
+        <div class="blackbar"> ENVÍO Y DEVOLUCIONES GRATIS </div>
     </header>
     <main>
         <!--<Añadir Productos>-->
@@ -90,8 +90,8 @@
                     <option value="joyeria">Joyeria</option>
                     <option value="ropa">Ropa</option>
                     <option value="animales">Animales</option>
-                    <option value="consumibles">Consumibles</option>
                     <option value="juegos">Juegos</option>
+                    <option value="otros">Otros</option>
                 </select>
                 <label for="descripcionProducto">Descripcion del Producto por unidad:</label>
                 <textarea id="descripcionProducto" name="descripcionProducto" required></textarea>
@@ -188,7 +188,7 @@
               <option value="joyeria">Joyeria</option>
               <option value="ropa">Ropa</option>
               <option value="animales">Animales</option>
-              <option value="consumibles">Consumibles</option>
+              <option value="otros">Otros</option>
               <option value="juegos">Juegos</option>
             </select>
             <label for="editDescripcionProducto">Descripcion del Producto:</label>
