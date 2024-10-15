@@ -209,7 +209,7 @@
             </div>
             <div class="">
                 <ul>
-                    <li>Client:</li>
+                    <li>Cliente:</li>
                     <li>DGETP-UTU</li>
                     <li>Teléfono: 2208 9891</li>
                 </ul>
