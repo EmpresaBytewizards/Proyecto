@@ -142,22 +142,22 @@
         <div>
             <div class="">
                 <ul>
-                    <li>Contact:</li>
-                    <li>Send us an email: bytewizards@gmail.com</li>
-                    <li>Phone: xxx-xx-xx</li>
+                    <li>Contacto:</li>
+                    <li>Envianos un email: empresa.bytewizards.3bg@gmail.com</li>
+                    <li>Teléfono: xxx-xx-xx</li>
                 </ul>
             </div>
             <div class="">
                 <ul>
                     <li>Client:</li>
                     <li>DGETP-UTU</li>
-                    <li>Phone: 2208 9891</li>
+                    <li>Teléfono: 2208 9891</li>
                 </ul>
             </div>
             <div class="">
                 <ul>
-                    <li>Development Team:</li>
-                    <li>byteWizards Corporation</li>
+                    <li>Equipo de Desarrollo:</li>
+                    <li>ByteWizards Corporation</li>
                 </ul>
             </div>
         </div>

@@ -3,7 +3,7 @@ window.onload = function () {
     const IMAGENES = [
         'img/1.jpg','img/2.jpg','img/3.jpg'
     ];
-    const TIEMPO_INTERVALO_MILESIMAS_SEG = 3000; // 3 segundos
+    const TIEMPO_INTERVALO_MILESIMAS_SEG = 5000; // 3 segundos
     let posicionActual = 0;
     let $imagen = document.querySelector('#publi');
 
