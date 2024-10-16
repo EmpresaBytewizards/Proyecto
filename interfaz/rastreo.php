@@ -15,46 +15,14 @@
     <header>
         <div class="header__top">
             <div class="logo__container">
-                <img id="logo_pagina" src="tienda/Logopagina tr borde.png" data-category="CATALOG">
+               <a href="interfaz\index.php" <img id="logo_pagina" src="tienda/Logopagina tr borde.png" data-category="CATALOG" href="interfaz\index.php"> </a>
             </div>
-            <nav>
-                
-                <div class="menu">
-                    <span id="menu__icon" class="material-symbols-outlined">menu</span>
-                    
-                    <ul class="dropdown">
-                        <li><a href="#" class="category" data-category="tecnologia">Tecnologia</a></li>
-                        <li><a href="#" class="category" data-category="joyeria">Joyeria</a></li>
-                        <li><a href="#" class="category" data-category="ropa">Ropa</a></li>
-                        <li><a href="#" class="category" data-category="animales">Animales</a></li>
-                        <li><a href="#" class="category" data-category="juegos">Juegos</a></li>
-                        <li><a href="#" class="category" data-category="otros">Otros</a></li>
-                    </ul>
-                </div>
-                <form action="" class="search">
-                    <input class="searchBar" type="search" placeholder="Buscar...">
-                    <button type="submit" class="material-symbols-outlined">
-                        search
-                    </button>
-                </form>
-
-                <div class="icons">
-                    <button alt="cuenta" class="btnLoggin" onclick="toggleLoggin()"> <span class="material-symbols-outlined">passkey</span> </button>
-                    <button alt="carrito" class="btnCarrito" onclick="toggleCarrito()"> <span class="material-symbols-outlined">shopping_cart</span> </button>
-                </div>
-            </nav>
         </div>
         <div class="blackbar"> ENVÍO Y DEVOLUCIONES GRATIS </div>
     </header>
     <main>
         <!--<section class="concarrusel">-->
            <br>
-            <div class="carrusel">
-                <div id="publi" class="publi"></div>
-            </div>
-        
-    
-        <script src="carrusel.js"></script>
 
         <div class="flexCenter">
             <h1 class="categoryName">CATALOGO</h1>
@@ -65,41 +33,7 @@
 
         
     </main>
-    <section class="cart inactive">
-        <div class="cartContainer">
-            <div class="cart__title">
-                <button class="btnCarrito" onclick="toggleCarrito()"> <span class="material-symbols-outlined closeCarrito"> close </span> </button>
-                
-                <h1>CARRITO</h1>
-            </div>
-            <div class="cartItems"> <!-- Lugar de renderizado del carrito -->
-
-            </div> 
-            <div class="checkout">
-                <span class="total">TOTAL: $0.00</span>
-                <button class="paybtn">Pasar al Pago por PayPal</button>
-                <span style="color: black"> (Se aplicaran impuestos correspondientes despues de pasar al pago) </span>
-            </div>
-        </div>
-    </section>
-
-    <section class="loggin inactive">
-        
-        <div class="login-container">
-            <div class="loggin__title">
-                <button alt="carrito" class="btnLoggin" onclick="toggleLoggin()"> <span class="material-symbols-outlined closeLogin">close</span> </button>      
-                <h1 id="logintitulo">Inicio de Sesion</h1>
-            </div>
-            <form>
-                <label for="email">Email/Nombre:</label>
-                <input type="text" id="email" name="email" required>
-                <label for="password">Contraseña:</label>
-                <input type="password" id="password" name="password" required>
-                <button type="submit" class="continueLoggin">Iniciar Sesion</button>
-                <p><a href="register.php">¿Aun no tienes una cuenta? ¡Registrate ahora!</a></p>
-            </form>
-        </div>
-    </section>
+  
     
     <section class="articlePage inactive">
         

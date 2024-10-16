@@ -274,7 +274,7 @@ function editarProducto(productId) {
         document.getElementById('habilitacionProducto').value = producto.habilitacion_producto || '';
         document.getElementById('editProductId').value = producto.id_producto || '';
         document.getElementById('editNombreProducto').value = producto.titulo || '';
-        document.getElementById('editStockProducto').value = producto.stock || '';
+        document.getElementById('editStockProducto').value = producto.stock || '0';
         // document.getElementById('editProductImage').value = producto.imagen || '';
         document.getElementById('editPrecioProducto').value = producto.precio_base || '';
         document.getElementById('editCondicionProducto').value = producto.condicion || '';

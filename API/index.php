@@ -213,12 +213,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
     if (empty($nombreProducto)) $missingFields[] = 'editNombreProducto';
     if (empty($precioProducto)) $missingFields[] = 'editPrecioProducto';
     if (empty($condicionProducto)) $missingFields[] = 'editCondicionProducto';
-    if (empty($stockProducto)) $missingFields[] = 'editStockProducto';
+    // if (empty($stockProducto)) $missingFields[] = 'editStockProducto';
     if (empty($descripcionProducto)) $missingFields[] = 'editDescripcionProducto';
     if (empty($categoriaProducto)) $missingFields[] = 'editCategoriaProducto';
     if (empty($habilitacion_producto)) $missingFields[] = 'habilitacionProducto';
 
-
+    if ($stockProducto == null){
+        $stockProducto = 0;
+    }
+    
     if (!empty($missingFields)) {
         echo json_encode(['message' => 'Faltan datos del formulario', 'fields' => $missingFields]);
         exit;
