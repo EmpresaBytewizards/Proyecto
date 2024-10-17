@@ -211,6 +211,7 @@ function updateTotalPrice() {
     });
 
     document.querySelector('.checkout span').textContent = `TOTAL: $${totalPrice.toFixed(2)}`;
+    document.getElementById('cantidad').value = `${totalPrice.toFixed(2)}`;
 }
 
 // Función para renderizar el artículo en la página de artículo
@@ -231,3 +232,30 @@ function renderArticleItem(titulo, precio_base, image, id_producto, descripcion,
         document.querySelector('.buyItem').innerText = "Añadir al Carro";
     }
 }
+
+
+//paypal
+document.querySelector('.paybtn').addEventListener('click', function() {
+    // Enviar la solicitud a la API para crear el pago
+    fetch('http://localhost/bytewizards/API/metodosDePago/paypal_payment.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                amount: document.getElementById("cantidad").value, // Monto a pagar
+                currency: 'USD', // Moneda
+                description: 'Compra de prueba'
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.approvalUrl) {
+                // Redirigir al usuario a PayPal para completar el pago
+                window.location.href = data.approvalUrl;
+            } else {
+                console.error('Error al generar el pago:', data.error);
+            }
+        })
+        .catch(error => console.error('Error en la solicitud:', error));
+});

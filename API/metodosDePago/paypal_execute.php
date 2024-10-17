@@ -97,3 +97,4 @@ try {
     // Manejo de excepciones
     echo "Error: " . $error->getMessage(); // Mensaje de error si algo falla
 }
+?>

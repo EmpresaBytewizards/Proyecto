@@ -1059,3 +1059,9 @@ button:disabled {
 .editarItem:hover {
     background-color: rgb(195, 81, 0);
 }
+
+
+#logo_pagina_rastreo{
+    height: 3rem;
+    cursor:pointer;
+}

@@ -77,6 +77,7 @@
             </div> 
             <div class="checkout">
                 <span class="total">TOTAL: $0.00</span>
+                <input type="hidden" id="cantidad" require> 
                 <button class="paybtn">Pasar al Pago por PayPal</button>
                 <span style="color: black"> (Se aplicaran impuestos correspondientes despues de pasar al pago) </span>
             </div>
