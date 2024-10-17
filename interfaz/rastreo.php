@@ -117,7 +117,7 @@
                 try {
                     // Intentar ejecutar el pago
                     if (executePayPalPayment($paymentId, $payerId)) {
-                        echo "<h1 class='categoryName'>Pago confirmado con éxito</h1>"; // Mensaje de éxito
+                        echo "<h1 class='exitoPago'>Pago confirmado con éxito</h1>"; // Mensaje de éxito
                     }
                 } catch (Exception $error) {
                     // Manejo de excepciones
@@ -133,41 +133,7 @@
     </main>
   
     
-    <section class="articlePage inactive">
-        
-        <div class="articlePage-container">
-            <div class="articlePage__title">
-                <button alt="articlePageExit" class="exitArticle"> <span class="material-symbols-outlined exitArticle">close</span> </button>    
-                <br>  
-                <img src="" class="imgArticlePage">
-                <h1 class="articlePageTitle"> </h1>
-            </div>
-            <button type="submit" class="buyItem">Añadir al Carro</button>
-            <br>
-            <div class="stockYempresa">
-                <h3 id="stockArticleText" class="stockTexto"> STOCK: </h3>
-                <h3 id="empresaText" class="empresaTexto"> Publicador: </h3>
-            </div>
-            <br>
-            <div class="descriptionArticle">
-                <h3 id="descripcionTexto"> Descripcion: </h3>
-                <br>
-                <p class="descriptionArticleText"> </p>
-            </div>
-            <div class="commentSection">
-                <h2> ¡Comentar! </h2>
-                <form class="commentForm">
-                    <div class="formGroup">
-                        <label for="nick">Nombre: Anonimo </label>
-                        <label for="comment">Comentario:</label>
-                        <textarea id="comment" class="inputComment" rows="8" required></textarea>
-                    </div>
-                    <button class="sendbtn">Enviar</button>
-                </form>
-            </div>
-            
-        </div>
-    </section>
+    
 
 
     <footer>

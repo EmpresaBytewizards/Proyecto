@@ -1061,7 +1061,11 @@ button:disabled {
 }
 
 
-#logo_pagina_rastreo{
+#logo_pagina_rastreo {
     height: 3rem;
     cursor:pointer;
+}
+
+.exitoPago {
+    font-size: 25px;
 }

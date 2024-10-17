@@ -61,7 +61,7 @@ class ApiProductos
 
 //Configuracion de la base de datos
 $host = 'localhost';
-$dbname = 'weshop';
+$dbname = 'weshop2';
 $username = 'root';
 $password = '';
 

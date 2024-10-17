@@ -24,6 +24,9 @@
             <label for="email">Email:</label>
             <input type="email" id="email" name="email" required>
 
+            <label for="numero">Número de Telefono:</label>
+            <input type="number" id="numero" name="numero" required>
+
             <label for="password">Contraseña:</label>
             <ul class="required">
                 <li id="caractMin" class="reject"> Minímo 5 caracteres. </li>
@@ -35,6 +38,7 @@
             <label for="password">Repita su contraseña:</label>
             <input type="password" id="password2" name="password2" required>
             <button type="submit">Registrarse</button>
+            <h5> En caso de que no funcione, intente poner otro nombre </h5>
             <p><a href="index.php">¿Quieres volver sin una cuenta? ¡Clickea aquí!</a></p>
         </form>
     </div>

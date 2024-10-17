@@ -25,13 +25,13 @@ header {
 }
 
 .login-container {
-    position: absolute;
+    position: fixed;
     background-color: white;
     padding: 2rem;
     border-radius: 20px;
     box-shadow: 0 0 5rem rgba(0, 0, 0, 0.1);
     text-align: center;
-    bottom: -15rem;
+    bottom: -22rem;
 }
 
 @media (max-width: 868px) {

@@ -14,5 +14,8 @@
         return $this->pdo;
     }
 }
+if (!isset($_SESSION['usuarios'])) {
+    $_SESSION['usuarios'] = [];
+}
 
 ?>
