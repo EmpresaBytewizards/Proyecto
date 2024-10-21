@@ -1069,3 +1069,22 @@ button:disabled {
 .exitoPago {
     font-size: 25px;
 }
+
+
+
+.reject {
+    color: rgba(75, 75, 75, 0.75);
+}
+
+.accept {
+    color: rgb(75, 75, 75);
+
+}
+
+.accept::after {
+    content: " ✅";
+}
+
+#emailMuestra {
+    color: black;
+}

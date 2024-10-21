@@ -79,6 +79,7 @@
                 <span class="total">TOTAL: $0.00</span>
                 <input type="hidden" id="cantidad" require> 
                 <button class="paybtn">Pasar al Pago por PayPal</button>
+                <span style="color: black"> El envio se hara a la direccion almacenada en su cuenta </span>
                 <span style="color: black"> (Se aplicaran impuestos correspondientes despues de pasar al pago) </span>
             </div>
         </div>
@@ -87,7 +88,7 @@
     <section class="loggin inactive">
         
     <?php 
-session_start(); // Asegúrate de que la sesión esté iniciada al principio del archivo PHP
+session_start(); 
 
 // Verificar si el usuario está logueado
 if (!isset($_SESSION['usuarios']) || empty($_SESSION['usuarios'])) {
@@ -95,7 +96,7 @@ if (!isset($_SESSION['usuarios']) || empty($_SESSION['usuarios'])) {
     ?>
     <div class="login-container">
         <div class="loggin__title">
-            <button alt="carrito" class="btnLoggin" onclick="toggleLoggin()"> 
+            <button alt="cerrar" class="btnLoggin" onclick="toggleLoggin()"> 
                 <span class="material-symbols-outlined closeLogin">close</span> 
             </button>      
             <h1 id="logintitulo">Inicio de Sesion</h1>
@@ -111,8 +112,41 @@ if (!isset($_SESSION['usuarios']) || empty($_SESSION['usuarios'])) {
     </div>
     <?php
 } else {
-    // Si ya está logueado, puedes redirigirlo a otra página o mostrar un mensaje
-    echo "<p>Ya estás logueado como " . $_SESSION['usuarios'][0]['nombre'] . "</p>";
+    ?>
+    <!-- Se utilizan las clases de Login para utilizar el mismo diseño pero se utilizara otra funcion en el boton -->
+    <div class="login-container">
+        <div class="loggin__title">
+            <button alt="cerrar" class="btnLoggin" onclick="toggleLoggin()"> 
+                <span class="material-symbols-outlined closeLogin">close</span> 
+            </button>      
+            <h1 id="logintitulo">Perfil</h1>
+        </div>
+        <form action class="perfilUsu">
+            <br>
+            <h2 id="emailMuestra">Email: <?php echo $_SESSION['usuarios'][0]['correo']; ?></label>
+            <br>
+            <label for="cambiarName">Nombre: <?php echo $_SESSION['usuarios'][0]['nombre']; ?></label>
+            <input type="text" id="cambiarName" name="cambiarName" required placeholder="Cambiar nombre...">
+            <label for="cambiarDirection">Direccion: <?php echo $_SESSION['usuarios'][0]['direccion']; ?></label>
+            <input type="text" id="cambiarDirection" name="cambiarDirection" required placeholder="Cambiar direccion...">
+            <label for="cambiarNumero">Número de Telefono: <?php echo $_SESSION['usuarios'][0]['numero']; ?></label>
+            <input type="number" id="cambiarNumero" name="cambiarNumero" required placeholder="Cambiar telefono...">
+
+            <label for="cambiarPassword">Contraseña:</label>
+            <ul class="required">
+                <li id="caractMin" class="reject"> Minímo 5 caracteres. </li>
+                <li id="mayMin" class="reject"> Minímo 1 letra mayuscula. </li>
+                <li id="minMin" class="reject"> Minímum 1 letra minuscula. </li>
+                <li id="minNum" class="reject"> Al menos 1 número. </li>
+            </ul>
+            <input type="password" id="cambiarPassword" name="cambiarPassword" required  placeholder="Cambiar contraseña...">
+            <label for="password">Repita su contraseña:</label>
+            <input type="password" id="password2" name="password2" required placeholder="Ingrese la contraseña nuevamente...">
+            <button type="submit" class="continueLoggin">Actualizar informacion</button>
+            <p><a href="http://localhost/bytewizards/API/sessionDestroy.php">¿Quieres cerrar sesion? ¡Presione aquí!</a></p>
+        </form>
+    </div>
+    <?php
 }
 ?>
 

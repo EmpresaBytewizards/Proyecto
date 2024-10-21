@@ -20,10 +20,12 @@ function iniciarSesionUsu() {
   };
 
   // Configuración de la solicitud POST
-  fetch(`http://localhost/bytewizards/API/iniciarSesion.php?email=${email}&password=${password}`)
+  fetch(`http://localhost/bytewizards/API/iniciarSesionUsu.php?email=${email}&password=${password}`)
   .then(response => response.json())
   .then(usuario => {
-    console.log(usuario); // Ver la respuesta del servidor
+    console.log(usuario);
+    alert("¡Iniciado sesion con exito!"); 
+    location.reload();
     if (usuario.error) {
       alert(usuario.error); // Mostrar error si hay uno
     } else {

@@ -45,7 +45,7 @@ class ApiUsuarios
             // Generar un token de sesión
             // Iniciar sesión
             session_start();
-
+            session_destroy();
             // Guardar los datos en la sesión
             $_SESSION['usuarios'][] = [ 
                 'id' => $usuarioId,
