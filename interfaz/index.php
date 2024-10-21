@@ -86,20 +86,36 @@
 
     <section class="loggin inactive">
         
-        <div class="login-container">
-            <div class="loggin__title">
-                <button alt="carrito" class="btnLoggin" onclick="toggleLoggin()"> <span class="material-symbols-outlined closeLogin">close</span> </button>      
-                <h1 id="logintitulo">Inicio de Sesion</h1>
-            </div>
-            <form>
-                <label for="email">Email/Nombre:</label>
-                <input type="text" id="email" name="email" required>
-                <label for="password">Contraseña:</label>
-                <input type="password" id="password" name="password" required>
-                <button type="submit" class="continueLoggin">Iniciar Sesion</button>
-                <p><a href="register.php">¿Aun no tienes una cuenta? ¡Registrate ahora!</a></p>
-            </form>
+    <?php 
+session_start(); // Asegúrate de que la sesión esté iniciada al principio del archivo PHP
+
+// Verificar si el usuario está logueado
+if (!isset($_SESSION['usuarios']) || empty($_SESSION['usuarios'])) {
+    // Si no está logueado, mostrar el formulario de inicio de sesión
+    ?>
+    <div class="login-container">
+        <div class="loggin__title">
+            <button alt="carrito" class="btnLoggin" onclick="toggleLoggin()"> 
+                <span class="material-symbols-outlined closeLogin">close</span> 
+            </button>      
+            <h1 id="logintitulo">Inicio de Sesion</h1>
         </div>
+        <form action class="inicioSesion">
+            <label for="email">Email:</label>
+            <input type="text" id="email" name="email" required>
+            <label for="password">Contraseña:</label>
+            <input type="password" id="password" name="password" required>
+            <button type="submit" class="continueLoggin">Iniciar Sesion</button>
+            <p><a href="register.php">¿Aun no tienes una cuenta? ¡Registrate ahora!</a></p>
+        </form>
+    </div>
+    <?php
+} else {
+    // Si ya está logueado, puedes redirigirlo a otra página o mostrar un mensaje
+    echo "<p>Ya estás logueado como " . $_SESSION['usuarios'][0]['nombre'] . "</p>";
+}
+?>
+
     </section>
     
     <section class="articlePage inactive">
@@ -165,6 +181,7 @@
     </footer>
 </body>
 <script src="main.js"></script>
+<script src="iniciarSesionUsu.js"></script>
 <script src="commentary.js"></script>
 <script src="jquery-3.7.1.min.js"></script>
 </html>

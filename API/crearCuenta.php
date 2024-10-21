@@ -53,7 +53,6 @@ class ApiUsuarios
                 'correo' => $email,
                 'direccion' => $direction,
                 'numero' => $numero,
-                'contraseña' => $hashedPassword
             ];
 
             echo json_encode(['message' => 'Cuenta creada exitosamente']);
