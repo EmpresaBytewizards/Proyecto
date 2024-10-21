@@ -46,6 +46,7 @@ class ApiUsuarios
             // Iniciar sesión
             session_start();
             session_destroy();
+            session_start();
             // Guardar los datos en la sesión
             $_SESSION['usuarios'][] = [ 
                 'id' => $usuarioId,
