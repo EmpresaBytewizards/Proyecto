@@ -121,17 +121,18 @@ if (!isset($_SESSION['usuarios']) || empty($_SESSION['usuarios'])) {
             </button>      
             <h1 id="logintitulo">Perfil</h1>
         </div>
-        <form action class="perfilUsu">
+        <form action id="perfilUsu">
             <br>
-            <h2 id="emailMuestra">Email: <?php echo $_SESSION['usuarios'][0]['correo']; ?></label>
-            <br>
+            <h3 style="color: black;"> Su id de usuario es: <?php echo $_SESSION['usuarios'][0]['id']; ?></h3> 
+            <label for="cambiarEmail" style="color: black;">Email: <?php echo $_SESSION['usuarios'][0]['correo']; ?></label>
+            <input type="text" id="cambiarEmail" name="cambiarEmail" required placeholder="Cambiar correo..." value="<?php echo $_SESSION['usuarios'][0]['correo']; ?>">
             <label for="cambiarName">Nombre: <?php echo $_SESSION['usuarios'][0]['nombre']; ?></label>
-            <input type="text" id="cambiarName" name="cambiarName" required placeholder="Cambiar nombre...">
+            <input type="text" id="cambiarName" name="cambiarName" required placeholder="Cambiar nombre..." value="<?php echo $_SESSION['usuarios'][0]['nombre']; ?>">
             <label for="cambiarDirection">Direccion: <?php echo $_SESSION['usuarios'][0]['direccion']; ?></label>
-            <input type="text" id="cambiarDirection" name="cambiarDirection" required placeholder="Cambiar direccion...">
+            <input type="text" id="cambiarDirection" name="cambiarDirection" required placeholder="Cambiar direccion..." value="<?php echo $_SESSION['usuarios'][0]['direccion']; ?>">
             <label for="cambiarNumero">Número de Telefono: <?php echo $_SESSION['usuarios'][0]['numero']; ?></label>
-            <input type="number" id="cambiarNumero" name="cambiarNumero" required placeholder="Cambiar telefono...">
-
+            <input type="number" id="cambiarNumero" name="cambiarNumero" required placeholder="Cambiar telefono..." value="<?php echo $_SESSION['usuarios'][0]['numero']; ?>">
+            
             <label for="cambiarPassword">Contraseña:</label>
             <ul class="required">
                 <li id="caractMin" class="reject"> Minímo 5 caracteres. </li>
@@ -140,8 +141,9 @@ if (!isset($_SESSION['usuarios']) || empty($_SESSION['usuarios'])) {
                 <li id="minNum" class="reject"> Al menos 1 número. </li>
             </ul>
             <input type="password" id="cambiarPassword" name="cambiarPassword" required  placeholder="Cambiar contraseña...">
-            <label for="password">Repita su contraseña:</label>
+            <label for="password2">Repita su contraseña:</label>
             <input type="password" id="password2" name="password2" required placeholder="Ingrese la contraseña nuevamente...">
+            <span style="color: black;"> Debes llenar todos los espacios para poder actualizar su perfil. </span>
             <button type="submit" class="continueLoggin">Actualizar informacion</button>
             <p><a href="http://localhost/bytewizards/API/sessionDestroy.php">¿Quieres cerrar sesion? ¡Presione aquí!</a></p>
         </form>
@@ -215,6 +217,7 @@ if (!isset($_SESSION['usuarios']) || empty($_SESSION['usuarios'])) {
     </footer>
 </body>
 <script src="main.js"></script>
+<script src="perfilUsu.js"></script>
 <script src="iniciarSesionUsu.js"></script>
 <script src="commentary.js"></script>
 <script src="jquery-3.7.1.min.js"></script>

@@ -39,6 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             if (password_verify($password, $usuario['contrasena_usu'])) {
                 session_start();
                 session_destroy();
+                session_start();
                 $_SESSION['usuarios'][] = [ 
                     'id' => $usuario['id_usu'],
                     'nombre' => $usuario['nombre_usu'],

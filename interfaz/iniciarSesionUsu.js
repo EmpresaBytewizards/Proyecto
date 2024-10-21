@@ -24,12 +24,13 @@ function iniciarSesionUsu() {
   .then(response => response.json())
   .then(usuario => {
     console.log(usuario);
-    alert("¡Iniciado sesion con exito!"); 
-    location.reload();
+    
+    
     if (usuario.error) {
       alert(usuario.error); // Mostrar error si hay uno
     } else {
-      // Aquí puedes hacer algo con la respuesta, por ejemplo redirigir al usuario o mostrar un mensaje
+      alert("¡Iniciado sesion con exito!"); 
+      location.reload();
     }
   })
   .catch(error => alert('Error al iniciar sesión:', error));
