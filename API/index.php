@@ -5,7 +5,7 @@ header('Access-Control-Allow-Methods: GET, POST, PUT'); // Métodos HTTP permiti
 header('Access-Control-Allow-Headers: Content-Type'); // Encabezados permitidos
 require("ConexionDB.php");
 require("subirImagenes.php"); 
-
+session_start();
 
 class ApiProductos 
 {
@@ -153,7 +153,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Si todos los datos están presentes, continúa con la lógica para insertar en la base de datos
-    $nombreEmpresa = 'ByteWizzards';
+    $nombreEmpresa = $_SESSION['empresas'][0]['nombre'];
     $habilitacion_producto = 'Habilitado';
 
     // Obtener el último id_producto
@@ -227,7 +227,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
         exit;
     }
 
-    $nombreEmpresa = 'ByteWizzards'; // Valor estático
+    $nombreEmpresa = $_SESSION['empresas'][0]['nombre'];
 
     
     // Ejecutar la función de editar

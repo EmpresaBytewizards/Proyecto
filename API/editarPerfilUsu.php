@@ -33,13 +33,13 @@ class ApiUsuarios
         //}
 
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT); // Tú sólo recibes la contraseña del usuario que inicia sesión, la encriptas y comparas los dos hashes.
-
+        $habilitacionUsu = "Habilitado";
         // Preparar la consulta
-        $stmt = $this->pdo->prepare("UPDATE usuario SET nombre_usu = ?, contrasena_usu = ?, direccion_usu = ?, telefono_usu = ?, mail_usu = ? WHERE id_usu = ?");
+        $stmt = $this->pdo->prepare("UPDATE usuario SET nombre_usu = ?, contrasena_usu = ?, direccion_usu = ?, telefono_usu = ?, mail_usu = ?, habilitacion_usu = ? WHERE id_usu = ?");
         
         $idUsu = $_SESSION['usuarios'][0]['id'];
         // Ejecutar la consulta
-        if ($stmt->execute([$name, $hashedPassword, $direction, $numero, $email, $idUsu])) {
+        if ($stmt->execute([$name, $hashedPassword, $direction, $numero, $email, $habilitacionUsu, $idUsu])) {
 
             // Generar un token de sesión
             // Iniciar sesión

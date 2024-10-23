@@ -1,4 +1,6 @@
 <?php
+session_start();
+require("../correo.php");
 // Función para obtener el token de acceso de PayPal
 function getPayPalAccessToken()
 {
@@ -92,6 +94,15 @@ try {
     // Intentar ejecutar el pago
     if (executePayPalPayment($paymentId, $payerId)) {
         echo "Pago confirmado con éxito"; // Mensaje de éxito
+        $emailSender = new EmailSender();
+
+
+        $emailSender->setFrom('empresa.bytewizards.3bg@gmail.com', 'De ByteWizards');
+        $emailSender->addRecipient($_SESSION['usuarios'][0]['correo'], 'Para '.$_SESSION['usuarios'][0]['nombre']);
+
+        // paymentId=$paymentId&payerId=$payerId
+        $result = $emailSender->sendEmail('Rastreo de su pedido', 'Este es el enlace para el rastreo de su paquete: http://localhost/bytewizards/interfaz/rastreo.php?paymentId='.$paymentId.'&token='.$accessToken.'&payerId='.$payerId);
+        echo $result;
     }
 } catch (Exception $error) {
     // Manejo de excepciones

@@ -1,3 +1,12 @@
+<?php 
+session_start(); 
+if (empty($_SESSION['empresas'])) {
+    header("Location: loginProveedores.php");
+}
+if ($_SESSION['empresas'][0]['habilitacion'] == "Deshabilitado"){
+    header("Location: noIniciadoProv.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,6 +20,12 @@
 </head>
 
 <body>
+    <!-- Esta en el body debido a que se desea hacer que la variable este al alcance de TODOS los archivos. -->
+    <script>
+        var nombreEmpresa = "<?php echo $_SESSION['empresas'][0]['nombre']; ?>";
+        console.log(nombreEmpresa); 
+        
+    </script>
 
     <header> 
         <div class="header__top">
@@ -105,15 +120,33 @@
         <div class="login-container">
             <div class="loggin__title">
                 <button alt="carrito" class="btnLoggin" onclick="toggleLoggin()"> <span class="material-symbols-outlined closeLogin">close</span> </button>      
-                <h1 id="logintitulo">Inicio de Sesion</h1>
+                <h1 id="logintitulo">Perfil</h1>
             </div>
-            <form>
-                <label for="email">Email/Nombre:</label>
-                <input type="text" id="email" name="email" required>
-                <label for="password">Contraseña:</label>
-                <input type="password" id="password" name="password" required>
-                <button type="submit" class="continueLoggin">Iniciar Sesion</button>
-                <p><a href="register.php">¿Aun no tienes una cuenta? ¡Registrate ahora!</a></p>
+            
+            <form action id="perfilUsu">
+                
+                <br>
+                <h3 style="color: black;"> Su id de empresa es: <?php echo $_SESSION['empresas'][0]['id']; ?> <br> Su nombre de empresa es: <?php echo $_SESSION['empresas'][0]['nombre']; ?></h3> 
+                <label for="cambiarEmail" style="color: black;">Email: <?php echo $_SESSION['empresas'][0]['correo']; ?></label>
+                <input type="text" id="cambiarEmail" name="cambiarEmail" required placeholder="Cambiar correo..." value="<?php echo $_SESSION['empresas'][0]['correo']; ?>">
+                <label for="cambiarDirection">Direccion: <?php echo $_SESSION['empresas'][0]['direccion']; ?></label>
+                <input type="text" id="cambiarDirection" name="cambiarDirection" required placeholder="Cambiar direccion..." value="<?php echo $_SESSION['empresas'][0]['direccion']; ?>">
+                <label for="cambiarNumero">Número de Telefono: <?php echo $_SESSION['empresas'][0]['numero']; ?></label>
+                <input type="number" id="cambiarNumero" name="cambiarNumero" required placeholder="Cambiar telefono..." value="<?php echo $_SESSION['empresas'][0]['numero']; ?>">
+                
+                <label for="cambiarPassword">Contraseña:</label>
+                <ul class="required">
+                    <li id="caractMin" class="reject"> Minímo 5 caracteres. </li>
+                    <li id="mayMin" class="reject"> Minímo 1 letra mayuscula. </li>
+                    <li id="minMin" class="reject"> Minímum 1 letra minuscula. </li>
+                    <li id="minNum" class="reject"> Al menos 1 número. </li>
+                </ul>
+                <input type="password" id="cambiarPassword" name="cambiarPassword" required  placeholder="Cambiar contraseña...">
+                <label for="password2">Repita su contraseña:</label>
+                <input type="password" id="password2" name="password2" required placeholder="Ingrese la contraseña nuevamente...">
+                <span style="color: black;"> Debes llenar todos los espacios para poder actualizar su perfil. </span>
+                <button type="submit" class="continueLoggin">Actualizar informacion</button>
+                <p><a href="http://localhost/bytewizards/API/sessionDestroyProv.php">¿Quieres cerrar sesion? ¡Presione aquí!</a></p>
             </form>
         </div>
     </section>
@@ -223,9 +256,12 @@
         </div>
     </footer>
 </body>
+
 <script src="mainProveedores.js"></script>
+<script src="perfilProv.js"></script>
 <script src="commentary.js"></script>
 <script src="jquery-3.7.1.min.js"></script>
+
 </html>
 
 <!-- <div class="">

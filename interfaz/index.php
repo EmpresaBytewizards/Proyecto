@@ -1,3 +1,6 @@
+<?php
+session_start(); 
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -75,6 +78,12 @@
             <div class="cartItems"> <!-- Lugar de renderizado del carrito -->
 
             </div> 
+            
+            <?php 
+            if (!empty($_SESSION['usuarios'])) {
+            
+            ?>
+            
             <div class="checkout">
                 <span class="total">TOTAL: $0.00</span>
                 <input type="hidden" id="cantidad" require> 
@@ -82,13 +91,34 @@
                 <span style="color: black"> El envio se hara a la direccion almacenada en su cuenta </span>
                 <span style="color: black"> (Se aplicaran impuestos correspondientes despues de pasar al pago) </span>
             </div>
+            
+            <?php
+            }else{
+            ?>
+            <div class="checkout">
+                <span class="total">TOTAL: $0.00</span>
+                <span style="color: black"> El envio se hara a la direccion almacenada en su cuenta </span>
+                <span style="color: black"> (Se aplicaran impuestos correspondientes despues de pasar al pago) </span>
+            </div>
+            <?php
+            }
+            ?>
         </div>
+        <?php
+        if(empty($_SESSION['usuarios'])){
+        ?>
+            <div class="checkout">
+                <h2>¡DEBES INICIAR SESION PARA PODER COMPRAR AQUÍ!</h2>
+            </div>
+        <?php
+        }
+        ?>
     </section>
 
     <section class="loggin inactive">
         
     <?php 
-session_start(); 
+
 
 // Verificar si el usuario está logueado
 if (!isset($_SESSION['usuarios']) || empty($_SESSION['usuarios'])) {
@@ -108,6 +138,7 @@ if (!isset($_SESSION['usuarios']) || empty($_SESSION['usuarios'])) {
             <input type="password" id="password" name="password" required>
             <button type="submit" class="continueLoggin">Iniciar Sesion</button>
             <p><a href="register.php">¿Aun no tienes una cuenta? ¡Registrate ahora!</a></p>
+            <p><a href="loginProveedores.php">¿Desea ingresar como proveedor? ¡Presiona aquí!</a></p>
         </form>
     </div>
     <?php

@@ -76,7 +76,7 @@
     <script>
         document.getElementById('pagarBtn').addEventListener('click', function() {
             // Enviar la solicitud a la API para crear el pago
-            fetch('./paypal_payment.php', {
+            fetch('paypal_payment.php', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'

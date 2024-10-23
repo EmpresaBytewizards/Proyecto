@@ -70,7 +70,7 @@ function validatePassword() {
 
 
 
-// Función para manejar la creacion de usuarios
+// Función para manejar la edicion de usuarios
 document.getElementById('perfilUsu').addEventListener('submit', function(event) {
     event.preventDefault();
 
@@ -81,7 +81,7 @@ document.getElementById('perfilUsu').addEventListener('submit', function(event) 
       data[key] = value;
     });
 
-    // Enviar los datos al servidor para actualizar el producto
+    // Enviar los datos al servidor para actualizar el perfil
     fetch('http://localhost/bytewizards/API/editarPerfilUsu.php', {
       method: 'PUT',
       headers: {
@@ -93,6 +93,6 @@ document.getElementById('perfilUsu').addEventListener('submit', function(event) 
     .then(responseData => {
       console.log(responseData.message);
       alert("¡Cuenta editada exitosamente!");
-      location.reload;
+      location.reload();
     }).catch(error => alert('Error al crear a:', error));
 });

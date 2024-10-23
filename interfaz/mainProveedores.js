@@ -22,21 +22,43 @@ function toggleEditarProducto() {
 
 }
 
-// RENDER SECTION
+
+
+
+
+
 
 let listProducts = []; //Tienda con los items del JSON
-
+// RENDER SECTION
 fetch('http://localhost/bytewizards/API/index.php') // Primer render con todos los items
 .then(res => res.json())
 .then(json => {
-    listProducts = json;
-    for (let i = 0; i < json.length; i++) {
-        renderAll(json[i].titulo, json[i].imagen, json[i].precio_base, json[i].id_producto, json[i].habilitacion_producto, json[i].stock, json[i].nombre_empresa);
-    }
+    let nombreEmpresaActual; // Declaración en el ámbito global
+
+    fetch('http://localhost/bytewizards/API/actualProv.php')
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json(); // Obtener respuesta como JSON
+    })
+    .then(data => {
+        console.log(data.nombreEmpresa); // Manejar el nombre de la empresa recibido
+        nombreEmpresaActual = data.nombreEmpresa; // Asignar a la variable global
+        listProducts = json;
+        for (let i = 0; i < json.length; i++) {
+            renderAll(json[i].titulo, json[i].imagen, json[i].precio_base, json[i].id_producto, json[i].habilitacion_producto, json[i].stock, json[i].nombre_empresa, data.nombreEmpresa);
+            
+        }
+    })
+    .catch(error => {
+        console.error('Hubo un problema con la solicitud Fetch:', error);
+    });
+    
 }).catch((error) => console.log(error.message));
 
-function renderAll(titulo, imagen, precio_base, id_producto, habilitacion_producto, stock, nombre_empresa) { //Funcion de renderizado de items
-    if (nombre_empresa != "ByteWizzards") {
+function renderAll(titulo, imagen, precio_base, id_producto, habilitacion_producto, stock, nombre_empresa, $nombreEmpresaActual) { //Funcion de renderizado de items
+    if (nombre_empresa != $nombreEmpresaActual) {
         // Si el producto no esta habilitado no se renderiza ni se hace nada 
         return;
     }

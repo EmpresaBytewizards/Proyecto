@@ -46,6 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                     'correo' => $usuario['mail_usu'],
                     'direccion' => $usuario['direccion_usu'],
                     'numero' => $usuario['telefono_usu'],
+                    'habilitacion' => $usuario['habilitacion_usu']
                 ];
                 echo json_encode(['message' => 'Inicio de sesión exitoso']);
             } else {

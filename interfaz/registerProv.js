@@ -93,6 +93,6 @@ document.getElementById('formRegistro').addEventListener('submit', function(even
     .then(responseData => {
       console.log(responseData.message);
       alert("¡Cuenta creada exitosamente!");
-      location.href = "index.php";
+      location.href = "indexProveedores.php";
     }).catch(error => alert('Error al crear a:', error));
 });

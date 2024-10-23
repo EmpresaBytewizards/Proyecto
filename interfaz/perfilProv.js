@@ -70,11 +70,11 @@ function validatePassword() {
 
 
 
-// Función para manejar la creacion de proveedores
-document.getElementById('perfilProveedor').addEventListener('submit', function(event) {
+// Función para manejar la edicion de proveedores
+document.getElementById('perfilUsu').addEventListener('submit', function(event) {
     event.preventDefault();
 
-    // Recolectar los datos del formulario de creacion de proveedores
+    // Recolectar los datos del formulario de edicion de proveedores
     const formData = new FormData(this);
     const data = {};
     formData.forEach((value, key) => {
@@ -93,6 +93,6 @@ document.getElementById('perfilProveedor').addEventListener('submit', function(e
     .then(responseData => {
       console.log(responseData.message);
       alert("¡Cuenta editada exitosamente!");
-      location.reload;
+      location.reload();
     }).catch(error => alert('Error al crear a:', error));
 });

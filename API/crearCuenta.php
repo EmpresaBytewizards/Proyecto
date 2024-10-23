@@ -33,12 +33,12 @@ class ApiUsuarios
         //}
 
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT); // Tú sólo recibes la contraseña del usuario que inicia sesión, la encriptas y comparas los dos hashes.
-
+        $habilitacionUsu = "Habilitado";
         // Preparar la consulta
-        $stmt = $this->pdo->prepare("INSERT INTO usuario (nombre_usu, mail_usu, contrasena_usu, direccion_usu, telefono_usu) VALUES (?, ?, ?, ?, ?)");
+        $stmt = $this->pdo->prepare("INSERT INTO usuario (nombre_usu, mail_usu, contrasena_usu, direccion_usu, telefono_usu, habilitacion_usu) VALUES (?, ?, ?, ?, ?, ?)");
 
         // Ejecutar la consulta
-        if ($stmt->execute([$name, $email, $hashedPassword, $direction, $numero])) {
+        if ($stmt->execute([$name, $email, $hashedPassword, $direction, $numero, $habilitacionUsu])) {
             // Obtener el ID del nuevo usuario
             $usuarioId = $this->pdo->lastInsertId();
 
@@ -54,6 +54,7 @@ class ApiUsuarios
                 'correo' => $email,
                 'direccion' => $direction,
                 'numero' => $numero,
+                'habilitacion' => $habilitacionUsu
             ];
 
             echo json_encode(['message' => 'Cuenta creada exitosamente']);
