@@ -300,6 +300,11 @@ main{
     background-color: rgb(195, 81, 0);
 }
 
+.paybtn:active {
+    background-color: rgb(136, 57, 0); /* Color de fondo más oscuro cuando se hace clic */
+    transform: scale(0.95);
+}
+
 .cart h1 {
     text-align: center;
     color: black;
@@ -591,6 +596,11 @@ button {
 
 .buyItem:hover {
     background-color: rgb(195, 81, 0);
+}
+
+.buyItem:active {
+    background-color: rgb(136, 57, 0); /* Color de fondo más oscuro cuando se hace clic */
+    transform: scale(0.95);
 }
 
 .continueLoggin:hover {

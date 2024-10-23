@@ -118,6 +118,7 @@
                     // Intentar ejecutar el pago
                     if (executePayPalPayment($paymentId, $payerId)) {
                         echo "<h1 class='exitoPago'>Pago confirmado con éxito</h1>"; // Mensaje de éxito
+                        echo "<p><a href='index.php' style='color: #1900ff;'>¿Desea ingresar como proveedor? ¡Presiona aquí!</a></p>";
                     }
                 } catch (Exception $error) {
                     // Manejo de excepciones
