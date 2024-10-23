@@ -1,6 +1,12 @@
 <?php
 session_start(); 
+if (isset($_SESSION['usuarios'])) {
+    if ($_SESSION['usuarios'][0]['habilitacion'] == "Deshabilitado"){
+        header("Location: noIniciadoUsu.php");
+    }
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 

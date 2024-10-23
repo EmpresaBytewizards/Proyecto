@@ -1,8 +1,8 @@
 <?php 
 session_start(); 
-if (isset($_SESSION['empresas'])) {
-    if ($_SESSION['empresas'][0]['habilitacion'] == "Habilitado"){
-        header("Location: indexProveedores.php");
+if (isset($_SESSION['usuarios'])) {
+    if ($_SESSION['usuarios'][0]['habilitacion'] == "Habilitado"){
+        header("Location: index.php");
     }
 }
 ?>
@@ -22,7 +22,7 @@ if (isset($_SESSION['empresas'])) {
     </header>
     <div class="login-container">
         <h2>Tu cuenta esta deshabilitada, no puedes acceder a la pagina mientras tu cuenta este deshabilitada.</h2>
-        <a href="http://localhost/bytewizards/API/sessionDestroyProv.php"> ¡Presione aquí si quieres intentar refrezcar su informacion e inciar sesion nuevamente! </a>
+        <a href="http://localhost/bytewizards/API/sessionDestroy.php"> ¡Presione aquí si quieres intentar refrezcar su informacion e inciar sesion nuevamente! </a>
     </div>
 </body>
 </html>

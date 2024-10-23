@@ -127,10 +127,10 @@ session_start();
                     $emailSender->addRecipient($_SESSION['usuarios'][0]['correo'], $_SESSION['usuarios'][0]['nombre']);
 
                     // paymentId=$paymentId&payerId=$payerId
-                    $result = $emailSender->sendEmail('Rastreo de su pedido', 'Este es el enlace para el rastreo de su paquete: http://localhost/bytewizards/interfaz/rastreo.php?paymentId=' . $paymentId . '&token=' . $accessToken . '&payerId=' . $payerId);
+                    $result = $emailSender->sendEmail('Rastreo de su pedido', 'Este es el enlace para el rastreo de su paquete: http://localhost/bytewizards/interfaz/rastreo.php?paymentId=' . $paymentId . '&token=' . $accessToken . '&PayerID=' . $payerId);
                     echo $result;
                     echo "<h1 class='exitoPago'>Pago confirmado con éxito</h1>"; // Mensaje de éxito
-                    echo "<p><a href='index.php' style='color: #1900ff;'>¿Desea ingresar como proveedor? ¡Presiona aquí!</a></p>";
+                    echo "<p><a href='index.php' style='color: #1900ff;'>¿Desea volver a la pagina principal? ¡Presiona aquí!</a></p>";
                 }
             } catch (Exception $error) {
                 // Manejo de excepciones

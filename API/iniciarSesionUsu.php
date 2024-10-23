@@ -8,7 +8,7 @@ require("ConexionDB.php");
 
 // Configuración de la base de datos
 $host = 'localhost';
-$dbname = 'weshop2';
+$dbname = 'weshop';
 $username = 'root';
 $password = ''; // Cambia la contraseña si es necesario
 

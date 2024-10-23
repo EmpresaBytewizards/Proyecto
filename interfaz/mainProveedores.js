@@ -47,7 +47,7 @@ fetch('http://localhost/bytewizards/API/index.php') // Primer render con todos l
         nombreEmpresaActual = data.nombreEmpresa; // Asignar a la variable global
         listProducts = json;
         for (let i = 0; i < json.length; i++) {
-            renderAll(json[i].titulo, json[i].imagen, json[i].precio_base, json[i].id_producto, json[i].habilitacion_producto, json[i].stock, json[i].nombre_empresa, data.nombreEmpresa);
+            renderAll(json[i].titulo, json[i].imagen, json[i].precio_base, json[i].id_producto, json[i].habilitacion_producto, json[i].stock, json[i].id_empresa, data.nombreEmpresa);
             
         }
     })
@@ -57,8 +57,8 @@ fetch('http://localhost/bytewizards/API/index.php') // Primer render con todos l
     
 }).catch((error) => console.log(error.message));
 
-function renderAll(titulo, imagen, precio_base, id_producto, habilitacion_producto, stock, nombre_empresa, $nombreEmpresaActual) { //Funcion de renderizado de items
-    if (nombre_empresa != $nombreEmpresaActual) {
+function renderAll(titulo, imagen, precio_base, id_producto, habilitacion_producto, stock, id_empresa, $nombreEmpresaActual) { //Funcion de renderizado de items
+    if (id_empresa != $nombreEmpresaActual) {
         // Si el producto no esta habilitado no se renderiza ni se hace nada 
         return;
     }
@@ -115,9 +115,9 @@ function capture(event) {
 
         for (let i = 0; i < listProducts.length; i++) {
             if (categoryEv == "CATALOG") {
-                renderAll(listProducts[i].titulo, listProducts[i].imagen, listProducts[i].precio_base, listProducts[i].id_producto, listProducts[i].habilitacion_producto, listProducts[i].stock, listProducts[i].nombre_empresa);
+                renderAll(listProducts[i].titulo, listProducts[i].imagen, listProducts[i].precio_base, listProducts[i].id_producto, listProducts[i].habilitacion_producto, listProducts[i].stock, listProducts[i].id_empresa);
             } else if (listProducts[i].categoria == categoryEv) {
-                renderAll(listProducts[i].titulo, listProducts[i].imagen, listProducts[i].precio_base, listProducts[i].id_producto, listProducts[i].habilitacion_producto, listProducts[i].stock, listProducts[i].nombre_empresa);
+                renderAll(listProducts[i].titulo, listProducts[i].imagen, listProducts[i].precio_base, listProducts[i].id_producto, listProducts[i].habilitacion_producto, listProducts[i].stock, listProducts[i].id_empresa);
             }
         }
     }
@@ -138,7 +138,7 @@ function capture(event) {
         const productId = event.target.id; // Capturar el id del producto
         console.log(`Product ID: ${productId}`);
         const product = listProducts.find(item => item.id_producto == productId);
-        renderArticleItem(product.titulo, product.precio_base, product.imagen, product.id_producto, product.descripcion, product.stock, product.nombre_empresa);
+        renderArticleItem(product.titulo, product.precio_base, product.imagen, product.id_producto, product.descripcion, product.stock, product.id_empresa);
         document.querySelector(".articlePage").classList.toggle("active");
         document.querySelector(".articlePage").classList.toggle("inactive");
     }
@@ -175,7 +175,7 @@ function searchProducts(search, searchCATALOG) {
     // Filtra productos por busqueda
     listProducts.forEach(product => {
         if (product.titulo.toLowerCase().includes(search) || search === '') {
-            renderAll(product.titulo, product.imagen, product.precio_base, product.id_producto, product.habilitacion_producto, product.stock, product.nombre_empresa);
+            renderAll(product.titulo, product.imagen, product.precio_base, product.id_producto, product.habilitacion_producto, product.stock, product.id_empresa);
         }
     });
     
@@ -201,21 +201,21 @@ logoPagina.addEventListener("click", (event) => {
     categoryName.innerText = "CATALOGO";
 
     for (let i = 0; i < listProducts.length; i++) {
-        renderAll(listProducts[i].titulo, listProducts[i].imagen, listProducts[i].precio_base, listProducts[i].id_producto, listProducts[i].habilitacion_producto, listProducts[i].stock, listProducts[i].nombre_empresa);
+        renderAll(listProducts[i].titulo, listProducts[i].imagen, listProducts[i].precio_base, listProducts[i].id_producto, listProducts[i].habilitacion_producto, listProducts[i].stock, listProducts[i].id_empresa);
     }
 });
 
 document.addEventListener('click', capture);
 
 // Función para renderizar el artículo en la página de artículo
-function renderArticleItem(titulo, precio_base, image, id_producto, descripcion, stock, nombre_empresa) {
+function renderArticleItem(titulo, precio_base, image, id_producto, descripcion, stock, id_empresa) {
     document.querySelector('.articlePageTitle').textContent = `${titulo} - $${precio_base}`;
     document.querySelector('.imgArticlePage').src = image;
     document.querySelector('.imgArticlePage').alt = titulo;
     document.querySelector('.editarItem').id = id_producto;
     const descripcionConSaltos = descripcion.replace(/\n/g, '<br>'); 
     document.querySelector('.descriptionArticleText').innerHTML = descripcionConSaltos;
-    document.querySelector('.empresaTexto').innerText = 'Publicado por: '+nombre_empresa;
+    document.querySelector('.empresaTexto').innerText = 'Publicado por: '+id_empresa;
     document.querySelector('.stockTexto').innerText = 'STOCK: '+stock;
 }
 

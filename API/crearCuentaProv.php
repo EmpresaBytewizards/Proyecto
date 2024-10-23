@@ -31,6 +31,11 @@ class ApiUsuarios
         //} else {
         //    echo "¡Contraseña incorrecta!";
         //}
+
+        $stmt = $this->pdo->query("SELECT MAX(id_empresa) FROM empresa");
+        $ultimoIdEmpresa = $stmt->fetchColumn();
+        $nuevoIdEmpresa = $ultimoIdEmpresa ? $ultimoIdEmpresa + 1 : 1;
+
         $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM empresa WHERE mail_empresa = ?");
         $stmt->execute([$email]);
         $emailExists = $stmt->fetchColumn() > 0;
@@ -53,10 +58,10 @@ class ApiUsuarios
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT); // Tú sólo recibes la contraseña del usuario que inicia sesión, la encriptas y comparas los dos hashes.
         $habilitacionProv = "Deshabilitado";
         // Preparar la consulta
-        $stmt = $this->pdo->prepare("INSERT INTO empresa (nombre_empresa, mail_empresa, contrasena_empresa, ubicacion_fisica, telefono_empresa, habilitacion_empresa) VALUES (?, ?, ?, ?, ?, ?)");
+        $stmt = $this->pdo->prepare("INSERT INTO empresa (id_empresa, nombre_empresa, mail_empresa, contrasena_empresa, ubicacion_fisica, telefono_empresa, habilitacion_empresa) VALUES (?, ?, ?, ?, ?, ?, ?)");
 
         // Ejecutar la consulta
-        if ($stmt->execute([$name, $email, $hashedPassword, $direction, $numero, $habilitacionProv])) {
+        if ($stmt->execute([$nuevoIdEmpresa, $name, $email, $hashedPassword, $direction, $numero, $habilitacionProv])) {
             // Obtener el ID del nuevo usuario
             $usuarioId = $this->pdo->lastInsertId();
 
@@ -67,7 +72,7 @@ class ApiUsuarios
             session_start(); 
             // Guardar los datos en la sesión
             $_SESSION['empresas'][] = [ 
-                'id' => $usuarioId,
+                'id' => $nuevoIdEmpresa,
                 'nombre' => $name,
                 'correo' => $email,
                 'direccion' => $direction,
@@ -84,7 +89,7 @@ class ApiUsuarios
 
 // Configuración de la base de datos
 $host = 'localhost';
-$dbname = 'weshop2';
+$dbname = 'weshop';
 $username = 'root';
 $password = '';
 

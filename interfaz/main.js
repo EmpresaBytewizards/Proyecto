@@ -118,7 +118,7 @@ function capture(event) {
         const productId = event.target.id; // Capturar el id del producto
         console.log(`Product ID: ${productId}`);
         const product = listProducts.find(item => item.id_producto == productId);
-        renderArticleItem(product.titulo, product.precio_base, product.imagen, product.id_producto, product.descripcion, product.stock, product.nombre_empresa);
+        renderArticleItem(product.titulo, product.precio_base, product.imagen, product.id_producto, product.descripcion, product.stock, product.id_empresa);
         document.querySelector(".articlePage").classList.toggle("active");
         document.querySelector(".articlePage").classList.toggle("inactive");
     }
@@ -215,14 +215,14 @@ function updateTotalPrice() {
 }
 
 // Función para renderizar el artículo en la página de artículo
-function renderArticleItem(titulo, precio_base, image, id_producto, descripcion, stock, nombre_empresa) {
+function renderArticleItem(titulo, precio_base, image, id_producto, descripcion, stock, id_empresa) {
     document.querySelector('.articlePageTitle').textContent = `${titulo} - $${precio_base}`;
     document.querySelector('.imgArticlePage').src = image;
     document.querySelector('.imgArticlePage').alt = titulo;
     document.querySelector('.buyItem').id = id_producto;
     const descripcionConSaltos = descripcion.replace(/\n/g, '<br>'); 
     document.querySelector('.descriptionArticleText').innerHTML = descripcionConSaltos;
-    document.querySelector('.empresaTexto').innerText = 'Publicado por: '+nombre_empresa;
+    document.querySelector('.empresaTexto').innerText = 'Publicado por: '+id_empresa;
     document.querySelector('.stockTexto').innerText = 'STOCK: '+stock;
     if(stock == 0) {
         document.querySelector('.buyItem').disabled = true;

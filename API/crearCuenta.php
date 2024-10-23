@@ -32,13 +32,17 @@ class ApiUsuarios
         //    echo "¡Contraseña incorrecta!";
         //}
 
+        $stmt = $this->pdo->query("SELECT MAX(id_usu) FROM usuario");
+        $ultimoIdUsuario = $stmt->fetchColumn();
+        $nuevoIdUsuario = $ultimoIdUsuario ? $ultimoIdUsuario + 1 : 1;
+
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT); // Tú sólo recibes la contraseña del usuario que inicia sesión, la encriptas y comparas los dos hashes.
         $habilitacionUsu = "Habilitado";
         // Preparar la consulta
-        $stmt = $this->pdo->prepare("INSERT INTO usuario (nombre_usu, mail_usu, contrasena_usu, direccion_usu, telefono_usu, habilitacion_usu) VALUES (?, ?, ?, ?, ?, ?)");
+        $stmt = $this->pdo->prepare("INSERT INTO usuario (id_usu, nombre_usu, mail_usu, contrasena_usu, direccion_usu, telefono_usu, habilitacion_usu) VALUES (?, ?, ?, ?, ?, ?, ?)");
 
         // Ejecutar la consulta
-        if ($stmt->execute([$name, $email, $hashedPassword, $direction, $numero, $habilitacionUsu])) {
+        if ($stmt->execute([$nuevoIdUsuario, $name, $email, $hashedPassword, $direction, $numero, $habilitacionUsu])) {
             // Obtener el ID del nuevo usuario
             $usuarioId = $this->pdo->lastInsertId();
 
@@ -49,7 +53,7 @@ class ApiUsuarios
             session_start();
             // Guardar los datos en la sesión
             $_SESSION['usuarios'][] = [ 
-                'id' => $usuarioId,
+                'id' => $nuevoIdUsuario,
                 'nombre' => $name,
                 'correo' => $email,
                 'direccion' => $direction,
@@ -66,7 +70,7 @@ class ApiUsuarios
 
 // Configuración de la base de datos
 $host = 'localhost';
-$dbname = 'weshop2';
+$dbname = 'weshop';
 $username = 'root';
 $password = '';
 

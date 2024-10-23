@@ -21,26 +21,36 @@ class ApiProductos
         // Verifica si se ha proporcionado un ID
         if (isset($_GET['id'])) {
             $id = $_GET['id'];
-            $stmt = $this->pdo->prepare("SELECT * FROM producto WHERE id_producto = ?");
+            $stmt = $this->pdo->prepare("SELECT p.*, e.nombre_empresa FROM producto p JOIN empresa e ON p.id_empresa = e.id_empresa WHERE p.id_producto = ?");
             $stmt->execute([$id]);
             $producto = $stmt->fetch(PDO::FETCH_ASSOC);
+            // Reemplaza el Id_Empresa con el nombre de la empresa
+            if ($producto) {
+                $producto['id_empresa'] = $producto['nombre_empresa'];
+                unset($producto['nombre_empresa']);
+            }
             return $producto;
-
         } else {
             // Obtener todos los productos
-            $stmt = $this->pdo->prepare("SELECT * FROM producto");
+            $stmt = $this->pdo->prepare("SELECT p.*, e.nombre_empresa FROM producto p JOIN empresa e ON p.id_empresa = e.id_empresa");
             $stmt->execute();
             $productos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            // Reemplaza Id_Empresa con el nombre de la empresa para todos los productos
+            foreach ($productos as &$producto) {
+                $producto['id_empresa'] = $producto['nombre_empresa'];
+                unset($producto['nombre_empresa']);
+            }
             return $productos;
         }
     }
 
-    public function agregar($nuevoIdProducto, $nombreProducto, $urlImagen, $precioProducto, $condicionProducto, $stockProducto, $nombreEmpresa, $descripcionProducto, $categoriaProducto, $habilitacion_producto)
+
+    public function agregar($nuevoIdProducto, $nombreProducto, $urlImagen, $precioProducto, $condicionProducto, $stockProducto, $idEmpresa, $descripcionProducto, $categoriaProducto, $habilitacion_producto)
     {
-        $stmt = $this->pdo->prepare("INSERT INTO producto (id_producto, titulo, imagen, precio_base, condicion, stock, nombre_empresa, descripcion, categoria, habilitacion_producto) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt = $this->pdo->prepare("INSERT INTO producto (id_producto, titulo, imagen, precio_base, condicion, stock, id_empresa, descripcion, categoria, habilitacion_producto) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
         // Ejecutar la consulta
-        if ($stmt->execute([$nuevoIdProducto, $nombreProducto, $urlImagen, $precioProducto, $condicionProducto, $stockProducto, $nombreEmpresa, $descripcionProducto, $categoriaProducto, $habilitacion_producto])) {
+        if ($stmt->execute([$nuevoIdProducto, $nombreProducto, $urlImagen, $precioProducto, $condicionProducto, $stockProducto, $idEmpresa, $descripcionProducto, $categoriaProducto, $habilitacion_producto])) {
             echo json_encode(['message' => 'Producto creado exitosamente']);
         } else {
             echo json_encode(['message' => 'Error al crear producto']);
@@ -61,7 +71,7 @@ class ApiProductos
 
 //Configuracion de la base de datos
 $host = 'localhost';
-$dbname = 'weshop2';
+$dbname = 'weshop';
 $username = 'root';
 $password = '';
 
@@ -106,7 +116,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     }
 
     // Si todos los datos están presentes, continúa con la lógica para insertar en la base de datos
-    $nombreEmpresa = 'ByteWizzards';
+    $idEmpresa = 'ByteWizzards';
     $habilitacion_producto = 'Habilitado';
 
     // Obtener el último id_producto
@@ -114,7 +124,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $ultimoIdProducto = $stmt->fetchColumn();
     $nuevoIdProducto = $ultimoIdProducto ? $ultimoIdProducto + 1 : 1;
 
-    $productos = $producto->agregar($nuevoIdProducto, $nombreProducto, $imagenProducto, $precioProducto, $condicionProducto, $stockProducto, $nombreEmpresa, $descripcionProducto, $categoriaProducto, $habilitacion_producto);
+    $productos = $producto->agregar($nuevoIdProducto, $nombreProducto, $imagenProducto, $precioProducto, $condicionProducto, $stockProducto, $idEmpresa, $descripcionProducto, $categoriaProducto, $habilitacion_producto);
     echo json_encode($productos);
 }
 */
@@ -153,7 +163,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Si todos los datos están presentes, continúa con la lógica para insertar en la base de datos
-    $nombreEmpresa = $_SESSION['empresas'][0]['nombre'];
+    $idEmpresa = $_SESSION['empresas'][0]['id'];
     $habilitacion_producto = 'Habilitado';
 
     // Obtener el último id_producto
@@ -181,7 +191,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     $urlImagen = "../api/assets/" . $urlImagen;
     // Este método ya maneja el JSON
-    $producto->agregar($nuevoIdProducto, $nombreProducto, $urlImagen, $precioProducto, $condicionProducto, $stockProducto, $nombreEmpresa, $descripcionProducto, $categoriaProducto, $habilitacion_producto);
+    $producto->agregar($nuevoIdProducto, $nombreProducto, $urlImagen, $precioProducto, $condicionProducto, $stockProducto, $idEmpresa, $descripcionProducto, $categoriaProducto, $habilitacion_producto);
 }
 
 
@@ -227,7 +237,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
         exit;
     }
 
-    $nombreEmpresa = $_SESSION['empresas'][0]['nombre'];
+    $idEmpresa = $_SESSION['empresas'][0]['nombre'];
 
     
     // Ejecutar la función de editar
