@@ -1,7 +1,7 @@
 <?php 
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *'); // Permitir solicitudes de cualquier origen
-header('Access-Control-Allow-Methods: GET, POST, PUT'); // Métodos HTTP permitidos
+header('Access-Control-Allow-Methods: POST'); // Métodos HTTP permitidos
 header('Access-Control-Allow-Headers: Content-Type'); // Encabezados permitidos
 require("ConexionDB.php");
 
@@ -14,10 +14,13 @@ $password = ''; // Cambia la contraseña si es necesario
 $conexionDB = new ConexionDB($host, $dbname, $username, $password);
 $pdo = $conexionDB->getPDO();
 
-if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    if (isset($_GET['email']) && isset($_GET['password'])) {
-        $email = $_GET['email'];
-        $password = $_GET['password'];
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Decodificar el contenido JSON enviado en la solicitud
+    $inputData = json_decode(file_get_contents('php://input'), true);
+    
+    if (isset($inputData['email']) && isset($inputData['password'])) {
+        $email = $inputData['email'];
+        $password = $inputData['password'];
 
         // Verificar si faltan campos
         $missingFields = [];
@@ -53,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                 echo json_encode(['error' => 'Contraseña incorrecta']);
             }
         } else {
-            echo json_encode(['error' => 'Usuario no encontrado'.$email]);
+            echo json_encode(['error' => 'Usuario no encontrado']);
         }
     } else {
         echo json_encode(['error' => 'Faltan datos del formulario']);

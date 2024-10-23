@@ -1,8 +1,9 @@
 <?php 
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *'); // Permitir solicitudes de cualquier origen
-header('Access-Control-Allow-Methods: GET, POST, PUT'); // Métodos HTTP permitidos
+header('Access-Control-Allow-Methods: POST'); // Solo POST permitido
 header('Access-Control-Allow-Headers: Content-Type'); // Encabezados permitidos
+
 require("ConexionDB.php");
 
 // Configuración de la base de datos
@@ -14,10 +15,14 @@ $password = ''; // Cambia la contraseña si es necesario
 $conexionDB = new ConexionDB($host, $dbname, $username, $password);
 $pdo = $conexionDB->getPDO();
 
-if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    if (isset($_GET['email']) && isset($_GET['password'])) {
-        $email = $_GET['email'];
-        $password = $_GET['password'];
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Leer el contenido JSON enviado en el cuerpo de la solicitud
+    $input = file_get_contents('php://input');
+    $data = json_decode($input, true); // Decodificar los datos JSON a un array asociativo
+
+    if (isset($data['email']) && isset($data['password'])) {
+        $email = $data['email'];
+        $password = $data['password'];
 
         // Verificar si faltan campos
         $missingFields = [];

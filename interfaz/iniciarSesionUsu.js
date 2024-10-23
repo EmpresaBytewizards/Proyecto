@@ -20,17 +20,22 @@ function iniciarSesionUsu() {
   };
 
   // Configuración de la solicitud POST
-  fetch(`http://localhost/bytewizards/API/iniciarSesionUsu.php?email=${email}&password=${password}`)
+  fetch('http://localhost/bytewizards/API/iniciarSesionUsu.php', {
+    method: 'POST', // Cambiar a método POST
+    headers: {
+      'Content-Type': 'application/json' // Enviar datos como JSON
+    },
+    body: JSON.stringify(datos) // Convertir datos a JSON
+  })
   .then(response => response.json())
   .then(usuario => {
     console.log(usuario);
     
-    
     if (usuario.error) {
       alert(usuario.error); // Mostrar error si hay uno
     } else {
-      alert("¡Iniciado sesion con exito!"); 
-      location.reload();
+      alert("¡Sesión iniciada con éxito!"); 
+      location.reload(); // Recargar la página si es necesario
     }
   })
   .catch(error => alert('Error al iniciar sesión:', error));

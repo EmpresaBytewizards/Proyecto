@@ -1,7 +1,8 @@
 <?php
+require "../correo.php";
 // Establece el tipo de contenido de la respuesta como JSON
 header('Content-Type: application/json');
-
+session_start();
 // Configuración para mostrar errores (útil en desarrollo)
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);

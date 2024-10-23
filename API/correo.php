@@ -2,7 +2,9 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require '../vendor/autoload.php'; // Ajusta esto según tu método de instalación
+// Ruta al archivo autoload.php en el directorio vendor
+require $_SERVER['DOCUMENT_ROOT'] . '/bytewizards/vendor/autoload.php';
+// Ajusta esto según tu método de instalación
 
 class EmailSender {
     private $mailer;
@@ -49,12 +51,3 @@ class EmailSender {
     }
 }
 
-$emailSender = new EmailSender();
-
-
-$emailSender->setFrom('empresa.bytewizards.3bg@gmail.com', 'De ByteWizards');
-$emailSender->addRecipient($_SESSION['usuarios'][0]['correo'], 'Para '.$_SESSION['usuarios'][0]['nombre']);
-
-// paymentId=$paymentId&payerId=$payerId
-$result = $emailSender->sendEmail('Rastreo de su pedido', 'Este es el enlace para el rastreo de su paquete: http://localhost/bytewizards/interfaz/rastreo.php?paymentId='.$paymentId.'&token='.$accessToken.'&payerId='.$payerId);
-echo $result;
