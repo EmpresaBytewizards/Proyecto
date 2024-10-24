@@ -1,5 +1,30 @@
 <?php
 session_start(); 
+if (!empty($_SESSION['usuarios'])) {
+    require("../API/ConexionDB.php");
+
+    // Configuración de la base de datos
+    $host = 'localhost';
+    $dbname = 'weshop';
+    $username = 'root';
+    $password = ''; // Cambia la contraseña si es necesario
+
+    $conexionDB = new ConexionDB($host, $dbname, $username, $password);
+    $pdo = $conexionDB->getPDO();
+    $stmt = $pdo->prepare("SELECT * FROM usuario WHERE id_usu = ?");
+    $stmt->execute([$_SESSION['usuarios'][0]['id']]);
+    $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+    if($usuario){
+        $_SESSION['usuarios'][0] = [ 
+            'id' => $usuario['id_usu'],
+            'nombre' => $usuario['nombre_usu'],
+            'correo' => $usuario['mail_usu'],
+            'direccion' => $usuario['direccion_usu'],
+            'numero' => $usuario['telefono_usu'],
+            'habilitacion' => $usuario['habilitacion_usu']
+        ];
+    }
+}
 if (isset($_SESSION['usuarios'])) {
     if ($_SESSION['usuarios'][0]['habilitacion'] == "Deshabilitado"){
         header("Location: noIniciadoUsu.php");
@@ -194,6 +219,7 @@ if (!isset($_SESSION['usuarios']) || empty($_SESSION['usuarios'])) {
     <section class="articlePage inactive">
         
         <div class="articlePage-container">
+            <button class="denunciaProducto" style="border:none; background:none; float: right; font-size: 20px;" onclick="denunciaProducto(this.id)">❗</button>
             <div class="articlePage__title">
                 <button alt="articlePageExit" class="exitArticle"> <span class="material-symbols-outlined exitArticle">close</span> </button>    
                 <br>  
@@ -214,14 +240,57 @@ if (!isset($_SESSION['usuarios']) || empty($_SESSION['usuarios'])) {
             </div>
             <div class="commentSection">
                 <h2> ¡Comentar! </h2>
+                <?php
+                if (empty($_SESSION['usuarios'])) {
+                ?>
+                <h2> DEBES INICIAR SESION PARA PODER COMENTAR </h2>
+                <?php
+                }else{
+                ?>
                 <form class="commentForm">
                     <div class="formGroup">
-                        <label for="nick">Nombre: Anonimo </label>
+                        <label for="nick">Nombre: <?php echo $_SESSION['usuarios'][0]['nombre']; ?> </label>
                         <label for="comment">Comentario:</label>
                         <textarea id="comment" class="inputComment" rows="8" required></textarea>
                     </div>
                     <button class="sendbtn">Enviar</button>
                 </form>
+                <?php 
+                }
+                ?>
+                <br>
+                <h4 style="text-align: center; color:black;"> COMENTARIOS </h4>
+                <div class="comments">
+                    <div class="comment" style="border: 2px solid darkgrey;">
+                        <button class="denunciaComentario" style="border:none; background:none; float: right;">❗</button>
+                        <h3 class="nombreComentario" style="color:black"> Nombre: Pedro </h3>
+                        <p class="contenidoComentario" style="color: black; font-size: 13px;"> Hermoso el ejemplo. </p>
+                        <span class="fechaComentario" style="color:darkgrey;right: 10%;position: absolute;"> 2/8/2009 9:15AM </span>
+                    </div>
+                    <br>
+                    <div class="comment" style="border: 2px solid darkgrey;">
+                        <button class="denunciaComentario" style="border:none; background:none; float: right;">❗</button>
+                        <h3 class="nombreComentario" style="color:black"> Nombre: Anastasio </h3>
+                        <p class="contenidoComentario" style="color: black; font-size: 13px;"> Hermoso el ejemplo. </p>
+                        <span class="fechaComentario" style="color:darkgrey;right: 10%;position: absolute;"> 2/8/2009 9:15AM </span>
+                    </div>
+                    <br>
+                    <div class="comment" style="border: 2px solid darkgrey;">
+                        <button class="denunciaComentario" style="border:none; background:none; float: right;">❗</button>
+                        <h3 class="nombreComentario" style="color:black"> Nombre: Anacleto </h3>
+                        <p class="contenidoComentario" style="color: black; font-size: 13px;"> Hermoso el ejemplo. </p>
+                        <span class="fechaComentario" style="color:darkgrey;right: 10%;position: absolute;"> 2/8/2009 9:15AM </span>
+                    </div>
+                    <br>
+                    <div class="comment" style="border: 2px solid darkgrey;">
+                        <button class="denunciaComentario" style="border:none; background:none; float: right;">❗</button>
+                        <h3 class="nombreComentario" style="color:black"> Nombre: Random </h3>
+                        <p class="contenidoComentario" style="color: black; font-size: 13px;"> Hermoso el ejemplo. </p>
+                        <span class="fechaComentario" style="color:darkgrey;right: 10%;position: absolute;"> 2/8/2009 9:15AM </span>
+                    </div>
+                    <br>
+                    
+                </div>
             </div>
             
         </div>

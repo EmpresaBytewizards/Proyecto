@@ -21,7 +21,7 @@ class ApiProductos
         // Verifica si se ha proporcionado un ID
         if (isset($_GET['id'])) {
             $id = $_GET['id'];
-            $stmt = $this->pdo->prepare("SELECT p.*, e.nombre_empresa FROM producto p JOIN empresa e ON p.id_empresa = e.id_empresa WHERE p.id_producto = ?");
+            $stmt = $this->pdo->prepare("SELECT p.*, e.nombre_empresa FROM producto p JOIN empresa e ON p.id_empresa = e.id_empresa WHERE p.id_producto = ? AND e.habilitacion_empresa = 'Habilitado'");
             $stmt->execute([$id]);
             $producto = $stmt->fetch(PDO::FETCH_ASSOC);
             // Reemplaza el Id_Empresa con el nombre de la empresa
@@ -32,7 +32,7 @@ class ApiProductos
             return $producto;
         } else {
             // Obtener todos los productos
-            $stmt = $this->pdo->prepare("SELECT p.*, e.nombre_empresa FROM producto p JOIN empresa e ON p.id_empresa = e.id_empresa");
+            $stmt = $this->pdo->prepare("SELECT p.*, e.nombre_empresa FROM producto p JOIN empresa e ON p.id_empresa = e.id_empresa AND e.habilitacion_empresa = 'Habilitado'");
             $stmt->execute();
             $productos = $stmt->fetchAll(PDO::FETCH_ASSOC);
             // Reemplaza Id_Empresa con el nombre de la empresa para todos los productos

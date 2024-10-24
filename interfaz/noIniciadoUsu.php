@@ -1,5 +1,30 @@
 <?php 
 session_start(); 
+if (!empty($_SESSION['usuarios'])) {
+    require("../API/ConexionDB.php");
+
+    // Configuración de la base de datos
+    $host = 'localhost';
+    $dbname = 'weshop';
+    $username = 'root';
+    $password = ''; // Cambia la contraseña si es necesario
+
+    $conexionDB = new ConexionDB($host, $dbname, $username, $password);
+    $pdo = $conexionDB->getPDO();
+    $stmt = $pdo->prepare("SELECT * FROM usuario WHERE id_usu = ?");
+    $stmt->execute([$_SESSION['usuarios'][0]['id']]);
+    $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+    if($usuario){
+        $_SESSION['usuarios'][0] = [ 
+            'id' => $usuario['id_usu'],
+            'nombre' => $usuario['nombre_usu'],
+            'correo' => $usuario['mail_usu'],
+            'direccion' => $usuario['direccion_usu'],
+            'numero' => $usuario['telefono_usu'],
+            'habilitacion' => $usuario['habilitacion_usu']
+        ];
+    }
+}
 if (isset($_SESSION['usuarios'])) {
     if ($_SESSION['usuarios'][0]['habilitacion'] == "Habilitado"){
         header("Location: index.php");

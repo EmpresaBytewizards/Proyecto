@@ -16,6 +16,33 @@ function toggleLoggin() {
     document.querySelector(".loggin").classList.toggle("inactive");
 }
 
+//Para manejar las denuncias hechas a los productos
+function denunciaProducto(idDenuncia) {
+    fetch('http://localhost/bytewizards/API/denunciaProducto.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            idDenuncia: idDenuncia 
+        })
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Error en la solicitud: ' + response.status);
+        }
+        return response.json(); 
+    })
+    .then(data => {
+        alert('Respuesta: ' + JSON.stringify(data)); 
+    })
+    .catch(error => {
+        alert('Error: ' + error.message); 
+    });
+}
+
+
+
 // RENDER SECTION
 
 let listProducts = []; //Tienda con los items del JSON
@@ -179,6 +206,7 @@ function renderCartItem(titulo, precio_base, id_producto) {
 
     const productCart = document.createElement("div");
     productCart.classList.add("product__cart");
+    productCart.id = id_producto;
 
     const cartName = document.createElement("h2");
     cartName.classList.add("cart__name");
@@ -224,6 +252,7 @@ function renderArticleItem(titulo, precio_base, image, id_producto, descripcion,
     document.querySelector('.descriptionArticleText').innerHTML = descripcionConSaltos;
     document.querySelector('.empresaTexto').innerText = 'Publicado por: '+id_empresa;
     document.querySelector('.stockTexto').innerText = 'STOCK: '+stock;
+    document.querySelector('.denunciaProducto').id = id_producto;
     if(stock == 0) {
         document.querySelector('.buyItem').disabled = true;
         document.querySelector('.buyItem').innerText = "No hay STOCK";
@@ -236,6 +265,38 @@ function renderArticleItem(titulo, precio_base, image, id_producto, descripcion,
 
 //paypal
 document.querySelector('.paybtn').addEventListener('click', function() {
+    const cartItems = document.querySelectorAll('.product__cart');
+    let itemsArray = [];
+
+    cartItems.forEach(item => {
+        const titulo = item.querySelector('.cart__name').textContent;
+        const precio_base = parseFloat(item.querySelector('.cart__price').textContent.replace('$', ''));
+        const id_producto = item.id; // Usamos el id del elemento
+        // Empujar cada artículo al array
+        itemsArray.push({
+            titulo: titulo,
+            precio_base: precio_base,
+            id_producto: id_producto
+        });
+    });
+    fetch('http://localhost/bytewizards/API/carrito.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        
+    })
+    .catch(error => {
+        console.error('Error en la solicitud:', error ,'. No se procedera al pago.');
+        return;
+    });
+
     // Enviar la solicitud a la API para crear el pago
     fetch('http://localhost/bytewizards/API/metodosDePago/paypal_payment.php', {
             method: 'POST',
