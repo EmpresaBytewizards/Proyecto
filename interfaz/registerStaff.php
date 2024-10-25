@@ -39,11 +39,10 @@
             <input type="password" id="password2" name="password2" required>
             <button type="submit">Registrarse</button>
             <h5> En caso de que no funcione, intente poner otro nombre </h5>
-            <p><a href="index.php">¿Quieres volver sin una cuenta? ¡Clickea aquí!</a></p>
-            <p><a href="loginProveedores.php">¿Desea ingresar como proveedor? ¡Presiona aquí!</a></p>
-            <p><a href="registerStaff.php">¿Trabajas aquí? ¡Presiona aquí!</a></p>
+            <p><a href="index.php">¿Quieres volver a la pagina principal? ¡Clickea aquí!</a></p>
+            <p><a href="index.php">¿Ya tienes una cuenta? ¡Clickea aquí!</a></p>
         </form>
     </div>
-    <script src="register.js"></script>
+    <script src="registerStaff.js"></script>
 </body>
 </html>

@@ -279,7 +279,7 @@ document.querySelector('.paybtn').addEventListener('click', function() {
             id_producto: id_producto
         });
     });
-    fetch('http://localhost/bytewizards/API/carrito.php', {
+    fetch('http://localhost/bytewizards/API/articulosCarrito.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

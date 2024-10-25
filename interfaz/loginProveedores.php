@@ -23,6 +23,7 @@
             <button type="submit">Iniciar Sesion</button>
             <p><a href="registerProv.php">¿Aun no tienes cuenta? ¡Clickea aquí!</a></p>
             <p><a href="index.php">¿Quieres iniciar como comprador? ¡Clickea aquí!</a></p>
+            <p><a href="registerStaff.php">¿Trabajas aquí? ¡Presiona aquí!</a></p>
         </form>
     </div>
     <script src="loginProveedores.js"></script>
