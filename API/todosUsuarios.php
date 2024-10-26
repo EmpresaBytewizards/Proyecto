@@ -30,6 +30,15 @@ class ApiUsuarios
         }
     }
 
+    public function actualizar($id, $estado)
+    {
+
+    $stmt = $this->pdo->prepare("UPDATE usuario SET habilitacion_usu = ? WHERE id_usu = ?");
+
+    // Ejecutar la consulta y devolver el resultado
+    return $stmt->execute([$estado, $id]);
+    }
+
 }
 
 //Configuracion de la base de datos
@@ -46,6 +55,17 @@ $usuario = new ApiUsuarios($pdo);
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $usuarios = $usuario->obtenerTodos();
     echo json_encode($usuarios);
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Obtener los datos JSON del cuerpo de la solicitud
+    $input = file_get_contents('php://input');
+    $data = json_decode($input, true);
+
+    $id = isset($data['id']) ? $data['id'] : null;
+    $estado = isset($data['estado']) ? $data['estado'] : null;
+
+    $usuario->actualizar($id, $estado);
 }
 
 ?>

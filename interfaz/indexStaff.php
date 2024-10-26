@@ -80,8 +80,8 @@ if ($_SESSION['staffs'][0]['tipo'] == "Deshabilitado"){
                 <thead>
                     <tr style="background-color: #f2f2f2; text-align: left;">
                         <th style="padding: 10px; border: 1px solid #ddd; background-color:rgb(255, 106, 0);">ID</th>
-                        <th style="padding: 10px; border: 1px solid #ddd; background-color:rgb(255, 106, 0);">Title</th>
-                        <th style="padding: 10px; border: 1px solid #ddd; background-color:rgb(255, 106, 0);">Action</th>
+                        <th style="padding: 10px; border: 1px solid #ddd; background-color:rgb(255, 106, 0);">Nombre</th>
+                        <th style="padding: 10px; border: 1px solid #ddd; background-color:rgb(255, 106, 0);">Accion</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -97,8 +97,8 @@ if ($_SESSION['staffs'][0]['tipo'] == "Deshabilitado"){
                 <thead>
                     <tr style="background-color: #f2f2f2; text-align: left;">
                         <th style="padding: 10px; border: 1px solid #ddd; background-color:rgb(255, 106, 0);">ID</th>
-                        <th style="padding: 10px; border: 1px solid #ddd; background-color:rgb(255, 106, 0);">Name</th>
-                        <th style="padding: 10px; border: 1px solid #ddd; background-color:rgb(255, 106, 0);">Action</th>
+                        <th style="padding: 10px; border: 1px solid #ddd; background-color:rgb(255, 106, 0);">Nombre</th>
+                        <th style="padding: 10px; border: 1px solid #ddd; background-color:rgb(255, 106, 0);">Accion</th>
                     </tr>
                 </thead>
                 <tbody>

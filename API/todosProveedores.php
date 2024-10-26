@@ -29,7 +29,14 @@ class ApiProveedores
             return $proveedores;
         }
     }
+    public function actualizar($id, $estado)
+    {
 
+    $stmt = $this->pdo->prepare("UPDATE empresa SET habilitacion_empresa = ? WHERE id_empresa = ?");
+
+    // Ejecutar la consulta y devolver el resultado
+    return $stmt->execute([$estado, $id]);
+    }
 }
 
 //Configuracion de la base de datos
@@ -46,6 +53,17 @@ $proveedor = new ApiProveedores($pdo);
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $proveedores = $proveedor->obtenerTodos();
     echo json_encode($proveedores);
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Obtener los datos JSON del cuerpo de la solicitud
+    $input = file_get_contents('php://input');
+    $data = json_decode($input, true);
+
+    $id = isset($data['id']) ? $data['id'] : null;
+    $estado = isset($data['estado']) ? $data['estado'] : null;
+
+    $proveedor->actualizar($id, $estado);
 }
 
 ?>

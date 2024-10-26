@@ -22,11 +22,20 @@ function articulos() {
         for (let i = 0; i < json.length; i++) {
             let row = document.createElement('tr');
             row.setAttribute('data-id', json[i].id_producto);
-            row.innerHTML = `
-                <td style="border: 1px solid #ddd; background-color: rgb(255, 106, 0);">${json[i].id_producto}</td>
+            if (json[i].habilitacion_producto == "Deshabilitado") {
+                row.innerHTML = `
+                <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0);">${json[i].id_producto}</td>
                 <td style="border: 1px solid #ddd; background-color: rgb(255, 106, 0)">${json[i].titulo}</td>
-                <td><button onclick="toggleStatus(this)" style="background-color: rgb(184, 77, 0); color: #fff; padding: 6px 12px; border: none; border-radius: 4px; cursor: pointer;">Disable</button></td>
+                <td><button onclick="toggleStatus(this)" style="background-color: rgb(136, 57, 0); color: #fff; padding: 6px 25px; border: none; cursor: pointer;" class="deshabilitado">Habilitar</button></td>
             `;
+            }else{
+                row.innerHTML = `
+                <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0);">${json[i].id_producto}</td>
+                <td style="border: 1px solid #ddd; background-color: rgb(255, 106, 0)">${json[i].titulo}</td>
+                <td><button onclick="toggleStatus(this)" style="background-color: rgb(184, 77, 0); color: #fff; padding: 6px 25px; border: none; cursor: pointer;">Deshabilitar</button></td>
+            `;
+            }
+            
             articlesTableBody.appendChild(row);
         };
     });
@@ -41,11 +50,19 @@ function proveedores() {
         for (let i = 0; i < json.length; i++) {
             let row = document.createElement('tr');
             row.setAttribute('data-id', json[i].id_empresa);
-            row.innerHTML = `
+            if (json[i].habilitacion_empresa == "Deshabilitado") {
+                row.innerHTML = `
                 <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0);">${json[i].id_empresa}</td>
                 <td style="border: 1px solid #ddd; background-color: rgb(255, 106, 0)">${json[i].nombre_empresa}</td>
-                <td><button onclick="toggleStatus(this)" style="background-color: rgb(184, 77, 0); color: #fff; padding: 6px 12px; border: none; border-radius: 4px; cursor: pointer;">Disable</button></td>
+                <td><button onclick="toggleStatus(this)" style="background-color: rgb(136, 57, 0); color: #fff; padding: 6px 25px; border: none; cursor: pointer;" class="deshabilitado">Habilitar</button></td>
             `;
+            }else{
+                row.innerHTML = `
+                <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0);">${json[i].id_empresa}</td>
+                <td style="border: 1px solid #ddd; background-color: rgb(255, 106, 0)">${json[i].nombre_empresa}</td>
+                <td><button onclick="toggleStatus(this)" style="background-color: rgb(184, 77, 0); color: #fff; padding: 6px 25px; border: none; cursor: pointer;">Deshabilitar</button></td>
+            `;
+            }
             articlesTableBody.appendChild(row);
         };
     });
@@ -60,11 +77,19 @@ function usuarios() {
         for (let i = 0; i < json.length; i++) {
             let row = document.createElement('tr');
             row.setAttribute('data-id', json[i].id_usu);
-            row.innerHTML = `
-                <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0);">${json[i].id_usu}</td>
-                <td style="border: 1px solid #ddd; background-color: rgb(255, 106, 0)">${json[i].nombre_usu}</td>
-                <td><button onclick="toggleStatus(this)" style="background-color: rgb(184, 77, 0); color: #fff; padding: 6px 12px; border: none; border-radius: 4px; cursor: pointer;">Disable</button></td>
+            if (json[i].habilitacion_usu == "Deshabilitado") {
+                row.innerHTML = `
+                    <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0);">${json[i].id_usu}</td>
+                    <td style="border: 1px solid #ddd; background-color: rgb(255, 106, 0)">${json[i].nombre_usu}</td>
+                    <td><button onclick="toggleStatus(this)" style="background-color: rgb(136, 57, 0); color: #fff; padding: 6px 25px; border: none; cursor: pointer;" class="deshabilitado">Habilitar</button></td>
             `;
+            }else{
+                row.innerHTML = `
+                    <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0);">${json[i].id_usu}</td>
+                    <td style="border: 1px solid #ddd; background-color: rgb(255, 106, 0)">${json[i].nombre_usu}</td>
+                    <td><button onclick="toggleStatus(this)" style="background-color: rgb(184, 77, 0); color: #fff; padding: 6px 25px; border: none; cursor: pointer;">Deshabilitar</button></td>
+            `;
+            }
             articlesTableBody.appendChild(row);
         };
     });
@@ -87,7 +112,6 @@ function denuncias() {
                 <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0)">${json[i].tipo_denunciado}</td>
                 <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0)">${json[i].id_denunciado}</td>
                 <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0)">${json[i].fecha_denuncia}</td>
-                <td><button onclick="toggleStatus(this)" style="background-color: rgb(184, 77, 0);color: #fff;padding: 11px 100px;border: none;border-radius: 4px;cursor: pointer;">Disable</button></td>
             `;
             articlesTableBody.appendChild(row);
         };
@@ -117,13 +141,59 @@ function filterList(tableId, searchInputId) {
 
 
 function toggleStatus(button) {
-    if (button.classList.contains('disabled')) {
-        button.classList.remove('disabled');
-        button.textContent = 'Disable';
-        button.style.backgroundColor = ' rgb(184, 77, 0)';
-    } else {
-        button.classList.add('disabled');
-        button.textContent = 'Enable';
-        button.style.backgroundColor = 'rgb(136, 57, 0)';
+    const row = button.closest('tr');  // Obtener el elemento <tr> donde está el botón
+    const id = row.getAttribute('data-id');  // Obtener el ID del <tr>
+    const table = row.closest('table');  // Obtener la tabla a la que pertenece el <tr>
+    let endpoint;
+    
+    // Definir el endpoint según la tabla
+    switch (table.id) {
+        case 'articulosTabla':
+            endpoint = 'http://localhost/bytewizards/API/todosProductos.php';
+            break;
+        case 'proveedoresTabla':
+            endpoint = 'http://localhost/bytewizards/API/todosProveedores.php';
+            break;
+        case 'compradoresTabla':
+            endpoint = 'http://localhost/bytewizards/API/todosUsuarios.php';
+            break;
+        case 'denunciasTabla':
+            endpoint = 'http://localhost/bytewizards/API/todosDenuncias.php';
+            break;
+        default:
+            console.error('Tabla desconocida');
+            return;
     }
+    
+    let estado;
+    if (button.classList.contains('deshabilitado')) {
+        button.classList.remove('deshabilitado');
+        button.textContent = 'Deshabilitar';
+        button.style.backgroundColor = 'rgb(184, 77, 0)';
+        estado = 'Habilitado';
+    } else {
+        button.classList.add('deshabilitado');
+        button.textContent = 'Habilitar';
+        button.style.backgroundColor = 'rgb(136, 57, 0)';
+        estado = 'Deshabilitado';
+    }
+
+    // Enviar el ID y el estado con fetch al endpoint correspondiente
+    fetch(endpoint, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            id: id,
+            estado: estado
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data.message);  // Mensaje de confirmación del servidor
+    })
+    .catch(error => {
+        console.error('Error:', error);  // Manejo de errores
+    });
 }
