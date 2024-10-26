@@ -21,11 +21,11 @@
             <label for="password">Contraseña:</label>
             <input type="password" id="password" name="password" required>
             <button type="submit">Iniciar Sesion</button>
-            <p><a href="registerProv.php">¿Aun no tienes cuenta? ¡Clickea aquí!</a></p>
+            <p><a href="registerStaff.php">¿Aun no tienes cuenta? ¡Clickea aquí!</a></p>
             <p><a href="index.php">¿Quieres iniciar como comprador? ¡Clickea aquí!</a></p>
-            <p><a href="loginStaff.php">¿Trabajas aquí? ¡Presiona aquí!</a></p>
+            <p><a href="indexProveedores.php">¿Quieres iniciar como vendedor? ¡Clickea aquí!</a></p>
         </form>
     </div>
-    <script src="loginProveedores.js"></script>
+    <script src="loginStaff.js"></script>
 </body>
 </html>

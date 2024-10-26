@@ -24,12 +24,12 @@ if (!empty($_SESSION['staffs'])) {
             'correo' => $usuario['mail_staff'],
             'direccion' => $usuario['ubicacion_staff'],
             'numero' => $usuario['telefono_staff'],
-            'habilitacion' => $usuario['tipo_staff']
+            'tipo' => $usuario['tipo_staff']
         ];
     }
 }
-if ($_SESSION['staffs'][0]['habilitacion'] == "Deshabilitado"){
-    header("Location: noIniciadoProv.php");
+if ($_SESSION['staffs'][0]['tipo'] == "Deshabilitado"){
+    header("Location: noIniciadoStaff.php");
 }
 ?>
 
@@ -58,27 +58,7 @@ if ($_SESSION['staffs'][0]['habilitacion'] == "Deshabilitado"){
             <div class="logo__container">
                 <img id="logo_pagina" src="tienda/Logopagina tr borde.png" data-category="CATALOG">
             </div>
-            <nav>
-                
-                <div class="menu">
-                    <span id="menu__icon" class="material-symbols-outlined">menu</span>
-                    
-                    <ul class="dropdown">
-                        <li><a href="#" class="category" data-category="tecnologia">Tecnologia</a></li>
-                        <li><a href="#" class="category" data-category="joyeria">Joyeria</a></li>
-                        <li><a href="#" class="category" data-category="ropa">Ropa</a></li>
-                        <li><a href="#" class="category" data-category="animales">Animales</a></li>
-                        <li><a href="#" class="category" data-category="juegos">Juegos</a></li>
-                        <li><a href="#" class="category" data-category="otros">Otros</a></li>
-                    </ul>
-                </div>
-                <form action="" class="search">
-                    <input class="searchBar" type="search" placeholder="Buscar...">
-                    <button type="submit" class="material-symbols-outlined">
-                        search
-                    </button>
-                </form>
-
+            <nav style="display:flex;justify-content: end;">
                 <div class="icons">
                     <button alt="iniciarSesion" class="btnLoggin" onclick="toggleLoggin()"> <span class="material-symbols-outlined">passkey</span> </button>
                 </div>
@@ -87,15 +67,10 @@ if ($_SESSION['staffs'][0]['habilitacion'] == "Deshabilitado"){
         <div class="blackbar"> ENVÍO Y DEVOLUCIONES GRATIS </div>
     </header>
     <main>
-        <!--<Añadir Productos>-->
-           <br>
-            <div class="entradaProducto">
-                <button alt="añadirProducto" class="btnAddProduct" onclick="toggleAñadirProducto()"> <span class="addProductADD">+</span> Añadir Productos </button>
-            </div>
         
 
         <div class="flexCenter">
-            <h1 class="categoryName">CATALOGO</h1>
+            <h1 class="categoryName">BACKOFFICE</h1>
         </div>
         <div class="renderZone">
         </div>
@@ -103,43 +78,6 @@ if ($_SESSION['staffs'][0]['habilitacion'] == "Deshabilitado"){
 
         
     </main>
-    <section class="productAdd inactive">
-        <div class="productAdd-container">
-            <div class="productAdd__title">
-                <button alt="añadirProducto" class="btnLoggin" onclick="toggleAñadirProducto()"> 
-                    <span class="material-symbols-outlined closeLogin">close</span>
-                </button>      
-                <h1 id="addProductTitle">Añadir Productos</h1>
-            </div>
-            <form id="productForm">
-                <label for="nombreProducto">Nombre del Producto:</label>
-                <input type="text" id="nombreProducto" name="nombreProducto" required>
-                <label for="stockProducto">STOCK Inicial:</label>
-                <input type="number" id="stockProducto" name="stockProducto" required>
-                <label for="addProductImage">Imagen:</label>
-                <input type="file" id="addProductImage" name="addProductImage" required>
-                <label for="precioProducto">Precio del Producto:</label>
-                <input type="number" id="precioProducto" name="precioProducto" step="0.01" min="0" required>
-                <label for="condicionProducto">Condición del Producto:</label>
-                <select id="condicionProducto" name="condicionProducto" required>
-                    <option value="Primera Mano">Primera Mano</option>
-                    <option value="Segunda Mano">Segunda Mano</option>
-                </select>
-                <label for="categoriaProducto">Categoria del Producto:</label>
-                <select id="categoriaProducto" name="categoriaProducto" required>
-                    <option value="tecnologia">Tecnologia</option>
-                    <option value="joyeria">Joyeria</option>
-                    <option value="ropa">Ropa</option>
-                    <option value="animales">Animales</option>
-                    <option value="juegos">Juegos</option>
-                    <option value="otros">Otros</option>
-                </select>
-                <label for="descripcionProducto">Descripcion del Producto por unidad:</label>
-                <textarea id="descripcionProducto" name="descripcionProducto" required></textarea>
-                <button type="submit" class="continueAddProduct">Añadir Producto</button>
-            </form>
-        </div>
-    </section>
 
     <section class="loggin inactive">
         
@@ -172,122 +110,10 @@ if ($_SESSION['staffs'][0]['habilitacion'] == "Deshabilitado"){
                 <input type="password" id="password2" name="password2" required placeholder="Ingrese la contraseña nuevamente...">
                 <span style="color: black;"> Debes llenar todos los espacios para poder actualizar su perfil. </span>
                 <button type="submit" class="continueLoggin">Actualizar informacion</button>
-                <p><a href="http://localhost/bytewizards/API/sessionDestroyProv.php">¿Quieres cerrar sesion? ¡Presione aquí!</a></p>
+                <p><a href="http://localhost/bytewizards/API/sessionDestroyStaff.php">¿Quieres cerrar sesion? ¡Presione aquí!</a></p>
             </form>
         </div>
     </section>
-    
-    <section class="articlePage inactive">
-        
-        <div class="articlePage-container">
-            <div class="articlePage__title">
-                <button alt="articlePageExit" class="exitArticle"> <span class="material-symbols-outlined exitArticle">close</span> </button>    
-                <br>  
-                <img src="" class="imgArticlePage">
-                <h1 class="articlePageTitle"> </h1>
-            </div>
-            <button type="submit" class="editarItem">Editar</button>
-            <br>
-            <div class="stockYempresa">
-                <h3 id="stockArticleText" class="stockTexto"> STOCK: </h3>
-                <h3 id="empresaText" class="empresaTexto"> Publicador: </h3>
-            </div>
-            <br>
-            <div class="descriptionArticle">
-                <h3 id="descripcionTexto"> Descripcion: </h3>
-                <br>
-                <p class="descriptionArticleText"> </p>
-            </div>
-            <div class="commentSection">
-                <h2> ¡Comentar! </h2>
-                <form class="commentForm">
-                    <div class="formGroup">
-                        <label for="nick">Nombre: Anonimo </label>
-                        <label for="comment">Comentario:</label>
-                        <textarea id="comment" class="inputComment" rows="8" required></textarea>
-                    </div>
-                    <button class="sendbtn">Enviar</button>
-                </form>
-                <br>
-                <h4 style="text-align: center; color:black;"> COMENTARIOS </h4>
-                <div class="comments">
-                    <div class="comment" style="border: 2px solid darkgrey;">
-                        <button class="denunciaComentario" style="border:none; background:none; float: right;">❗</button>
-                        <h3 class="nombreComentario" style="color:black"> Nombre: Pedro </h3>
-                        <p class="contenidoComentario" style="color: black; font-size: 13px;"> Hermoso el ejemplo. </p>
-                        <span class="fechaComentario" style="color:darkgrey;right: 10%;position: absolute;"> 2/8/2009 9:15AM </span>
-                    </div>
-                    <br>
-                    <div class="comment" style="border: 2px solid darkgrey;">
-                        <button class="denunciaComentario" style="border:none; background:none; float: right;">❗</button>
-                        <h3 class="nombreComentario" style="color:black"> Nombre: Anastasio </h3>
-                        <p class="contenidoComentario" style="color: black; font-size: 13px;"> Hermoso el ejemplo. </p>
-                        <span class="fechaComentario" style="color:darkgrey;right: 10%;position: absolute;"> 2/8/2009 9:15AM </span>
-                    </div>
-                    <br>
-                    <div class="comment" style="border: 2px solid darkgrey;">
-                        <button class="denunciaComentario" style="border:none; background:none; float: right;">❗</button>
-                        <h3 class="nombreComentario" style="color:black"> Nombre: Anacleto </h3>
-                        <p class="contenidoComentario" style="color: black; font-size: 13px;"> Hermoso el ejemplo. </p>
-                        <span class="fechaComentario" style="color:darkgrey;right: 10%;position: absolute;"> 2/8/2009 9:15AM </span>
-                    </div>
-                    <br>
-                    <div class="comment" style="border: 2px solid darkgrey;">
-                        <button class="denunciaComentario" style="border:none; background:none; float: right;">❗</button>
-                        <h3 class="nombreComentario" style="color:black"> Nombre: Random </h3>
-                        <p class="contenidoComentario" style="color: black; font-size: 13px;"> Hermoso el ejemplo. </p>
-                        <span class="fechaComentario" style="color:darkgrey;right: 10%;position: absolute;"> 2/8/2009 9:15AM </span>
-                    </div>
-                    <br>
-                </div>
-            </div>
-            
-        </div>
-    </section>
-
-    <section class="productEdit inactive" id="editProductSection">
-        <div class="productEdit-container">
-          <div class="productEdit__title">
-            <button class="btnLoggin" onclick="toggleEditarProducto()"> 
-              <span class="material-symbols-outlined closeLogin">close</span> 
-            </button>
-            <h1 id="editProductTitle">Editar Producto</h1>
-          </div>
-          <form id="editProductForm">
-            <label for="habilitacionProducto">Habilitacion del Producto:</label>
-            <select id="habilitacionProducto" name="habilitacionProducto" required>
-                <option value="Habilitado">Habilitado</option>
-                <option value="Deshabilitado">Deshabilitado</option>
-            </select>
-            <input type="hidden" id="editProductId" name="editProductId">
-            <label for="editNombreProducto">Nombre del Producto:</label>
-            <input type="text" id="editNombreProducto" name="editNombreProducto" required>
-            <label for="editStockProducto">STOCK:</label>
-            <input type="number" id="editStockProducto" name="editStockProducto" required>
-            <label for="editProductImage">Imagen:</label>
-            <input type="file" id="editProductImage" name="editProductImage">
-            <label for="editPrecioProducto">Precio del Producto:</label>
-            <input type="number" id="editPrecioProducto" name="editPrecioProducto" step="0.01" min="0" required>
-            <label for="editCondicionProducto">Condición del Producto:</label>
-            <select id="editCondicionProducto" name="editCondicionProducto" required>
-              <option value="Primera Mano">Primera Mano</option>
-              <option value="Segunda Mano">Segunda Mano</option>
-            </select>
-            <label for="editCategoriaProducto">Categoria del Producto:</label>
-            <select id="editCategoriaProducto" name="editCategoriaProducto" required>
-              <option value="tecnologia">Tecnologia</option>
-              <option value="joyeria">Joyeria</option>
-              <option value="ropa">Ropa</option>
-              <option value="animales">Animales</option>
-              <option value="otros">Otros</option>
-              <option value="juegos">Juegos</option>
-            </select>
-            <label for="editDescripcionProducto">Descripcion del Producto:</label>
-            <textarea id="editDescripcionProducto" name="editDescripcionProducto" required></textarea>
-            <button type="submit" class="continueAddProduct">Guardar Cambios</button>
-          </form>
-        </div>
-      </section>
 
     <footer>
         <div>
@@ -315,9 +141,8 @@ if ($_SESSION['staffs'][0]['habilitacion'] == "Deshabilitado"){
     </footer>
 </body>
 
-<script src="mainProveedores.js"></script>
-<script src="perfilProv.js"></script>
-<script src="commentary.js"></script>
+<script src="mainStaff.js"></script>
+<script src="perfilStaff.js"></script>
 <script src="jquery-3.7.1.min.js"></script>
 
 </html>

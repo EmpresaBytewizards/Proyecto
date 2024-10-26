@@ -76,7 +76,7 @@ class ApiUsuarios
                 'correo' => $email,
                 'direccion' => $direction,
                 'numero' => $numero,
-                'habilitacion' => $tipoStaff
+                'tipo' => $tipoStaff
             ];
 
             echo json_encode(['message' => 'Cuenta creada exitosamente']);
