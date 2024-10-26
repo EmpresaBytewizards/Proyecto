@@ -17,11 +17,14 @@ class ApiDenuncia
 
     public function agregarDenuncia($idDenunciado, $idDenunciante)
     {
+        $stmt = $this->pdo->query("SELECT MAX(id_empresa) FROM empresa");
+        $ultimoIdDenuncia = $stmt->fetchColumn();
+        $nuevoIdDenuncia = $ultimoIdDenuncia ? $ultimoIdDenuncia + 1 : 1;
         // Preparar la consulta
-        $stmt = $this->pdo->prepare("INSERT INTO denuncia (id_denunciante, id_denunciado) VALUES (?, ?)");
+        $stmt = $this->pdo->prepare("INSERT INTO denuncia (id_denuncia, id_denunciante, id_denunciado) VALUES (?, ?, ?)");
 
         // Ejecutar la consulta
-        if ($stmt->execute([$idDenunciante, $idDenunciado])) {
+        if ($stmt->execute([$nuevoIdDenuncia, $idDenunciante, $idDenunciado])) {
             echo json_encode(['message' => 'Denuncia enviada con éxito.']);
         } else {
             echo json_encode(['error' => 'Error al enviar denuncia', 'info' => $stmt->errorInfo()]);

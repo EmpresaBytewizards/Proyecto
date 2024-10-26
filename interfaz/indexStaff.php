@@ -52,6 +52,7 @@ if ($_SESSION['staffs'][0]['tipo'] == "Deshabilitado"){
         console.log(nombreStaff); 
         
     </script>
+    
 
     <header> 
         <div class="header__top">
@@ -72,10 +73,80 @@ if ($_SESSION['staffs'][0]['tipo'] == "Deshabilitado"){
         <div class="flexCenter">
             <h1 class="categoryName">BACKOFFICE</h1>
         </div>
-        <div class="renderZone">
-        </div>
+        <section class="admin-section" style="margin: 20px; padding: 20px; border: 1px solid #ddd; border-radius: 5px;">
+            <h2 style="font-size: 24px; color: #333;">Productos</h2>
+            <input type="text" id="buscarArticulos" placeholder="Buscar objetos por ID" onkeyup="filterList('articulosTabla', 'buscarArticulos')" style="color: black; width: 100%; padding: 8px; margin-bottom: 10px; border-radius: 4px; border: 1px solid #ccc;">
+            <table id="articulosTabla" style="width: 100%; border-collapse: collapse;">
+                <thead>
+                    <tr style="background-color: #f2f2f2; text-align: left;">
+                        <th style="padding: 10px; border: 1px solid #ddd; background-color:rgb(255, 106, 0);">ID</th>
+                        <th style="padding: 10px; border: 1px solid #ddd; background-color:rgb(255, 106, 0);">Title</th>
+                        <th style="padding: 10px; border: 1px solid #ddd; background-color:rgb(255, 106, 0);">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Los productos cargaran acá -->
+                </tbody>
+            </table>
+        </section>
+
+        <section class="admin-section" style="margin: 20px; padding: 20px; border: 1px solid #ddd; border-radius: 5px;">
+            <h2 style="font-size: 24px; color: #333;">Proveedores</h2>
+            <input type="text" id="buscarProveedores" placeholder="Buscar proveedor por ID" onkeyup="filterList('proveedoresTabla', 'buscarProveedores')" style="color: black; width: 100%; padding: 8px; margin-bottom: 10px; border-radius: 4px; border: 1px solid #ccc;">
+            <table id="proveedoresTabla" style="width: 100%; border-collapse: collapse;">
+                <thead>
+                    <tr style="background-color: #f2f2f2; text-align: left;">
+                        <th style="padding: 10px; border: 1px solid #ddd; background-color:rgb(255, 106, 0);">ID</th>
+                        <th style="padding: 10px; border: 1px solid #ddd; background-color:rgb(255, 106, 0);">Name</th>
+                        <th style="padding: 10px; border: 1px solid #ddd; background-color:rgb(255, 106, 0);">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Los proveedores cargaran aca -->
+                </tbody>
+            </table>
+        </section>
+
+        <section class="admin-section" style="margin: 20px; padding: 20px; border: 1px solid #ddd; border-radius: 5px;">
+            <h2 style="font-size: 24px; color: #333;">Compradores</h2>
+            <input type="text" id="buscarCompradores" placeholder="Buscar usuarios por ID" onkeyup="filterList('compradoresTabla', 'buscarCompradores')" style="color: black; width: 100%; padding: 8px; margin-bottom: 10px; border-radius: 4px; border: 1px solid #ccc;">
+            <table id="compradoresTabla" style="width: 100%; border-collapse: collapse;">
+                <thead>
+                    <tr style="background-color: #f2f2f2; text-align: left;">
+                        <th style="padding: 10px; border: 1px solid #ddd; background-color:rgb(255, 106, 0);">ID</th>
+                        <th style="padding: 10px; border: 1px solid #ddd; background-color:rgb(255, 106, 0);">Nombre</th>
+                        <th style="padding: 10px; border: 1px solid #ddd; background-color:rgb(255, 106, 0);">Accion</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Los compradores cargaran acá -->
+                </tbody>
+            </table>
+        </section>
         <br>
 
+
+        <section class="admin-section" style="margin: 20px; padding: 20px; border: 1px solid #ddd; border-radius: 5px;">
+            <h2 style="font-size: 24px; color: #333;">Compradores</h2>
+            <input type="text" id="buscarDenuncias" placeholder="Buscar denuncias por ID" onkeyup="filterList('denunciasTabla', 'buscarDenuncias')" style="color: black; width: 100%; padding: 8px; margin-bottom: 10px; border-radius: 4px; border: 1px solid #ccc;">
+            <table id="denunciasTabla" style="width: 100%; border-collapse: collapse;">
+                <thead>
+                    <tr style="background-color: #f2f2f2; text-align: left;">
+                        <th style="padding: 10px; border: 1px solid #ddd; background-color:rgb(255, 106, 0);">ID Denuncia</th>
+                        <th style="padding: 10px; border: 1px solid #ddd; background-color:rgb(255, 106, 0);">Tipo Denunciante</th>
+                        <th style="padding: 10px; border: 1px solid #ddd; background-color:rgb(255, 106, 0);">ID Denunciante</th>
+                        <th style="padding: 10px; border: 1px solid #ddd; background-color:rgb(255, 106, 0);">Tipo Denunciado</th>
+                        <th style="padding: 10px; border: 1px solid #ddd; background-color:rgb(255, 106, 0);">ID Denunciado</th>
+                        <th style="padding: 10px; border: 1px solid #ddd; background-color:rgb(255, 106, 0);">Fecha Denuncia</th>
+                        <th style="padding: 10px; border: 1px solid #ddd; background-color:rgb(255, 106, 0);">Estado Denuncia</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Los compradores cargaran acá -->
+                </tbody>
+            </table>
+        </section>
+        <br>
         
     </main>
 
@@ -114,6 +185,8 @@ if ($_SESSION['staffs'][0]['tipo'] == "Deshabilitado"){
             </form>
         </div>
     </section>
+    
+    
 
     <footer>
         <div>
