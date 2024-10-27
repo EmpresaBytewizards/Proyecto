@@ -40,7 +40,7 @@
             <button type="submit">Registrarse</button>
             <h5> En caso de que no funcione, intente poner otro nombre </h5>
             <p><a href="index.php">¿Quieres volver a la pagina principal? ¡Clickea aquí!</a></p>
-            <p><a href="index.php">¿Ya tienes una cuenta? ¡Clickea aquí!</a></p>
+            <p><a href="loginStaff.php">¿Ya tienes una cuenta? ¡Clickea aquí!</a></p>
         </form>
     </div>
     <script src="registerStaff.js"></script>

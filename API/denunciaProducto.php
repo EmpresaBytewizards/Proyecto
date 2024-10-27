@@ -17,7 +17,7 @@ class ApiDenuncia
 
     public function agregarDenuncia($idDenunciado, $idDenunciante)
     {
-        $stmt = $this->pdo->query("SELECT MAX(id_empresa) FROM empresa");
+        $stmt = $this->pdo->query("SELECT MAX(id_denuncia) FROM denuncia");
         $ultimoIdDenuncia = $stmt->fetchColumn();
         $nuevoIdDenuncia = $ultimoIdDenuncia ? $ultimoIdDenuncia + 1 : 1;
         // Preparar la consulta

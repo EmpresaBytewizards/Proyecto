@@ -30,6 +30,15 @@ class ApiDenuncia
         }
     }
 
+    public function actualizar($id, $estado)
+    {
+        // Editar producto existente (UPDATE)
+    $stmt = $this->pdo->prepare("UPDATE denuncia SET estado_denuncia = ? WHERE id_denuncia = ?");
+
+    // Ejecutar la consulta y devolver el resultado
+    return $stmt->execute([$estado, $id]);
+    }
+
 }
 
 //Configuracion de la base de datos
@@ -46,6 +55,18 @@ $denuncia = new ApiDenuncia($pdo);
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $denuncias = $denuncia->obtenerTodos();
     echo json_encode($denuncias);
+}
+
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Obtener los datos JSON del cuerpo de la solicitud
+    $input = file_get_contents('php://input');
+    $data = json_decode($input, true);
+
+    $id = isset($data['id']) ? $data['id'] : null;
+    $estado = isset($data['estado']) ? $data['estado'] : null;
+
+    $denuncia->actualizar($id, $estado);
 }
 
 ?>

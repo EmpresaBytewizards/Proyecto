@@ -170,7 +170,7 @@ if (!isset($_SESSION['usuarios']) || empty($_SESSION['usuarios'])) {
             <button type="submit" class="continueLoggin">Iniciar Sesion</button>
             <p><a href="register.php">¿Aun no tienes una cuenta? ¡Registrate ahora!</a></p>
             <p><a href="loginProveedores.php">¿Desea ingresar como proveedor? ¡Presiona aquí!</a></p>
-            <p><a href="registerStaff.php">¿Trabajas aquí? ¡Presiona aquí!</a></p>
+            <p><a href="loginStaff.php">¿Trabajas aquí? ¡Presiona aquí!</a></p>
         </form>
     </div>
     <?php

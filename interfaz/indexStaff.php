@@ -127,7 +127,7 @@ if ($_SESSION['staffs'][0]['tipo'] == "Deshabilitado"){
 
 
         <section class="admin-section" style="margin: 20px; padding: 20px; border: 1px solid #ddd; border-radius: 5px;">
-            <h2 style="font-size: 24px; color: #333;">Compradores</h2>
+            <h2 style="font-size: 24px; color: #333;">Denuncias</h2>
             <input type="text" id="buscarDenuncias" placeholder="Buscar denuncias por ID" onkeyup="filterList('denunciasTabla', 'buscarDenuncias')" style="color: black; width: 100%; padding: 8px; margin-bottom: 10px; border-radius: 4px; border: 1px solid #ccc;">
             <table id="denunciasTabla" style="width: 100%; border-collapse: collapse;">
                 <thead>
@@ -142,12 +142,59 @@ if ($_SESSION['staffs'][0]['tipo'] == "Deshabilitado"){
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Los compradores cargaran acá -->
+                    <!-- Las denuncias cargaran acá -->
                 </tbody>
             </table>
         </section>
         <br>
-        
+<?php
+    if ($_SESSION['staffs'][0]['tipo'] == "Admin"){     
+?>
+        <section class="admin-section" style="margin: 20px; padding: 20px; border: 1px solid #ddd; border-radius: 5px;">
+            <h2 style="font-size: 24px; color: #333;">STAFFs Inferiores</h2>
+            <input type="text" id="buscarMod" placeholder="Buscar STAFF por ID" onkeyup="filterList('modTabla', 'buscarMod')" style="color: black; width: 100%; padding: 8px; margin-bottom: 10px; border-radius: 4px; border: 1px solid #ccc;">
+            <table id="modTabla" style="width: 100%; border-collapse: collapse;">
+                <thead>
+                    <tr style="background-color: #f2f2f2; text-align: left;">
+                        <th style="padding: 10px; border: 1px solid #ddd; background-color:rgb(255, 106, 0);">ID</th>
+                        <th style="padding: 10px; border: 1px solid #ddd; background-color:rgb(255, 106, 0);">Nombre</th>
+                        <th style="padding: 10px; border: 1px solid #ddd; background-color:rgb(255, 106, 0);">Accion</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Los STAFFs cargaran acá -->
+                </tbody>
+            </table>
+        </section>
+        <br>
+<?php
+}
+?>
+
+
+<?php
+    if ($_SESSION['staffs'][0]['tipo'] == "Root"){     
+?>
+        <section class="admin-section" style="margin: 20px; padding: 20px; border: 1px solid #ddd; border-radius: 5px;">
+            <h2 style="font-size: 24px; color: #333;">STAFFs Inferiores</h2>
+            <input type="text" id="buscarStaff" placeholder="Buscar STAFF por ID" onkeyup="filterList('staffTabla', 'buscarStaff')" style="color: black; width: 100%; padding: 8px; margin-bottom: 10px; border-radius: 4px; border: 1px solid #ccc;">
+            <table id="staffTabla" style="width: 100%; border-collapse: collapse;">
+                <thead>
+                    <tr style="background-color: #f2f2f2; text-align: left;">
+                        <th style="padding: 10px; border: 1px solid #ddd; background-color:rgb(255, 106, 0);">ID</th>
+                        <th style="padding: 10px; border: 1px solid #ddd; background-color:rgb(255, 106, 0);">Nombre</th>
+                        <th style="padding: 10px; border: 1px solid #ddd; background-color:rgb(255, 106, 0);">Accion</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Los STAFFs cargaran acá -->
+                </tbody>
+            </table>
+        </section>
+        <br>
+<?php
+}
+?>
     </main>
 
     <section class="loggin inactive">

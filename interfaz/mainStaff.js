@@ -11,6 +11,8 @@ document.addEventListener('DOMContentLoaded', function() {
     usuarios();
     proveedores();
     denuncias();
+    admin();
+    staff();
 });
 
 function articulos() {
@@ -112,12 +114,79 @@ function denuncias() {
                 <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0)">${json[i].tipo_denunciado}</td>
                 <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0)">${json[i].id_denunciado}</td>
                 <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0)">${json[i].fecha_denuncia}</td>
+                <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0)">
+                    <select style="padding: 5px 10px; font-size: 14px; background-color: rgb(184, 77, 0); border: 1px solid #ddd; border-radius: 5px; outline: none; cursor: pointer; transition: all 0.3s ease;" onchange="updateDenunciaStatus(this)">
+                        <option value="Solucionada" ${json[i].estado_denuncia === 'Solucionada' ? 'selected' : ''}>Solucionada</option>
+                        <option value="Pendiente" ${json[i].estado_denuncia === 'Pendiente' ? 'selected' : ''}>Pendiente</option>
+                        <option value="Descartada" ${json[i].estado_denuncia === 'Descartada' ? 'selected' : ''}>Descartada</option>
+                    </select>
+                </td>
             `;
             articlesTableBody.appendChild(row);
         };
     });
 }
 
+
+function admin() {
+    let articlesTableBody = document.getElementById('modTabla');
+    if (!articlesTableBody) {
+        // Si la tabla no existe, termina la función
+        return;
+    }
+    fetch('http://localhost/bytewizards/API/todosModeradores.php')
+    .then(res => res.json())
+    .then(json => {
+        listProducts = json;      
+        let articlesTableBody = document.getElementById('modTabla').querySelector('tbody');
+        for (let i = 0; i < json.length; i++) {
+            let row = document.createElement('tr');
+            row.setAttribute('data-id', json[i].id_staff);
+            row.innerHTML = `
+                <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0);">${json[i].id_staff}</td>
+                <td style="border: 1px solid #ddd; background-color: rgb(255, 106, 0)">${json[i].nombre_staff}</td>
+                <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0)">
+                    <select style="padding: 5px 10px; font-size: 14px; background-color: rgb(184, 77, 0); border: 1px solid #ddd; border-radius: 5px; outline: none; cursor: pointer; transition: all 0.3s ease;" onchange="updateModStatus(this)">
+                        <option value="Moderador" ${json[i].tipo_staff === "Moderador" ? "selected" : ""}>Moderador</option>
+                        <option value="Deshabilitado" ${json[i].tipo_staff === "Deshabilitado" ? "selected" : ""}>Deshabilitado</option>
+                    </select>
+                </td>
+            `;
+            articlesTableBody.appendChild(row);
+        };
+    });
+}
+
+
+function staff() {
+    let articlesTableBody = document.getElementById('staffTabla');
+    if (!articlesTableBody) {
+        // Si la tabla no existe, termina la función
+        return;
+    }
+    fetch('http://localhost/bytewizards/API/todosStaffs.php')
+    .then(res => res.json())
+    .then(json => {
+        listProducts = json;      
+        let articlesTableBody = document.getElementById('staffTabla').querySelector('tbody');
+        for (let i = 0; i < json.length; i++) {
+            let row = document.createElement('tr');
+            row.setAttribute('data-id', json[i].id_staff);
+            row.innerHTML = `
+                <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0);">${json[i].id_staff}</td>
+                <td style="border: 1px solid #ddd; background-color: rgb(255, 106, 0)">${json[i].nombre_staff}</td>
+                <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0)">
+                    <select style="padding: 5px 10px; font-size: 14px; background-color: rgb(184, 77, 0); border: 1px solid #ddd; border-radius: 5px; outline: none; cursor: pointer; transition: all 0.3s ease;" onchange="updateStaffStatus(this)">
+                        <option value="Admin" ${json[i].tipo_staff === "Admin" ? "selected" : ""}>Admin</option>
+                        <option value="Moderador" ${json[i].tipo_staff === "Moderador" ? "selected" : ""}>Moderador</option>
+                        <option value="Deshabilitado" ${json[i].tipo_staff === "Deshabilitado" ? "selected" : ""}>Deshabilitado</option>
+                    </select>
+                </td>
+            `;
+            articlesTableBody.appendChild(row);
+        };
+    });
+}
 
 function filterList(tableId, searchInputId) {
     let input = document.getElementById(searchInputId);
@@ -157,9 +226,9 @@ function toggleStatus(button) {
         case 'compradoresTabla':
             endpoint = 'http://localhost/bytewizards/API/todosUsuarios.php';
             break;
-        case 'denunciasTabla':
-            endpoint = 'http://localhost/bytewizards/API/todosDenuncias.php';
-            break;
+        //     case 'denunciasTabla':
+        //     endpoint = 'http://localhost/bytewizards/API/todosDenuncias.php';
+        //     break;
         default:
             console.error('Tabla desconocida');
             return;
@@ -195,5 +264,84 @@ function toggleStatus(button) {
     })
     .catch(error => {
         console.error('Error:', error);  // Manejo de errores
+    });
+}
+
+
+// Función que se llama cuando el usuario cambia el valor del <select>
+function updateDenunciaStatus(selectElement) {
+    const row = selectElement.closest('tr'); // Obtiene el <tr> padre
+    const idDenuncia = row.getAttribute('data-id'); // Obtiene el ID de la denuncia
+    const status = selectElement.value; // Obtiene el valor seleccionado en el <select>
+
+    // Enviar el ID y el nuevo estado al servidor
+    fetch('http://localhost/bytewizards/API/todosDenuncias.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            id: idDenuncia,
+            estado: status
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data.message); // Mensaje de confirmación del servidor
+    })
+    .catch(error => {
+        console.error('Error:', error); // Manejo de errores
+    });
+}
+
+
+
+function updateModStatus(selectElement) {
+    const row = selectElement.closest('tr'); // Obtiene el <tr> padre
+    const idStaff = row.getAttribute('data-id'); // Obtiene el ID de la denuncia
+    const status = selectElement.value; // Obtiene el valor seleccionado en el <select>
+
+    // Enviar el ID y el nuevo estado al servidor
+    fetch('http://localhost/bytewizards/API/todosModeradores.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            id: idStaff,
+            estado: status
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data.message); // Mensaje de confirmación del servidor
+    })
+    .catch(error => {
+        console.error('Error:', error); // Manejo de errores
+    });
+}
+
+function updateStaffStatus(selectElement) {
+    const row = selectElement.closest('tr'); // Obtiene el <tr> padre
+    const idStaff = row.getAttribute('data-id'); // Obtiene el ID de la denuncia
+    const status = selectElement.value; // Obtiene el valor seleccionado en el <select>
+
+    // Enviar el ID y el nuevo estado al servidor
+    fetch('http://localhost/bytewizards/API/todosStaffs.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            id: idStaff,
+            estado: status
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data.message); // Mensaje de confirmación del servidor
+    })
+    .catch(error => {
+        console.error('Error:', error); // Manejo de errores
     });
 }
