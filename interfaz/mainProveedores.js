@@ -26,14 +26,14 @@ function toggleEditarProducto() {
 
 
 
-
+let nombreEmpresaActual; // Declaración en el ámbito global
 
 let listProducts = []; //Tienda con los items del JSON
 // RENDER SECTION
 fetch('http://localhost/bytewizards/API/index.php') // Primer render con todos los items
 .then(res => res.json())
 .then(json => {
-    let nombreEmpresaActual; // Declaración en el ámbito global
+    
 
     fetch('http://localhost/bytewizards/API/actualProv.php')
     .then(response => {
@@ -47,7 +47,7 @@ fetch('http://localhost/bytewizards/API/index.php') // Primer render con todos l
         nombreEmpresaActual = data.nombreEmpresa; // Asignar a la variable global
         listProducts = json;
         for (let i = 0; i < json.length; i++) {
-            renderAll(json[i].titulo, json[i].imagen, json[i].precio_base, json[i].id_producto, json[i].habilitacion_producto, json[i].stock, json[i].id_empresa, data.nombreEmpresa);
+            renderAll(json[i].titulo, json[i].imagen, json[i].precio_base, json[i].id_producto, json[i].habilitacion_producto, json[i].stock, json[i].id_empresa);
             
         }
     })
@@ -57,8 +57,8 @@ fetch('http://localhost/bytewizards/API/index.php') // Primer render con todos l
     
 }).catch((error) => console.log(error.message));
 
-function renderAll(titulo, imagen, precio_base, id_producto, habilitacion_producto, stock, id_empresa, $nombreEmpresaActual) { //Funcion de renderizado de items
-    if (id_empresa != $nombreEmpresaActual) {
+function renderAll(titulo, imagen, precio_base, id_producto, habilitacion_producto, stock, id_empresa) { //Funcion de renderizado de items
+    if (id_empresa != nombreEmpresaActual) {
         // Si el producto no esta habilitado no se renderiza ni se hace nada 
         return;
     }
