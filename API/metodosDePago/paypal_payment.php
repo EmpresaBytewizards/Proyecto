@@ -63,7 +63,7 @@ function createPayPalPayment($amount, $currency, $description, $baseUrl)
             "description" => $description
         ]],
         "redirect_urls" => [
-            "return_url" => "http://localhost/bytewizards/interfaz/rastreo.php", // URL de retorno usando la variable base
+            "return_url" => "http://localhost/bytewizards/API/metodosDePago/correocarrito.php", // URL de retorno usando la variable base
             "cancel_url" => "http://localhost/bytewizards/interfaz/cancelacion.php" // URL de cancelación usando la variable base
         ]
     ]);

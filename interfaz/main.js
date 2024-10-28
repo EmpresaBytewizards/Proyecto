@@ -285,38 +285,39 @@ document.querySelector('.paybtn').addEventListener('click', function() {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            
+            items: itemsArray // Aquí se envían los artículos
         })
     })
     .then(response => response.json())
     .then(data => {
+        // Enviar la solicitud a la API para crear el pago
+    fetch('http://localhost/bytewizards/API/metodosDePago/paypal_payment.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            amount: document.getElementById("cantidad").value, // Monto a pagar
+            currency: 'USD', // Moneda
+            description: 'Compra de prueba'
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.approvalUrl) {
+            // Redirigir al usuario a PayPal para completar el pago
+            window.location.href = data.approvalUrl;
+        } else {
+            console.error('Error al generar el pago:', data.error);
+        }
+    })
+    .catch(error => alert('Error en la solicitud: ' + error));
         
     })
     .catch(error => {
-        console.error('Error en la solicitud:', error ,'. No se procedera al pago.');
+        alert('Error en la solicitud: ' + error + '. No se procedera al pago.');
         return;
     });
 
-    // Enviar la solicitud a la API para crear el pago
-    fetch('http://localhost/bytewizards/API/metodosDePago/paypal_payment.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                amount: document.getElementById("cantidad").value, // Monto a pagar
-                currency: 'USD', // Moneda
-                description: 'Compra de prueba'
-            })
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.approvalUrl) {
-                // Redirigir al usuario a PayPal para completar el pago
-                window.location.href = data.approvalUrl;
-            } else {
-                console.error('Error al generar el pago:', data.error);
-            }
-        })
-        .catch(error => console.error('Error en la solicitud:', error));
+    
 });
