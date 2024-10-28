@@ -1,0 +1,136 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    scroll-behavior: smooth;
+    scroll-margin-top: 2rem;
+    list-style: none;
+    text-decoration: none;
+    box-sizing: border-box;
+    appearance: none;
+    color: rgb(0, 0, 0);
+    font-weight: bold
+}
+body{
+    background-color: rgb(255, 106, 0);
+}
+.blackbar {
+    text-align: center;
+    background-color:rgb(255, 106, 0);
+    color: white;
+    height: 15px;
+    font-size: 10px;
+    border-top: solid;
+    border-color: rgb(255, 106, 0);
+}
+
+header {
+    display: flex;
+    flex-direction: column;
+    
+    justify-content: space-between;
+    background-color:#333;
+    border-bottom-left-radius: 50%;
+}
+
+.header__top {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    
+}
+#logo_pagina{
+    height: 3rem;
+    margin-left: 3rem;
+    cursor:pointer;
+}
+
+nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 2rem;
+}
+
+.icons {
+    display: flex;
+    flex-direction: row;
+}
+
+.logo__container {
+    display: flex;
+    justify-content: center;
+}
+
+
+/* MAIN */
+
+/* main {
+    min-height: 80vh;
+} */
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1rem;
+    gap: 1rem;
+    min-height: 80vh;
+    background-color: #9e9892;
+    border-top-right-radius: 10%;
+    border-bottom-left-radius: 10%;
+    
+}
+
+
+/* FOOTER */
+
+footer {
+    display: flex;
+    justify-content: center;
+    background-color:#333;
+    color: white;
+    border-top-right-radius: 50%;
+}
+
+footer li {
+    color: rgb(255, 255, 255);
+}
+
+footer div {
+    display: flex;
+    width: 70%;
+    padding: 1rem 0;
+    justify-content: center;
+}
+
+
+
+.container {
+    max-width: 800px; /* Ancho máximo */
+    margin: 20px auto; /* Centrar el contenedor */
+    padding: 20px; /* Espaciado interno */
+    background-color: #f9f9f9; /* Color de fondo */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+.container h1 {
+    text-align: center; /* Centrar el texto del encabezado */
+    color: #333; /* Color del texto */
+    margin-bottom: 20px; /* Espaciado inferior */
+}
+
+.carrito {
+    border: 1px solid #ddd; /* Borde ligero */
+    border-radius: 5px; /* Bordes redondeados */
+    margin-bottom: 15px; /* Espaciado entre carritos */
+    padding: 15px; /* Espaciado interno */
+    background-color: #fff; /* Color de fondo de los carritos */
+}
+
+.articulo {
+    margin-top: 10px; /* Espaciado superior para artículos */
+    padding: 10px; /* Espaciado interno */
+    background-color: #f0f0f0; /* Color de fondo para artículos */
+    border-radius: 4px; /* Bordes redondeados */
+}

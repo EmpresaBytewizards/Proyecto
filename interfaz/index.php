@@ -208,6 +208,7 @@ if (!isset($_SESSION['usuarios']) || empty($_SESSION['usuarios'])) {
             <input type="password" id="password2" name="password2" required placeholder="Ingrese la contraseña nuevamente...">
             <span style="color: black;"> Debes llenar todos los espacios para poder actualizar su perfil. </span>
             <button type="submit" class="continueLoggin">Actualizar informacion</button>
+            <p><a href="historial.php">¿Desea ver su historial de compras? ¡Presione aquí!</a></p>
             <p><a href="http://localhost/bytewizards/API/sessionDestroy.php">¿Quieres cerrar sesion? ¡Presione aquí!</a></p>
         </form>
     </div>
