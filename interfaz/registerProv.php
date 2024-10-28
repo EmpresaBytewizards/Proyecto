@@ -37,7 +37,9 @@
             <input type="password" id="password" name="password" required>
             <label for="password">Repita su contraseña:</label>
             <input type="password" id="password2" name="password2" required>
+            <p><a href="/bytewizards/interfaz/tienda/Términos%20y%20Condiciones%20de%20Uso%20VENDEDOR.pdf">Al registrarse aquí significa que usted acepta nuestros terminos y condiciones, para verlos presione aquí</a></p>
             <button type="submit">Registrarse</button>
+
             <h5> En caso de que no funcione, intente poner otro nombre </h5>
             <p><a href="loginProveedores.php">¿Ya tienes una cuenta? ¡Clickea aquí!</a></p>
         </form>
