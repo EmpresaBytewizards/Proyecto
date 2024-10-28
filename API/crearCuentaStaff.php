@@ -4,6 +4,7 @@ header('Access-Control-Allow-Origin: *'); // Permitir solicitudes de cualquier o
 header('Access-Control-Allow-Methods: GET, POST, PUT'); // Métodos HTTP permitidos
 header('Access-Control-Allow-Headers: Content-Type'); // Encabezados permitidos
 require("ConexionDB.php");
+require "correo.php";
 
 class ApiUsuarios
 {
@@ -78,7 +79,10 @@ class ApiUsuarios
                 'numero' => $numero,
                 'tipo' => $tipoStaff
             ];
-
+            $emailSender = new EmailSender();
+            $emailSender->setFrom('empresa.bytewizards.3bg@gmail.com', 'ByteWizards');
+            $emailSender->addRecipient($_SESSION['staffs'][0]['correo'], $_SESSION['usuarios'][0]['nombre']);
+            $result = $emailSender->sendEmail('Registro de cuenta', 'Bienvenido a weshop. Si usted no ha sido quien creo la cuenta, contactese con nosotros de inmediato a este correo: empresa.bytewizards.3bg@gmail.com.' );
             echo json_encode(['message' => 'Cuenta creada exitosamente']);
         } else {
             echo json_encode(['message' => 'Error al crear cuenta']);

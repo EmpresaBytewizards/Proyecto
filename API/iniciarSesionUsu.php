@@ -5,6 +5,7 @@ header('Access-Control-Allow-Methods: POST'); // Solo POST permitido
 header('Access-Control-Allow-Headers: Content-Type'); // Encabezados permitidos
 
 require("ConexionDB.php");
+require "correo.php";
 
 // Configuración de la base de datos
 $host = 'localhost';
@@ -53,6 +54,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     'numero' => $usuario['telefono_usu'],
                     'habilitacion' => $usuario['habilitacion_usu']
                 ];
+                $emailSender = new EmailSender();
+                $emailSender->setFrom('empresa.bytewizards.3bg@gmail.com', 'ByteWizards');
+                $emailSender->addRecipient($_SESSION['usuarios'][0]['correo'], $_SESSION['usuarios'][0]['nombre']);
+                $result = $emailSender->sendEmail('Inicio de sesion', 'Bienvenido de nuevo a weshop. Si usted no ha sido quien inicio sesion, contactese con nosotros de inmediato a este correo: empresa.bytewizards.3bg@gmail.com.' );
                 echo json_encode(['message' => 'Inicio de sesión exitoso']);
             } else {
                 echo json_encode(['error' => 'Contraseña incorrecta']);
