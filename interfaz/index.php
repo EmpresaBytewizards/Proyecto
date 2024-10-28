@@ -200,7 +200,7 @@ if (!isset($_SESSION['usuarios']) || empty($_SESSION['usuarios'])) {
             <ul class="required">
                 <li id="caractMin" class="reject"> Minímo 5 caracteres. </li>
                 <li id="mayMin" class="reject"> Minímo 1 letra mayuscula. </li>
-                <li id="minMin" class="reject"> Minímum 1 letra minuscula. </li>
+                <li id="minMin" class="reject"> Minímo 1 letra minuscula. </li>
                 <li id="minNum" class="reject"> Al menos 1 número. </li>
             </ul>
             <input type="password" id="cambiarPassword" name="cambiarPassword" required  placeholder="Cambiar contraseña...">
