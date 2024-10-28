@@ -22,10 +22,6 @@ class ApiProductos
             $stmt->execute([$id]);
             $producto = $stmt->fetch(PDO::FETCH_ASSOC);
             // Reemplaza el Id_Empresa con el nombre de la empresa
-            if ($producto) {
-                $producto['id_empresa'] = $producto['nombre_empresa'];
-                unset($producto['nombre_empresa']);
-            }
             return $producto;
         } else {
             // Obtener todos los productos
@@ -33,10 +29,6 @@ class ApiProductos
             $stmt->execute();
             $productos = $stmt->fetchAll(PDO::FETCH_ASSOC);
             // Reemplaza Id_Empresa con el nombre de la empresa para todos los productos
-            foreach ($productos as &$producto) {
-                $producto['id_empresa'] = $producto['nombre_empresa'];
-                unset($producto['nombre_empresa']);
-            }
             return $productos;
         }
     }

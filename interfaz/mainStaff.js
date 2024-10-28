@@ -27,12 +27,14 @@ function articulos() {
             if (json[i].habilitacion_producto == "Deshabilitado") {
                 row.innerHTML = `
                 <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0);">${json[i].id_producto}</td>
+                <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0);">${json[i].id_empresa}</td>
                 <td style="border: 1px solid #ddd; background-color: rgb(255, 106, 0)">${json[i].titulo}</td>
                 <td><button onclick="toggleStatus(this)" style="background-color: rgb(136, 57, 0); color: #fff; padding: 6px 25px; border: none; cursor: pointer;" class="deshabilitado">Habilitar</button></td>
             `;
             }else{
                 row.innerHTML = `
                 <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0);">${json[i].id_producto}</td>
+                <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0);">${json[i].id_empresa}</td>
                 <td style="border: 1px solid #ddd; background-color: rgb(255, 106, 0)">${json[i].titulo}</td>
                 <td><button onclick="toggleStatus(this)" style="background-color: rgb(184, 77, 0); color: #fff; padding: 6px 25px; border: none; cursor: pointer;">Deshabilitar</button></td>
             `;

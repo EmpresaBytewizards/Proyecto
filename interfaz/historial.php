@@ -59,7 +59,7 @@ try {
         <?php if (count($carritos) > 0): ?>
             <?php foreach ($carritos as $carrito): ?>
                 <div class="carrito">
-                    <h2>Carrito ID: <?php echo htmlspecialchars($carrito['id_carrito']); ?></h2>
+                    <h2>ID del Carrito: <?php echo htmlspecialchars($carrito['id_carrito']); ?></h2>
                     <p>Dirección de Envío: <?php echo htmlspecialchars($carrito['envio']); ?></p>
                     <p>Precio Total: <span class="precio"><?php echo htmlspecialchars($carrito['precio_carrito']); ?> €</span></p>
 
