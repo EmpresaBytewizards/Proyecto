@@ -100,5 +100,5 @@ $accessToken = getPayPalAccessToken();
 // $result = $emailSender->sendEmail('Rastreo de su pedido', 'Este es el enlace para el rastreo de su paquete: http://localhost/bytewizards/interfaz/confirmacionPago.php?paymentId=' . $paymentId . '&token=' . $accessToken . '&PayerID=' . $payerId);
 // echo $result;
 include("../subirDatosCarrito.php");
-header('Location: ../interfaz/confirmacionPago.php?paymentId=' . $paymentId . '&token=' . $accessToken . '&PayerID=' . $payerId);
+header('Location: /../bytewizards/interfaz/confirmacionPago.php?paymentId=' . $paymentId . '&token=' . $accessToken . '&PayerID=' . $payerId);
 ?>
