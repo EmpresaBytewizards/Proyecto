@@ -48,7 +48,7 @@ if (isset($_SESSION['staffs'])) {
     <div class="login-container">
         <h2>Tu cuenta esta deshabilitada, no puedes acceder a la pagina mientras tu cuenta este deshabilitada.</h2>
         <p> Si desea habilitar su cuenta, puede contactarse con nosotros por correo a empresa.bytewizards.3bg@gmail.com </p>
-        <a href="http://localhost/bytewizards/API/sessionDestroyStaff.php"> ¡Presione aquí si quieres intentar refrezcar su informacion e inciar sesion nuevamente! </a>
+        <a href="../API/sessionDestroyStaff.php"> ¡Presione aquí si quieres intentar refrezcar su informacion e inciar sesion nuevamente! </a>
     </div>
 </body>
 </html>

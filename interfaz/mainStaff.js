@@ -23,7 +23,7 @@ function articulos() {
         // Si la tabla no existe, termina la función
         return;
     }
-    fetch('http://localhost/bytewizards/API/todosProductos.php')
+    fetch('../API/todosProductos.php')
     .then(res => res.json())
     .then(json => {
         listProducts = json;      
@@ -58,7 +58,7 @@ function proveedores() {
         // Si la tabla no existe, termina la función
         return;
     }
-    fetch('http://localhost/bytewizards/API/todosProveedores.php')
+    fetch('../API/todosProveedores.php')
     .then(res => res.json())
     .then(json => {
         listUsers = json;      
@@ -96,7 +96,7 @@ function usuarios() {
         // Si la tabla no existe, termina la función
         return;
     }
-    fetch('http://localhost/bytewizards/API/todosUsuarios.php')
+    fetch('../API/todosUsuarios.php')
     .then(res => res.json())
     .then(json => {
         listProducts = json;      
@@ -135,7 +135,7 @@ function denuncias() {
         // Si la tabla no existe, termina la función
         return;
     }
-    fetch('http://localhost/bytewizards/API/todosDenuncias.php')
+    fetch('../API/todosDenuncias.php')
     .then(res => res.json())
     .then(json => {
         listProducts = json;      
@@ -170,7 +170,7 @@ function admin() {
         // Si la tabla no existe, termina la función
         return;
     }
-    fetch('http://localhost/bytewizards/API/todosModeradores.php')
+    fetch('../API/todosModeradores.php')
     .then(res => res.json())
     .then(json => {
         listProducts = json;      
@@ -204,7 +204,7 @@ function staff() {
         // Si la tabla no existe, termina la función
         return;
     }
-    fetch('http://localhost/bytewizards/API/todosStaffs.php')
+    fetch('../API/todosStaffs.php')
     .then(res => res.json())
     .then(json => {
         listProducts = json;      
@@ -238,7 +238,7 @@ function carrito() {
         // Si la tabla no existe, termina la función
         return;
     }
-    fetch('http://localhost/bytewizards/API/todosCarritos.php')
+    fetch('../API/todosCarritos.php')
     .then(res => res.json())
     .then(json => {
         listProducts = json;      
@@ -274,7 +274,7 @@ function venta() {
         // Si la tabla no existe, termina la función
         return;
     }
-    fetch('http://localhost/bytewizards/API/todosVentas.php')
+    fetch('../API/todosVentas.php')
     .then(res => res.json())
     .then(json => {
         listProducts = json;      
@@ -326,16 +326,16 @@ function toggleStatus(button) {
     // Definir el endpoint según la tabla
     switch (table.id) {
         case 'articulosTabla':
-            endpoint = 'http://localhost/bytewizards/API/todosProductos.php';
+            endpoint = '../API/todosProductos.php';
             break;
         case 'proveedoresTabla':
-            endpoint = 'http://localhost/bytewizards/API/todosProveedores.php';
+            endpoint = '../API/todosProveedores.php';
             break;
         case 'compradoresTabla':
-            endpoint = 'http://localhost/bytewizards/API/todosUsuarios.php';
+            endpoint = '../API/todosUsuarios.php';
             break;
         //     case 'denunciasTabla':
-        //     endpoint = 'http://localhost/bytewizards/API/todosDenuncias.php';
+        //     endpoint = '../API/todosDenuncias.php';
         //     break;
         default:
             console.error('Tabla desconocida');
@@ -383,7 +383,7 @@ function updateDenunciaStatus(selectElement) {
     const status = selectElement.value; // Obtiene el valor seleccionado en el <select>
 
     // Enviar el ID y el nuevo estado al servidor
-    fetch('http://localhost/bytewizards/API/todosDenuncias.php', {
+    fetch('../API/todosDenuncias.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -410,7 +410,7 @@ function updateModStatus(selectElement) {
     const status = selectElement.value; // Obtiene el valor seleccionado en el <select>
 
     // Enviar el ID y el nuevo estado al servidor
-    fetch('http://localhost/bytewizards/API/todosModeradores.php', {
+    fetch('../API/todosModeradores.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -435,7 +435,7 @@ function updateStaffStatus(selectElement) {
     const status = selectElement.value; // Obtiene el valor seleccionado en el <select>
 
     // Enviar el ID y el nuevo estado al servidor
-    fetch('http://localhost/bytewizards/API/todosStaffs.php', {
+    fetch('../API/todosStaffs.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -461,7 +461,7 @@ function updateCarritoStatus(selectElement) {
     const status = selectElement.value; // Obtiene el valor seleccionado en el <select>
 
     // Enviar el ID y el nuevo estado al servidor
-    fetch('http://localhost/bytewizards/API/todosCarritos.php', {
+    fetch('../API/todosCarritos.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

@@ -82,7 +82,7 @@ document.getElementById('perfilUsu').addEventListener('submit', function(event) 
     });
 
     // Enviar los datos al servidor para actualizar el producto
-    fetch('http://localhost/bytewizards/API/editarPerfilStaff.php', {
+    fetch('../API/editarPerfilStaff.php', {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'

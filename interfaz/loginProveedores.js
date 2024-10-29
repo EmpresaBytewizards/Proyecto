@@ -60,7 +60,7 @@
     };
   
     // Configuración de la solicitud POST
-    fetch('http://localhost/bytewizards/API/iniciarSesionProv.php', {
+    fetch('../API/iniciarSesionProv.php', {
       method: 'POST', // Cambiar a método POST
       headers: {
         'Content-Type': 'application/json' // Enviar datos como JSON

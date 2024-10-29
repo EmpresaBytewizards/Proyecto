@@ -30,12 +30,12 @@ let nombreEmpresaActual; // Declaración en el ámbito global
 
 let listProducts = []; //Tienda con los items del JSON
 // RENDER SECTION
-fetch('http://localhost/bytewizards/API/index.php') // Primer render con todos los items
+fetch('../API/index.php') // Primer render con todos los items
 .then(res => res.json())
 .then(json => {
     
 
-    fetch('http://localhost/bytewizards/API/actualProv.php')
+    fetch('../API/actualProv.php')
     .then(response => {
         if (!response.ok) {
             throw new Error('Network response was not ok');
@@ -262,7 +262,7 @@ document.getElementById('productForm').addEventListener('submit', function(event
     });
 
     // Enviar los datos al servidor
-    fetch('http://localhost/bytewizards/API/index.php', {
+    fetch('../API/index.php', {
         method: 'POST',
         body: formData
     })
@@ -289,7 +289,7 @@ document.getElementById('productForm').addEventListener('submit', function(event
 
 
 function editarProducto(productId) {
-    fetch(`http://localhost/bytewizards/API/index.php?id=${productId}`)
+    fetch(`../API/index.php?id=${productId}`)
       .then(response => response.json())
       .then(producto => {
         console.log(producto); // Añade esto para ver la respuesta del servidor
@@ -323,7 +323,7 @@ document.getElementById('editProductForm').addEventListener('submit', function(e
     });
 
     // Enviar los datos del formulario al servidor sin la imagen
-    fetch('http://localhost/bytewizards/API/index.php', {
+    fetch('../API/index.php', {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
@@ -348,7 +348,7 @@ document.getElementById('editProductForm').addEventListener('submit', function(e
             imageFormData.append('editProductId', document.querySelector('[name="editProductId"]').value); // Enviar el ID del producto
 
             // Enviar la imagen en una solicitud separada
-            fetch('http://localhost/bytewizards/API/imagenesEditar.php', {
+            fetch('../API/imagenesEditar.php', {
                 method: 'POST', // Mejor usar POST para archivos
                 body: imageFormData
             })

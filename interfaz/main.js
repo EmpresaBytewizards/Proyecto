@@ -19,7 +19,7 @@ function toggleLoggin() {
 
 //Para manejar las denuncias hechas a los productos
 function denunciaProducto(idDenuncia) {
-    fetch('http://localhost/bytewizards/API/denunciaProducto.php', {
+    fetch('../API/denunciaProducto.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -48,7 +48,7 @@ function denunciaProducto(idDenuncia) {
 
 let listProducts = []; //Tienda con los items del JSON
 
-fetch('http://localhost/bytewizards/API/index.php') // Primer render con todos los items
+fetch('../API/index.php') // Primer render con todos los items
 .then(res => res.json())
 .then(json => {
     listProducts = json;
@@ -307,7 +307,7 @@ document.querySelector('.paybtn').addEventListener('click', function() {
             id_producto: id_producto
         });
     });
-    fetch('http://localhost/bytewizards/API/articulosCarrito.php', {
+    fetch('../API/articulosCarrito.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -319,7 +319,7 @@ document.querySelector('.paybtn').addEventListener('click', function() {
     .then(response => response.json())
     .then(data => {
         // Enviar la solicitud a la API para crear el pago
-    fetch('http://localhost/bytewizards/API/metodosDePago/paypal_payment.php', {
+    fetch('../API/metodosDePago/paypal_payment.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

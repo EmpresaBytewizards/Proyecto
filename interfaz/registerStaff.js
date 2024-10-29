@@ -82,7 +82,7 @@ document.getElementById('formRegistro').addEventListener('submit', function(even
     });
 
     // Enviar los datos al servidor para actualizar el producto
-    fetch('http://localhost/bytewizards/API/crearCuentaStaff.php', {
+    fetch('../API/crearCuentaStaff.php', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

@@ -20,7 +20,7 @@ function iniciarSesionUsu() {
   };
 
   // Configuración de la solicitud POST
-  fetch('http://localhost/bytewizards/API/iniciarSesionUsu.php', {
+  fetch('../API/iniciarSesionUsu.php', {
     method: 'POST', // Cambiar a método POST
     headers: {
       'Content-Type': 'application/json' // Enviar datos como JSON

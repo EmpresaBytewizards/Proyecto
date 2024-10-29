@@ -20,7 +20,7 @@ document.querySelector('#formRegistro').addEventListener('submit', (event) => {
     };
   
     // Configuración de la solicitud POST
-    fetch('http://localhost/bytewizards/API/iniciarSesionStaff.php', {
+    fetch('../API/iniciarSesionStaff.php', {
       method: 'POST', // Cambiar a método POST
       headers: {
         'Content-Type': 'application/json' // Enviar datos como JSON

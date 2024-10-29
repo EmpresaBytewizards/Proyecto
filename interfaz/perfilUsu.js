@@ -82,7 +82,7 @@ document.getElementById('perfilUsu').addEventListener('submit', function(event) 
     });
 
     // Enviar los datos al servidor para actualizar el perfil
-    fetch('http://localhost/bytewizards/API/editarPerfilUsu.php', {
+    fetch('../API/editarPerfilUsu.php', {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'

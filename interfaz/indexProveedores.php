@@ -175,7 +175,7 @@ if ($_SESSION['empresas'][0]['habilitacion'] == "Deshabilitado"){
                 <input type="password" id="password2" name="password2" required placeholder="Ingrese la contraseña nuevamente...">
                 <span style="color: black;"> Debes llenar todos los espacios para poder actualizar su perfil. </span>
                 <button type="submit" class="continueLoggin">Actualizar informacion</button>
-                <p><a href="http://localhost/bytewizards/API/sessionDestroyProv.php">¿Quieres cerrar sesion? ¡Presione aquí!</a></p>
+                <p><a href="../API/sessionDestroyProv.php">¿Quieres cerrar sesion? ¡Presione aquí!</a></p>
             </form>
         </div>
     </section>

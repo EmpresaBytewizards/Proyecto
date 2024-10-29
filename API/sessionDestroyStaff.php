@@ -2,5 +2,5 @@
     session_start();
     session_destroy();
     echo "Sesiones destruidas con exito";
-    header("Location: http://localhost/bytewizards/interfaz/loginStaff.php");
+    header("Location: ../interfaz/loginStaff.php");
 ?>
