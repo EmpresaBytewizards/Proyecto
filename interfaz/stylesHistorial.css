@@ -68,6 +68,7 @@ nav {
 /* main {
     min-height: 80vh;
 } */
+ 
 main{
     display: flex;
     flex-direction: column;
@@ -106,31 +107,46 @@ footer div {
 
 
 .container {
-    max-width: 800px; /* Ancho máximo */
-    margin: 20px auto; /* Centrar el contenedor */
-    padding: 20px; /* Espaciado interno */
-    background-color: #f9f9f9; /* Color de fondo */
-    border-radius: 8px; /* Bordes redondeados */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    width: 90vw; 
+    max-width: 800px; 
+    margin: 20px auto; 
+    padding: 5vw; 
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
+
 .container h1 {
-    text-align: center; /* Centrar el texto del encabezado */
-    color: #333; /* Color del texto */
-    margin-bottom: 20px; /* Espaciado inferior */
+    text-align: center; 
+    color: #333; 
+    margin-bottom: 20px; 
 }
 
 .carrito {
-    border: 1px solid #ddd; /* Borde ligero */
-    border-radius: 5px; /* Bordes redondeados */
-    margin-bottom: 15px; /* Espaciado entre carritos */
-    padding: 15px; /* Espaciado interno */
-    background-color: #fff; /* Color de fondo de los carritos */
+    border: 1px solid #ddd; 
+    border-radius: 5px; 
+    margin-bottom: 15px; 
+    padding: 15px; 
+    background-color: #fff; 
 }
 
 .articulo {
-    margin-top: 10px; /* Espaciado superior para artículos */
-    padding: 10px; /* Espaciado interno */
-    background-color: #f0f0f0; /* Color de fondo para artículos */
-    border-radius: 4px; /* Bordes redondeados */
+    margin-top: 10px; 
+    padding: 10px; 
+    background-color: #f0f0f0; 
+    border-radius: 4px; 
+}
+
+
+a {
+    color: #007BFF;
+    text-decoration: none;
+}
+
+
+main img {
+    max-width: 80%;      
+    height: auto;        
+    margin-top: 1rem;
 }

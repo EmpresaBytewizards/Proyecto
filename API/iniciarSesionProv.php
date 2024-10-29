@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 ];
                 $emailSender = new EmailSender();
                 $emailSender->setFrom('empresa.bytewizards.3bg@gmail.com', 'ByteWizards');
-                $emailSender->addRecipient($_SESSION['empresas'][0]['correo'], $_SESSION['usuarios'][0]['nombre']);
+                $emailSender->addRecipient($_SESSION['empresas'][0]['correo'], $_SESSION['empresas'][0]['nombre']);
                 $result = $emailSender->sendEmail('Inicio de sesion', 'Bienvenido de nuevo a weshop. Si usted no ha sido quien inicio sesion, contactese con nosotros de inmediato a este correo: empresa.bytewizards.3bg@gmail.com.' );
                 echo json_encode(['message' => 'Inicio de sesión exitoso']);
             } else {

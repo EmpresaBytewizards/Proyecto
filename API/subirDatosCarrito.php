@@ -49,7 +49,12 @@ try {
             $stmt = $pdo->prepare("INSERT INTO contiene (id_producto, id_carrito, precio_contiene, nombre_contiene) VALUES (?, ?, ?, ?)");
             $stmt->execute([$id_producto, $nuevoIdCarrito, $precio_contiene, $nombre_contiene]);
         }
-
+        $emailSender = new EmailSender();
+        $emailSender->setFrom('empresa.bytewizards.3bg@gmail.com', 'ByteWizards');
+        $emailSender->addRecipient($_SESSION['usuarios'][0]['correo'], $_SESSION['usuarios'][0]['nombre']);
+        // paymentId=$paymentId&payerId=$payerId
+        $result = $emailSender->sendEmail('Rastreo de su pedido', 'Este es el enlace para el rastreo de su paquete: http://localhost/bytewizards/interfaz/rastreo.php?idCarrito=' . $nuevoIdCarrito);
+        echo $result;
         // Responder con éxito
         echo json_encode(['success' => true, 'message' => 'Carrito y artículos guardados correctamente.']);
     } else {

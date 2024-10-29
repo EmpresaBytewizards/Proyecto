@@ -62,6 +62,7 @@ try {
                     <h2>ID del Carrito: <?php echo htmlspecialchars($carrito['id_carrito']); ?></h2>
                     <p>Dirección de Envío: <?php echo htmlspecialchars($carrito['envio']); ?></p>
                     <p>Precio Total: <span class="precio"><?php echo htmlspecialchars($carrito['precio_carrito']); ?> €</span></p>
+                    <p>Rastreo: <a class="rastreo" href="http://localhost/bytewizards/interfaz/rastreo.php?idCarrito=<?php echo htmlspecialchars($carrito['id_carrito']); ?>">http://localhost/bytewizards/interfaz/rastreo.php?idCarrito=<?php echo htmlspecialchars($carrito['id_carrito']); ?></a></p>
 
                     <?php
                     // Obtener artículos en el carrito

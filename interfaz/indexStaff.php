@@ -73,6 +73,9 @@ if ($_SESSION['staffs'][0]['tipo'] == "Deshabilitado"){
         <div class="flexCenter">
             <h1 class="categoryName">BACKOFFICE</h1>
         </div>
+        <?php
+        if ($_SESSION['staffs'][0]['tipo'] != "Organizador"){     
+        ?>
         <section class="admin-section" style="margin: 20px; padding: 20px; border: 1px solid #ddd; border-radius: 5px;">
             <h2 style="font-size: 24px; color: #333;">Productos</h2>
             <input type="text" id="buscarArticulos" placeholder="Buscar objetos por ID" onkeyup="filterList('articulosTabla', 'buscarArticulos')" style="color: black; width: 100%; padding: 8px; margin-bottom: 10px; border-radius: 4px; border: 1px solid #ccc;">
@@ -90,7 +93,11 @@ if ($_SESSION['staffs'][0]['tipo'] == "Deshabilitado"){
                 </tbody>
             </table>
         </section>
-
+        
+        <?php
+        }
+        if ($_SESSION['staffs'][0]['tipo'] != "Organizador"){     
+        ?>
         <section class="admin-section" style="margin: 20px; padding: 20px; border: 1px solid #ddd; border-radius: 5px;">
             <h2 style="font-size: 24px; color: #333;">Proveedores</h2>
             <input type="text" id="buscarProveedores" placeholder="Buscar proveedor por ID" onkeyup="filterList('proveedoresTabla', 'buscarProveedores')" style="color: black; width: 100%; padding: 8px; margin-bottom: 10px; border-radius: 4px; border: 1px solid #ccc;">
@@ -108,6 +115,10 @@ if ($_SESSION['staffs'][0]['tipo'] == "Deshabilitado"){
             </table>
         </section>
 
+        <?php
+        }
+        if ($_SESSION['staffs'][0]['tipo'] != "Organizador"){     
+        ?>
         <section class="admin-section" style="margin: 20px; padding: 20px; border: 1px solid #ddd; border-radius: 5px;">
             <h2 style="font-size: 24px; color: #333;">Compradores</h2>
             <input type="text" id="buscarCompradores" placeholder="Buscar usuarios por ID" onkeyup="filterList('compradoresTabla', 'buscarCompradores')" style="color: black; width: 100%; padding: 8px; margin-bottom: 10px; border-radius: 4px; border: 1px solid #ccc;">
@@ -126,6 +137,10 @@ if ($_SESSION['staffs'][0]['tipo'] == "Deshabilitado"){
         </section>
         <br>
 
+        <?php
+        }
+        if ($_SESSION['staffs'][0]['tipo'] != "Organizador"){     
+        ?>
 
         <section class="admin-section" style="margin: 20px; padding: 20px; border: 1px solid #ddd; border-radius: 5px;">
             <h2 style="font-size: 24px; color: #333;">Denuncias</h2>
@@ -148,9 +163,11 @@ if ($_SESSION['staffs'][0]['tipo'] == "Deshabilitado"){
             </table>
         </section>
         <br>
-<?php
-    if ($_SESSION['staffs'][0]['tipo'] == "Admin"){     
-?>
+
+        <?php
+        }
+        if ($_SESSION['staffs'][0]['tipo'] == "Admin"){     
+        ?>
         <section class="admin-section" style="margin: 20px; padding: 20px; border: 1px solid #ddd; border-radius: 5px;">
             <h2 style="font-size: 24px; color: #333;">STAFFs Inferiores</h2>
             <input type="text" id="buscarMod" placeholder="Buscar STAFF por ID" onkeyup="filterList('modTabla', 'buscarMod')" style="color: black; width: 100%; padding: 8px; margin-bottom: 10px; border-radius: 4px; border: 1px solid #ccc;">
@@ -168,14 +185,14 @@ if ($_SESSION['staffs'][0]['tipo'] == "Deshabilitado"){
             </table>
         </section>
         <br>
-<?php
-}
-?>
+        <?php
+        }
+        ?>
 
 
-<?php
-    if ($_SESSION['staffs'][0]['tipo'] == "Root"){     
-?>
+        <?php
+        if ($_SESSION['staffs'][0]['tipo'] == "Root"){     
+        ?>
         <section class="admin-section" style="margin: 20px; padding: 20px; border: 1px solid #ddd; border-radius: 5px;">
             <h2 style="font-size: 24px; color: #333;">STAFFs Inferiores</h2>
             <input type="text" id="buscarStaff" placeholder="Buscar STAFF por ID" onkeyup="filterList('staffTabla', 'buscarStaff')" style="color: black; width: 100%; padding: 8px; margin-bottom: 10px; border-radius: 4px; border: 1px solid #ccc;">
@@ -193,9 +210,31 @@ if ($_SESSION['staffs'][0]['tipo'] == "Deshabilitado"){
             </table>
         </section>
         <br>
-<?php
-}
-?>
+        <?php
+        }
+        ?>
+
+        <section class="admin-section" style="margin: 20px; padding: 20px; border: 1px solid #ddd; border-radius: 5px;">
+            <h2 style="font-size: 24px; color: #333;">Carritos</h2>
+            <input type="text" id="buscarCarrito" placeholder="Buscar carritos por ID" onkeyup="filterList('carritoTabla', 'buscarCarrito')" style="color: black; width: 100%; padding: 8px; margin-bottom: 10px; border-radius: 4px; border: 1px solid #ccc;">
+            <table id="carritoTabla" style="width: 100%; border-collapse: collapse;">
+                <thead>
+                    <tr style="background-color: #f2f2f2; text-align: left;">
+                        <th style="padding: 10px; border: 1px solid #ddd; background-color:rgb(255, 106, 0);">ID Carrito</th>
+                        <th style="padding: 10px; border: 1px solid #ddd; background-color:rgb(255, 106, 0);">ID Usuario</th>
+                        <th style="padding: 10px; border: 1px solid #ddd; background-color:rgb(255, 106, 0);">Fecha Peticion</th>
+                        <th style="padding: 10px; border: 1px solid #ddd; background-color:rgb(255, 106, 0);">Direccion de Envio</th>
+                        <th style="padding: 10px; border: 1px solid #ddd; background-color:rgb(255, 106, 0);">Precio del Carrito</th>
+                        <th style="padding: 10px; border: 1px solid #ddd; background-color:rgb(255, 106, 0);">Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Los Carritos cargaran acá -->
+                </tbody>
+            </table>
+        </section>
+        <br>
+
     </main>
 
     <section class="loggin inactive">

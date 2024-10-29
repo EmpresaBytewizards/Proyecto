@@ -13,9 +13,15 @@ document.addEventListener('DOMContentLoaded', function() {
     denuncias();
     admin();
     staff();
+    carrito();
 });
 
 function articulos() {
+    let articlesTableBody = document.getElementById('articulosTabla');
+    if (!articlesTableBody) {
+        // Si la tabla no existe, termina la función
+        return;
+    }
     fetch('http://localhost/bytewizards/API/todosProductos.php')
     .then(res => res.json())
     .then(json => {
@@ -46,6 +52,11 @@ function articulos() {
 }
 
 function proveedores() {
+    let articlesTableBody = document.getElementById('proveedoresTabla');
+    if (!articlesTableBody) {
+        // Si la tabla no existe, termina la función
+        return;
+    }
     fetch('http://localhost/bytewizards/API/todosProveedores.php')
     .then(res => res.json())
     .then(json => {
@@ -73,6 +84,11 @@ function proveedores() {
 }
 
 function usuarios() {
+    let articlesTableBody = document.getElementById('compradoresTabla');
+    if (!articlesTableBody) {
+        // Si la tabla no existe, termina la función
+        return;
+    }
     fetch('http://localhost/bytewizards/API/todosUsuarios.php')
     .then(res => res.json())
     .then(json => {
@@ -101,6 +117,11 @@ function usuarios() {
 
 
 function denuncias() {
+    let articlesTableBody = document.getElementById('denunciasTabla');
+    if (!articlesTableBody) {
+        // Si la tabla no existe, termina la función
+        return;
+    }
     fetch('http://localhost/bytewizards/API/todosDenuncias.php')
     .then(res => res.json())
     .then(json => {
@@ -150,6 +171,7 @@ function admin() {
                 <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0)">
                     <select style="padding: 5px 10px; font-size: 14px; background-color: rgb(184, 77, 0); border: 1px solid #ddd; border-radius: 5px; outline: none; cursor: pointer; transition: all 0.3s ease;" onchange="updateModStatus(this)">
                         <option value="Moderador" ${json[i].tipo_staff === "Moderador" ? "selected" : ""}>Moderador</option>
+                        <option value="Organizador" ${json[i].tipo_staff === "Organizador" ? "selected" : ""}>Organizador</option>
                         <option value="Deshabilitado" ${json[i].tipo_staff === "Deshabilitado" ? "selected" : ""}>Deshabilitado</option>
                     </select>
                 </td>
@@ -181,6 +203,7 @@ function staff() {
                     <select style="padding: 5px 10px; font-size: 14px; background-color: rgb(184, 77, 0); border: 1px solid #ddd; border-radius: 5px; outline: none; cursor: pointer; transition: all 0.3s ease;" onchange="updateStaffStatus(this)">
                         <option value="Admin" ${json[i].tipo_staff === "Admin" ? "selected" : ""}>Admin</option>
                         <option value="Moderador" ${json[i].tipo_staff === "Moderador" ? "selected" : ""}>Moderador</option>
+                        <option value="Organizador" ${json[i].tipo_staff === "Organizador" ? "selected" : ""}>Organizador</option>
                         <option value="Deshabilitado" ${json[i].tipo_staff === "Deshabilitado" ? "selected" : ""}>Deshabilitado</option>
                     </select>
                 </td>
@@ -189,6 +212,43 @@ function staff() {
         };
     });
 }
+
+function carrito() {
+    let articlesTableBody = document.getElementById('carritoTabla');
+    if (!articlesTableBody) {
+        // Si la tabla no existe, termina la función
+        return;
+    }
+    fetch('http://localhost/bytewizards/API/todosCarritos.php')
+    .then(res => res.json())
+    .then(json => {
+        listProducts = json;      
+        let articlesTableBody = document.getElementById('carritoTabla').querySelector('tbody');
+        for (let i = 0; i < json.length; i++) {
+            let row = document.createElement('tr');
+            row.setAttribute('data-id', json[i].id_carrito);
+            row.innerHTML = `
+                <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0);">${json[i].id_carrito}</td>
+                <td style="border: 1px solid #ddd; background-color: rgb(255, 106, 0)">${json[i].id_usu}</td>
+                <td style="border: 1px solid #ddd; background-color: rgb(255, 106, 0)">${json[i].fecha_peticion}</td>
+                <td style="border: 1px solid #ddd; background-color: rgb(255, 106, 0)">${json[i].envio}</td>
+                <td style="border: 1px solid #ddd; background-color: rgb(255, 106, 0)">${json[i].precio_carrito}$</td>
+                <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0)">
+                    <select style="padding: 5px 10px; font-size: 14px; background-color: rgb(184, 77, 0); border: 1px solid #ddd; border-radius: 5px; outline: none; cursor: pointer; transition: all 0.3s ease;" onchange="updateCarritoStatus(this)">
+                        <option value="empaquetando" ${json[i].estado === "empaquetando" ? "selected" : ""}>Empaquetando</option>
+                        <option value="en_camino" ${json[i].estado === "en_camino" ? "selected" : ""}>En camino</option>
+                        <option value="entregado" ${json[i].estado === "entregado" ? "selected" : ""}>Entregado</option>
+                        <option value="empaquetando_devolucion" ${json[i].estado === "empaquetando_devolucion" ? "selected" : ""}>Empaquetando Devolucion</option>
+                        <option value="enviado_devolucion" ${json[i].estado === "enviado_devolucion" ? "selected" : ""}>Enviando Devolucion</option>
+                        <option value="entregado_devolucion" ${json[i].estado === "entregado_devolucion" ? "selected" : ""}>Devuelto</option>
+                    </select>
+                </td>
+            `;
+            articlesTableBody.appendChild(row);
+        };
+    });
+}
+
 
 function filterList(tableId, searchInputId) {
     let input = document.getElementById(searchInputId);
@@ -336,6 +396,32 @@ function updateStaffStatus(selectElement) {
         },
         body: JSON.stringify({
             id: idStaff,
+            estado: status
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data.message); // Mensaje de confirmación del servidor
+    })
+    .catch(error => {
+        console.error('Error:', error); // Manejo de errores
+    });
+}
+
+
+function updateCarritoStatus(selectElement) {
+    const row = selectElement.closest('tr'); // Obtiene el <tr> padre
+    const idCarrito = row.getAttribute('data-id'); // Obtiene el ID de la denuncia
+    const status = selectElement.value; // Obtiene el valor seleccionado en el <select>
+
+    // Enviar el ID y el nuevo estado al servidor
+    fetch('http://localhost/bytewizards/API/todosCarritos.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            id: idCarrito,
             estado: status
         })
     })
