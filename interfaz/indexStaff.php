@@ -281,7 +281,9 @@ if ($_SESSION['staffs'][0]['tipo'] == "Deshabilitado"){
             <form action id="perfilUsu">
                 
                 <br>
-                <h3 style="color: black;"> Su id de empresa es: <?php echo $_SESSION['staffs'][0]['id']; ?> <br> Su nombre de empresa es: <?php echo $_SESSION['staffs'][0]['nombre']; ?></h3> 
+                <h3 style="color: black;"> Su id de STAFF es: <?php echo $_SESSION['staffs'][0]['id']; ?></h3>
+                <label for="cambiarNombre" style="color: black;">Su nombre de STAFF es: <?php echo $_SESSION['staffs'][0]['nombre']; ?> </label> 
+                <input type="text" id="cambiarNombre" name="cambiarNombre" required placeholder="Cambiar nombre..." value="<?php echo $_SESSION['staffs'][0]['nombre']; ?>">
                 <label for="cambiarEmail" style="color: black;">Email: <?php echo $_SESSION['staffs'][0]['correo']; ?></label>
                 <input type="text" id="cambiarEmail" name="cambiarEmail" required placeholder="Cambiar correo..." value="<?php echo $_SESSION['staffs'][0]['correo']; ?>">
                 <label for="cambiarDirection">Direccion: <?php echo $_SESSION['staffs'][0]['direccion']; ?></label>

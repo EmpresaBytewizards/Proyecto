@@ -47,7 +47,7 @@ class ApiProductos
 
     public function agregar($nuevoIdProducto, $nombreProducto, $urlImagen, $precioProducto, $condicionProducto, $stockProducto, $idEmpresa, $descripcionProducto, $categoriaProducto, $habilitacion_producto)
     {
-        $stmt = $this->pdo->prepare("INSERT INTO producto (id_producto, titulo, imagen, precio_base, condicion, stock, id_empresa, descripcion, categoria, habilitacion_producto) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt = $this->pdo->prepare("INSERT INTO producto (id_producto, titulo, imagen, precio_base, condicion, stock, id_empresa_producto, descripcion, categoria, habilitacion_producto) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
         // Ejecutar la consulta
         if ($stmt->execute([$nuevoIdProducto, $nombreProducto, $urlImagen, $precioProducto, $condicionProducto, $stockProducto, $idEmpresa, $descripcionProducto, $categoriaProducto, $habilitacion_producto])) {

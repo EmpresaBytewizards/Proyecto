@@ -22,18 +22,24 @@ class ApiUsuarios
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function editarPerfil($email, $password, $direction, $numero)
+    public function editarPerfil($email, $password, $direction, $numero, $nombreEmpresa)
     {
         $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM empresa WHERE mail_empresa = ?");
         $stmt->execute([$email]);
         $emailExists = $stmt->fetchColumn() > 0;
-    
-        // Si el correo o el nombre ya existen, devolver un error
-        if ($emailExists) {
-            $missingFields = [];
-            if ($emailExists) $missingFields[] = 'email';    
-            echo json_encode(['error' => 'Dato ya ocupado: ', 'fields' => $missingFields]);
-            exit; // Salir del método para evitar la creación de cuenta
+
+        // Verificar si el nombre de empresa ya existe
+        $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM empresa WHERE nombre_empresa = ?");
+        $stmt->execute([$nombreEmpresa]);
+        $nameExists = $stmt->fetchColumn() > 0;
+        
+        if (($emailExists && $email != $_SESSION['empresas'][0]['correo']) || ($nameExists && $nombreEmpresa != $_SESSION['empresas'][0]['nombre'])) {
+            $conflictingFields = [];
+            if ($emailExists) $conflictingFields[] = 'email';
+            if ($nameExists) $conflictingFields[] = 'nombre_empresa';
+
+            echo json_encode(['error' => 'Dato ya ocupado', 'fields' => $conflictingFields]);
+            exit;
         }
         // Hash de la contraseña antes de almacenar(es un tipo de cifrado de contraseña para que esta no sea legible en la base de datos ni en el servidor pero si sirva para verificar que la contraseña luego sea correcta con password_verify($password, $usuario['contrasena_usu'])) o con:
         // $inputPassword = 'miContraseñaSegura123'; // Contraseña ingresada por el usuario
@@ -46,12 +52,11 @@ class ApiUsuarios
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT); // Tú sólo recibes la contraseña del usuario que inicia sesión, la encriptas y comparas los dos hashes.
         $habilitacionProv = "Habilitado";
         // Preparar la consulta
-        $stmt = $this->pdo->prepare("UPDATE empresa SET contrasena_empresa = ?, ubicacion_fisica = ?, telefono_empresa = ?, mail_empresa = ?, habilitacion_empresa = ? WHERE id_empresa = ?");
+        $stmt = $this->pdo->prepare("UPDATE empresa SET nombre_empresa = ?, contrasena_empresa = ?, ubicacion_fisica = ?, telefono_empresa = ?, mail_empresa = ?, habilitacion_empresa = ? WHERE id_empresa = ?");
         
         $idUsu = $_SESSION['empresas'][0]['id'];
-        $name = $_SESSION['empresas'][0]['nombre'];
         // Ejecutar la consulta
-        if ($stmt->execute([$hashedPassword, $direction, $numero, $email, $habilitacionProv, $idUsu])) {
+        if ($stmt->execute([$nombreEmpresa, $hashedPassword, $direction, $numero, $email, $habilitacionProv, $idUsu])) {
 
             // Generar un token de sesión
             // Iniciar sesión
@@ -62,7 +67,7 @@ class ApiUsuarios
             // Guardar los datos en la sesión
             $_SESSION['empresas'][] = [ 
                 'id' => $idUsu,
-                'nombre' => $name,
+                'nombre' => $nombreEmpresa,
                 'correo' => $email,
                 'direccion' => $direction,
                 'numero' => $numero,
@@ -105,13 +110,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
     $password = $data['cambiarPassword'];
     $direction = $data['cambiarDirection'];
     $numero = $data['cambiarNumero'];
-        
+    $nombreEmpresa = $data['cambiarNombre'];
+
     $missingFields = [];
 
     if ($email === null) $missingFields[] = 'email';
     if ($password === null) $missingFields[] = 'password';
     if ($direction === null) $missingFields[] = 'direction';
     if ($numero === null) $missingFields[] = 'numero';
+    if ($nombreEmpresa === null) $missingFields[] = 'nombre_empresa';
 
     if (!empty($missingFields)) {
         echo json_encode(['error' => 'Faltan datos del formulario', 'fields' => $missingFields]);
@@ -119,5 +126,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
     }
 
     // Llama al método para agregar el usuario sin necesidad de especificar ID
-    $usuario->editarPerfil($email, $password, $direction, $numero);
+    $usuario->editarPerfil($email, $password, $direction, $numero, $nombreEmpresa);
 }

@@ -22,18 +22,26 @@ class ApiUsuarios
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function editarPerfil($email, $password, $direction, $numero)
+    public function editarPerfil($email, $password, $direction, $numero, $nombre)
     {
+        // Verificar si el correo ya está en uso por otro usuario
         $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM staff WHERE mail_staff = ?");
         $stmt->execute([$email]);
         $emailExists = $stmt->fetchColumn() > 0;
-    
-        // Si el correo o el nombre ya existen, devolver un error
-        if ($emailExists && $emailExists != $_SESSION['staffs'][0]['correo']) {
-            $missingFields = [];
-            if ($emailExists) $missingFields[] = 'email';    
-            echo json_encode(['error' => 'Dato ya ocupado: ', 'fields' => $missingFields]);
-            exit; // Salir del método para evitar la creación de cuenta
+        
+        // Verificar si el nombre ya está en uso por otro usuario
+        $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM staff WHERE nombre_staff = ?");
+        $stmt->execute([$nombre]);
+        $nameExists = $stmt->fetchColumn() > 0;
+
+        // Verificar si los datos ya existen en otro perfil
+        if (($emailExists && $email != $_SESSION['staffs'][0]['correo']) || ($nameExists && $nombre != $_SESSION['staffs'][0]['nombre'])) {
+            $duplicatedFields = [];
+            if ($emailExists && $email != $_SESSION['staffs'][0]['correo']) $duplicatedFields[] = 'email';
+            if ($nameExists && $nombre != $_SESSION['staffs'][0]['nombre']) $duplicatedFields[] = 'name';
+
+            echo json_encode(['error' => 'Dato/s ya ocupado:', 'fields' => $duplicatedFields]);
+            exit; // Salir del método para evitar la edición del perfil
         }
         // Hash de la contraseña antes de almacenar(es un tipo de cifrado de contraseña para que esta no sea legible en la base de datos ni en el servidor pero si sirva para verificar que la contraseña luego sea correcta con password_verify($password, $usuario['contrasena_usu'])) o con:
         // $inputPassword = 'miContraseñaSegura123'; // Contraseña ingresada por el usuario
@@ -105,6 +113,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
     $password = $data['cambiarPassword'];
     $direction = $data['cambiarDirection'];
     $numero = $data['cambiarNumero'];
+    $nombre = $data['cambiarNombre'];
         
     $missingFields = [];
 
@@ -112,6 +121,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
     if ($password === null) $missingFields[] = 'password';
     if ($direction === null) $missingFields[] = 'direction';
     if ($numero === null) $missingFields[] = 'numero';
+    if ($nombre === null) $missingFields[] = 'nombre';
 
     if (!empty($missingFields)) {
         echo json_encode(['error' => 'Faltan datos del formulario', 'fields' => $missingFields]);
@@ -119,5 +129,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
     }
 
     // Llama al método para agregar el usuario sin necesidad de especificar ID
-    $usuario->editarPerfil($email, $password, $direction, $numero);
+    $usuario->editarPerfil($email, $password, $direction, $numero, $nombre);
 }

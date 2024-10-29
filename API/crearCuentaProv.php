@@ -40,19 +40,22 @@ class ApiUsuarios
         $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM empresa WHERE mail_empresa = ?");
         $stmt->execute([$email]);
         $emailExists = $stmt->fetchColumn() > 0;
+
+        $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM usuario WHERE nombre_usu = ?");
+        $stmt->execute([$name]);
+        $nameExists = $stmt->fetchColumn() > 0;
     
         // Comprobar si el nombre ya existe
         $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM empresa WHERE nombre_empresa = ?");
         $stmt->execute([$name]);
         $nameExists = $stmt->fetchColumn() > 0;
     
-        // Si el correo o el nombre ya existen, devolver un error
         if ($emailExists || $nameExists) {
-            $missingFields = [];
-            if ($emailExists) $missingFields[] = 'email';
-            if ($nameExists) $missingFields[] = 'name';
+            $duplicatedFields = [];
+            if ($emailExists) $duplicatedFields[] = 'email';
+            if ($nameExists) $duplicatedFields[] = 'name';
     
-            echo json_encode(['error' => 'Dato/s ya ocupado: ', 'fields' => $missingFields]);
+            echo json_encode(['error' => 'Dato/s ya ocupado:', 'fields' => $duplicatedFields]);
             exit; // Salir del método para evitar la creación de cuenta
         }
 

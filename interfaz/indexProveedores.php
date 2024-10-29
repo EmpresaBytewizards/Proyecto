@@ -74,7 +74,7 @@ if ($_SESSION['empresas'][0]['habilitacion'] == "Deshabilitado"){
                 </div>
                 <form action="" class="search">
                     <input class="searchBar" type="search" placeholder="Buscar...">
-                    <button type="submit" class="material-symbols-outlined">
+                    <button type="submit" class="material-symbols-outlnied">
                         search
                     </button>
                 </form>
@@ -87,6 +87,7 @@ if ($_SESSION['empresas'][0]['habilitacion'] == "Deshabilitado"){
         <div class="blackbar"> ENVÍO Y DEVOLUCIONES GRATIS </div>
     </header>
     <main>
+        <p><a href="historialProveedores.php" style='color: #007BFF;'>¿Desea ver su historial de ventas? ¡Presione aquí!</a></p>
         <!--<Añadir Productos>-->
            <br>
             <div class="entradaProducto">
@@ -152,7 +153,9 @@ if ($_SESSION['empresas'][0]['habilitacion'] == "Deshabilitado"){
             <form action id="perfilUsu">
                 
                 <br>
-                <h3 style="color: black;"> Su id de empresa es: <?php echo $_SESSION['empresas'][0]['id']; ?> <br> Su nombre de empresa es: <?php echo $_SESSION['empresas'][0]['nombre']; ?></h3> 
+                <h3 style="color: black;"> Su id de empresa es: <?php echo $_SESSION['empresas'][0]['id']; ?></h3>
+                <label for="cambiarNombre" style="color: black;"> nombre de empresa es: <?php echo $_SESSION['empresas'][0]['nombre']; ?> </label>
+                <input type="text" id="cambiarNombre" name="cambiarNombre" required placeholder="Cambiar nombre..." value="<?php echo $_SESSION['empresas'][0]['nombre']; ?>">
                 <label for="cambiarEmail" style="color: black;">Email: <?php echo $_SESSION['empresas'][0]['correo']; ?></label>
                 <input type="text" id="cambiarEmail" name="cambiarEmail" required placeholder="Cambiar correo..." value="<?php echo $_SESSION['empresas'][0]['correo']; ?>">
                 <label for="cambiarDirection">Direccion: <?php echo $_SESSION['empresas'][0]['direccion']; ?></label>
@@ -172,7 +175,6 @@ if ($_SESSION['empresas'][0]['habilitacion'] == "Deshabilitado"){
                 <input type="password" id="password2" name="password2" required placeholder="Ingrese la contraseña nuevamente...">
                 <span style="color: black;"> Debes llenar todos los espacios para poder actualizar su perfil. </span>
                 <button type="submit" class="continueLoggin">Actualizar informacion</button>
-                <p><a href="historialProveedores.php">¿Desea ver su historial de ventas? ¡Presione aquí!</a></p>
                 <p><a href="http://localhost/bytewizards/API/sessionDestroyProv.php">¿Quieres cerrar sesion? ¡Presione aquí!</a></p>
             </form>
         </div>

@@ -32,6 +32,24 @@ class ApiUsuarios
         //} else {
         //    echo "¡Contraseña incorrecta!";
         //}
+        $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM usuario WHERE mail_usu = ?");
+        $stmt->execute([$email]);
+        $emailExists = $stmt->fetchColumn() > 0;
+
+        if ($emailExists) {
+            echo json_encode(['error' => 'El correo ya está en uso']);
+            exit;
+        }
+
+        // Verificar si el nombre ya está en uso
+        $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM usuario WHERE nombre_usu = ?");
+        $stmt->execute([$name]);
+        $nameExists = $stmt->fetchColumn() > 0;
+
+        if ($nameExists) {
+            echo json_encode(['error' => 'El nombre ya está en uso']);
+            exit;
+        }
 
         $stmt = $this->pdo->query("SELECT MAX(id_usu) FROM usuario");
         $ultimoIdUsuario = $stmt->fetchColumn();

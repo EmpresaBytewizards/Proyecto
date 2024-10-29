@@ -24,28 +24,43 @@ class ApiUsuarios
 
     public function editarPerfil($name, $email, $password, $direction, $numero)
     {
-        // Hash de la contraseña antes de almacenar(es un tipo de cifrado de contraseña para que esta no sea legible en la base de datos ni en el servidor pero si sirva para verificar que la contraseña luego sea correcta con password_verify($password, $usuario['contrasena_usu'])) o con:
-        // $inputPassword = 'miContraseñaSegura123'; // Contraseña ingresada por el usuario
-        //if (password_verify($inputPassword, $hashedPassword)) {
-        //    echo "¡Contraseña correcta!";
-        //} else {
-        //    echo "¡Contraseña incorrecta!";
-        //}
+        // Hash de la contraseña antes de almacenar
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT); // Solo recibir la contraseña del usuario que inicia sesión
 
-        $hashedPassword = password_hash($password, PASSWORD_DEFAULT); // Tú sólo recibes la contraseña del usuario que inicia sesión, la encriptas y comparas los dos hashes.
+        // Obtener el ID del usuario actual
+        $idUsu = $_SESSION['usuarios'][0]['id'];
+
+        // Verificar si el correo ya está en uso, pero ignorar el actual
+        $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM usuario WHERE mail_usu = ? AND id_usu != ?");
+        $stmt->execute([$email, $idUsu]);
+        $emailExists = $stmt->fetchColumn() > 0;
+
+        // Si el correo ya existe, devolver un error
+        if ($emailExists) {
+            echo json_encode(['error' => 'Dato ya ocupado: ', 'fields' => ['email']]);
+            exit; // Salir del método para evitar la creación de cuenta
+        }
+
+        // Verificar si el nombre ya está en uso, pero ignorar el actual
+        $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM usuario WHERE nombre_usu = ? AND id_usu != ?");
+        $stmt->execute([$name, $idUsu]);
+        $nameExists = $stmt->fetchColumn() > 0;
+
+        // Si el nombre ya existe y no es el mismo que el actual
+        if ($nameExists) {
+            echo json_encode(['error' => 'Dato ya ocupado: ', 'fields' => ['nombre']]);
+            exit;  
+        }
+
         $habilitacionUsu = "Habilitado";
+
         // Preparar la consulta
         $stmt = $this->pdo->prepare("UPDATE usuario SET nombre_usu = ?, contrasena_usu = ?, direccion_usu = ?, telefono_usu = ?, mail_usu = ?, habilitacion_usu = ? WHERE id_usu = ?");
         
-        $idUsu = $_SESSION['usuarios'][0]['id'];
         // Ejecutar la consulta
         if ($stmt->execute([$name, $hashedPassword, $direction, $numero, $email, $habilitacionUsu, $idUsu])) {
-
-            // Generar un token de sesión
             // Iniciar sesión
-            
             session_destroy();
-            
             session_start();
             // Guardar los datos en la sesión
             $_SESSION['usuarios'][] = [ 
@@ -61,6 +76,7 @@ class ApiUsuarios
             echo json_encode(['error' => 'Error al editar cuenta']);
         }
     }
+
 }
 
 // Configuración de la base de datos

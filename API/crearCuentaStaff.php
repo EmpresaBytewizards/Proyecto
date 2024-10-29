@@ -85,7 +85,8 @@ class ApiUsuarios
             $result = $emailSender->sendEmail('Registro de cuenta', 'Bienvenido a weshop. Si usted no ha sido quien creo la cuenta, contactese con nosotros de inmediato a este correo: empresa.bytewizards.3bg@gmail.com.' );
             echo json_encode(['message' => 'Cuenta creada exitosamente']);
         } else {
-            echo json_encode(['message' => 'Error al crear cuenta']);
+            echo json_encode(['error' => 'Error al crear cuenta. ']);
+            exit; // Salir del método para evitar la creación de cuenta
         }
     }
 }

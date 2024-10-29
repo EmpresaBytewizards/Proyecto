@@ -19,12 +19,12 @@ class ApiStaff
         // Verifica si se ha proporcionado un ID
         if (isset($_GET['id'])) {
             $id = $_GET['id'];
-            $stmt = $this->pdo->prepare("SELECT * FROM staff WHERE id_staff = ? AND tipo_staff = 'Moderador' OR tipo_staff ='Deshabilitado'");
+            $stmt = $this->pdo->prepare("SELECT * FROM staff WHERE id_staff = ? AND tipo_staff = 'Moderador' OR tipo_staff ='Organizador' OR tipo_staff ='Deshabilitado'");
             $stmt->execute([$id]);
             $staffs = $stmt->fetch(PDO::FETCH_ASSOC);
             return $staffs;
         } else {
-            $stmt = $this->pdo->prepare("SELECT * FROM staff WHERE tipo_staff = 'Moderador' OR tipo_staff ='Deshabilitado'");
+            $stmt = $this->pdo->prepare("SELECT * FROM staff WHERE tipo_staff = 'Moderador' OR tipo_staff ='Organizador' OR tipo_staff ='Deshabilitado'");
             $stmt->execute();
             $staffs = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return $staffs;

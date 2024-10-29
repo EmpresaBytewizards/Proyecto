@@ -64,8 +64,9 @@ try {
                 <div class="carrito">
                     <h2>ID de la venta: <?php echo htmlspecialchars($venta['id_contiene']); ?></h2>
                     <p>ID del producto: <?php echo htmlspecialchars($venta['id_producto_contiene']); ?></p>
-                    <p>Nombre del producto: <span class="precio"><?php echo htmlspecialchars($venta['nombre_contiene']); ?></span></p>
+                    <p>Nombre del producto: <span class="nombre"><?php echo htmlspecialchars($venta['nombre_contiene']); ?></span></p>
                     <p>Precio Total: <span class="precio"><?php echo htmlspecialchars($venta['precio_contiene']); ?> $</span></p>
+                    <p>Fecha: <span class="fecha"><?php echo htmlspecialchars($venta['fecha_contiene']); ?></span></p>
                 </div>
             <?php endforeach; ?>
         <?php else: ?>
