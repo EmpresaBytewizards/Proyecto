@@ -37,7 +37,7 @@ try {
         $id_usu = $_SESSION['usuarios'][0]['id'];
 
         // Insertar en la tabla carrito
-        $stmt = $pdo->prepare("INSERT INTO carrito (id_carrito, envio, id_usu, precio_carrito) VALUES (?, ?, ?, ?)");
+        $stmt = $pdo->prepare("INSERT INTO carrito (id_carrito, envio, id_usu_carrito, precio_carrito) VALUES (?, ?, ?, ?)");
         $stmt->execute([$nuevoIdCarrito, $envio, $id_usu, $precioCarrito]);
 
         // Insertar cada artículo en la base de datos
@@ -45,10 +45,28 @@ try {
             $id_producto = $item['id_producto'];
             $precio_contiene = $item['precio_base'];
             $nombre_contiene = $item['titulo'];
-
-            $stmt = $pdo->prepare("INSERT INTO contiene (id_producto, id_carrito, precio_contiene, nombre_contiene) VALUES (?, ?, ?, ?)");
-            $stmt->execute([$id_producto, $nuevoIdCarrito, $precio_contiene, $nombre_contiene]);
-        }
+            
+            // Obtener id_empresa del producto
+            $stmtEmpresa = $pdo->prepare("SELECT id_empresa_producto FROM producto WHERE id_producto = ?");
+            $stmtEmpresa->execute([$id_producto]);
+            $id_empresa = $stmtEmpresa->fetchColumn();
+            
+            // Insertar en la tabla 'contiene'
+            $stmt = $pdo->prepare("INSERT INTO contiene (id_producto_contiene, id_carrito_contiene, precio_contiene, nombre_contiene, id_empresa_contiene) VALUES (?, ?, ?, ?, ?)");
+            $stmt->execute([$id_producto, $nuevoIdCarrito, $precio_contiene, $nombre_contiene, $id_empresa]);
+            
+            // Obtener el stock actual del producto
+            $stmtEmpresa = $pdo->prepare("SELECT stock FROM producto WHERE id_producto = ?");
+            $stmtEmpresa->execute([$id_producto]);
+            $stock_producto = $stmtEmpresa->fetchColumn();
+            
+            // Calcular el nuevo stock
+            $stock_nuevo = $stock_producto - 1;
+            
+            // Actualizar el stock en la tabla 'producto'
+            $stmt = $pdo->prepare("UPDATE producto SET stock = ? WHERE id_producto = ?");
+            $stmt->execute([$stock_nuevo, $id_producto]);
+        }        
         $emailSender = new EmailSender();
         $emailSender->setFrom('empresa.bytewizards.3bg@gmail.com', 'ByteWizards');
         $emailSender->addRecipient($_SESSION['usuarios'][0]['correo'], $_SESSION['usuarios'][0]['nombre']);

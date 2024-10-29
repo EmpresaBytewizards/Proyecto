@@ -1,6 +1,7 @@
 const dropdownIcon = document.querySelector("#menu__icon");
 const dropdown = document.querySelector(".dropdown");
 const productsCartId = {};
+const productQuantities = {}; // Se utilizara para llevar un conteo del stock de cada producto0
 dropdownIcon.addEventListener("click", () => {
     dropdown.classList.toggle("toggle--dropdown");
 });
@@ -204,6 +205,16 @@ document.addEventListener('click', capture);
 function renderCartItem(titulo, precio_base, id_producto) {
     const cartItems = document.querySelector('.cartItems');
 
+    // Incrementa la cantidad en el carrito o inicializa a 1 si es la primera vez
+    productQuantities[id_producto] = (productQuantities[id_producto] || 0) + 1;
+    const product = listProducts.find(item => item.id_producto == id_producto);
+    if (productQuantities[id_producto] >= product.stock) {
+        document.querySelector('.buyItem').disabled = true;
+        document.querySelector('.buyItem').innerText = "No hay STOCK";
+        document.querySelector('.addCart').disabled = true;
+        document.querySelector('.addCart').innerText = "No hay STOCK";
+    }
+
     const productCart = document.createElement("div");
     productCart.classList.add("product__cart");
     productCart.id = id_producto;
@@ -220,6 +231,7 @@ function renderCartItem(titulo, precio_base, id_producto) {
     deleteButton.classList.add('btnCarrito');
     deleteButton.innerHTML = '<span class="material-symbols-outlined delCart">delete</span>';
     deleteButton.addEventListener('click', () => {
+        removeCartItem(id_producto, productCart); 
         productCart.remove();
         updateTotalPrice();
     });
@@ -227,6 +239,22 @@ function renderCartItem(titulo, precio_base, id_producto) {
     productCart.append(cartName, cartPrice, deleteButton);
     cartItems.append(productCart);
 }
+
+function removeCartItem(id_producto, productCart) {
+    const cartItems = document.querySelector('.cartItems');
+    // Reduce la cantidad en el carrito
+    productQuantities[id_producto]--;
+
+    // Rehabilita los botones si la cantidad en el carrito es menor que el stock
+    const product = listProducts.find(item => item.id_producto == id_producto);
+    if (productQuantities[id_producto] < product.stock) {
+        document.querySelector('.buyItem').disabled = false;
+        document.querySelector('.buyItem').innerText = "Añadir al carrito";
+        document.querySelector('.addCart').disabled = false;
+        document.querySelector('.addCart').innerText = "Añadir al carrito";
+    }
+}
+
 
 //actualiza el precio total
 function updateTotalPrice() {
@@ -253,7 +281,7 @@ function renderArticleItem(titulo, precio_base, image, id_producto, descripcion,
     document.querySelector('.empresaTexto').innerText = 'Publicado por: '+id_empresa;
     document.querySelector('.stockTexto').innerText = 'STOCK: '+stock;
     document.querySelector('.denunciaProducto').id = id_producto;
-    if(stock == 0) {
+    if(stock == 0 || productQuantities[id_producto] >= stock) {
         document.querySelector('.buyItem').disabled = true;
         document.querySelector('.buyItem').innerText = "No hay STOCK";
     }else{

@@ -106,6 +106,9 @@ if ($_SESSION['staffs'][0]['tipo'] == "Deshabilitado"){
                     <tr style="background-color: #f2f2f2; text-align: left;">
                         <th style="padding: 10px; border: 1px solid #ddd; background-color:rgb(255, 106, 0);">ID</th>
                         <th style="padding: 10px; border: 1px solid #ddd; background-color:rgb(255, 106, 0);">Nombre</th>
+                        <th style="padding: 10px; border: 1px solid #ddd; background-color:rgb(255, 106, 0);">Correo</th>
+                        <th style="padding: 10px; border: 1px solid #ddd; background-color:rgb(255, 106, 0);">Teléfono</th>
+                        <th style="padding: 10px; border: 1px solid #ddd; background-color:rgb(255, 106, 0);">Dirección</th>
                         <th style="padding: 10px; border: 1px solid #ddd; background-color:rgb(255, 106, 0);">Accion</th>
                     </tr>
                 </thead>
@@ -127,6 +130,9 @@ if ($_SESSION['staffs'][0]['tipo'] == "Deshabilitado"){
                     <tr style="background-color: #f2f2f2; text-align: left;">
                         <th style="padding: 10px; border: 1px solid #ddd; background-color:rgb(255, 106, 0);">ID</th>
                         <th style="padding: 10px; border: 1px solid #ddd; background-color:rgb(255, 106, 0);">Nombre</th>
+                        <th style="padding: 10px; border: 1px solid #ddd; background-color:rgb(255, 106, 0);">Correo</th>
+                        <th style="padding: 10px; border: 1px solid #ddd; background-color:rgb(255, 106, 0);">Teléfono</th>
+                        <th style="padding: 10px; border: 1px solid #ddd; background-color:rgb(255, 106, 0);">Dirección</th>
                         <th style="padding: 10px; border: 1px solid #ddd; background-color:rgb(255, 106, 0);">Accion</th>
                     </tr>
                 </thead>
@@ -176,6 +182,9 @@ if ($_SESSION['staffs'][0]['tipo'] == "Deshabilitado"){
                     <tr style="background-color: #f2f2f2; text-align: left;">
                         <th style="padding: 10px; border: 1px solid #ddd; background-color:rgb(255, 106, 0);">ID</th>
                         <th style="padding: 10px; border: 1px solid #ddd; background-color:rgb(255, 106, 0);">Nombre</th>
+                        <th style="padding: 10px; border: 1px solid #ddd; background-color:rgb(255, 106, 0);">Correo</th>
+                        <th style="padding: 10px; border: 1px solid #ddd; background-color:rgb(255, 106, 0);">Teléfono</th>
+                        <th style="padding: 10px; border: 1px solid #ddd; background-color:rgb(255, 106, 0);">Dirección</th>
                         <th style="padding: 10px; border: 1px solid #ddd; background-color:rgb(255, 106, 0);">Accion</th>
                     </tr>
                 </thead>
@@ -201,6 +210,9 @@ if ($_SESSION['staffs'][0]['tipo'] == "Deshabilitado"){
                     <tr style="background-color: #f2f2f2; text-align: left;">
                         <th style="padding: 10px; border: 1px solid #ddd; background-color:rgb(255, 106, 0);">ID</th>
                         <th style="padding: 10px; border: 1px solid #ddd; background-color:rgb(255, 106, 0);">Nombre</th>
+                        <th style="padding: 10px; border: 1px solid #ddd; background-color:rgb(255, 106, 0);">Correo</th>
+                        <th style="padding: 10px; border: 1px solid #ddd; background-color:rgb(255, 106, 0);">Teléfono</th>
+                        <th style="padding: 10px; border: 1px solid #ddd; background-color:rgb(255, 106, 0);">Dirección</th>
                         <th style="padding: 10px; border: 1px solid #ddd; background-color:rgb(255, 106, 0);">Accion</th>
                     </tr>
                 </thead>
@@ -226,6 +238,27 @@ if ($_SESSION['staffs'][0]['tipo'] == "Deshabilitado"){
                         <th style="padding: 10px; border: 1px solid #ddd; background-color:rgb(255, 106, 0);">Direccion de Envio</th>
                         <th style="padding: 10px; border: 1px solid #ddd; background-color:rgb(255, 106, 0);">Precio del Carrito</th>
                         <th style="padding: 10px; border: 1px solid #ddd; background-color:rgb(255, 106, 0);">Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Los Carritos cargaran acá -->
+                </tbody>
+            </table>
+        </section>
+        <br>
+
+        <section class="admin-section" style="margin: 20px; padding: 20px; border: 1px solid #ddd; border-radius: 5px;">
+            <h2 style="font-size: 24px; color: #333;">Ventas</h2>
+            <input type="text" id="buscarVenta" placeholder="Buscar carritos por ID" onkeyup="filterList('ventaTabla', 'buscarVenta')" style="color: black; width: 100%; padding: 8px; margin-bottom: 10px; border-radius: 4px; border: 1px solid #ccc;">
+            <table id="ventaTabla" style="width: 100%; border-collapse: collapse;">
+                <thead>
+                    <tr style="background-color: #f2f2f2; text-align: left;">
+                        <th style="padding: 10px; border: 1px solid #ddd; background-color:rgb(255, 106, 0);">ID Venta</th>
+                        <th style="padding: 10px; border: 1px solid #ddd; background-color:rgb(255, 106, 0);">ID Carrito</th>
+                        <th style="padding: 10px; border: 1px solid #ddd; background-color:rgb(255, 106, 0);">ID Proveedor</th>
+                        <th style="padding: 10px; border: 1px solid #ddd; background-color:rgb(255, 106, 0);">ID Producto</th>
+                        <th style="padding: 10px; border: 1px solid #ddd; background-color:rgb(255, 106, 0);">Fecha Venta</th>
+                        <th style="padding: 10px; border: 1px solid #ddd; background-color:rgb(255, 106, 0);">Precio Total</th>
                     </tr>
                 </thead>
                 <tbody>

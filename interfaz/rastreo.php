@@ -21,7 +21,7 @@ try {
             echo "idCarrito no está definido en la URL.";
         }
         // Consultar carritos del usuario
-        $stmt = $pdo->prepare("SELECT * FROM carrito WHERE id_usu = ? AND id_carrito = ?");
+        $stmt = $pdo->prepare("SELECT * FROM carrito WHERE id_usu_carrito = ? AND id_carrito = ?");
         $stmt->execute([$id_usu, $idCarrito]);
         $carritos = $stmt->fetchAll(PDO::FETCH_ASSOC);
     } else {

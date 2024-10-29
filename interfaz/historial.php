@@ -18,7 +18,7 @@ try {
         $id_usu = $_SESSION['usuarios'][0]['id'];
 
         // Consultar carritos del usuario
-        $stmt = $pdo->prepare("SELECT * FROM carrito WHERE id_usu = ?");
+        $stmt = $pdo->prepare("SELECT * FROM carrito WHERE id_usu_carrito = ?");
         $stmt->execute([$id_usu]);
         $carritos = $stmt->fetchAll(PDO::FETCH_ASSOC);
     } else {
@@ -55,18 +55,39 @@ try {
     <p><a href='index.php' style='color: #1900ff;'>¿Desea volver a la pagina principal? ¡Presiona aquí!</a></p>
     <div class="container">
         <h1>Historial de Compras</h1>
+        <span> Si desea devolver su pedido, contactese por correo a empresa.bytewizards.3bg@gmail.com adjuntando el id del pedido, motivo e id de usuario de ustedes(consultar en su perfil). </span>
 
         <?php if (count($carritos) > 0): ?>
             <?php foreach ($carritos as $carrito): ?>
+                <?php 
+                if($carrito['estado'] == "empaquetando"){
+                    $estado = 'Empaquetando.';
+                }
+                if($carrito['estado'] == "en_camino"){
+                    $estado = 'En camino.';
+                }
+                if($carrito['estado'] == "entregado"){
+                    $estado = 'Entregado.';
+                }
+                if($carrito['estado'] == "empaquetando_devolucion"){
+                    $estado = 'Empaquetando devolucion.';
+                }
+                if($carrito['estado'] == "enviado_devolucion"){
+                    $estado = 'Enviando devolucion.';
+                }
+                if($carrito['estado'] == "entregado_devolucion"){
+                    $estado = 'Devuelto';
+                }
+                ?>
                 <div class="carrito">
                     <h2>ID del Carrito: <?php echo htmlspecialchars($carrito['id_carrito']); ?></h2>
                     <p>Dirección de Envío: <?php echo htmlspecialchars($carrito['envio']); ?></p>
-                    <p>Precio Total: <span class="precio"><?php echo htmlspecialchars($carrito['precio_carrito']); ?> €</span></p>
+                    <p>Precio Total: <span class="precio"><?php echo htmlspecialchars($carrito['precio_carrito']); ?> $</span></p>
                     <p>Rastreo: <a class="rastreo" href="http://localhost/bytewizards/interfaz/rastreo.php?idCarrito=<?php echo htmlspecialchars($carrito['id_carrito']); ?>">http://localhost/bytewizards/interfaz/rastreo.php?idCarrito=<?php echo htmlspecialchars($carrito['id_carrito']); ?></a></p>
-
+                    <p>Estado del Pedido: <span><?php echo htmlspecialchars($estado); ?></span></p>
                     <?php
                     // Obtener artículos en el carrito
-                    $stmt = $pdo->prepare("SELECT * FROM contiene WHERE id_carrito = ?");
+                    $stmt = $pdo->prepare("SELECT * FROM contiene WHERE id_carrito_contiene = ?");
                     $stmt->execute([$carrito['id_carrito']]);
                     $articulos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     ?>

@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
     admin();
     staff();
     carrito();
+    venta();
 });
 
 function articulos() {
@@ -33,15 +34,15 @@ function articulos() {
             if (json[i].habilitacion_producto == "Deshabilitado") {
                 row.innerHTML = `
                 <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0);">${json[i].id_producto}</td>
-                <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0);">${json[i].id_empresa}</td>
-                <td style="border: 1px solid #ddd; background-color: rgb(255, 106, 0)">${json[i].titulo}</td>
+                <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0);">${json[i].id_empresa_producto}</td>
+                <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0);">${json[i].titulo}</td>
                 <td><button onclick="toggleStatus(this)" style="background-color: rgb(136, 57, 0); color: #fff; padding: 6px 25px; border: none; cursor: pointer;" class="deshabilitado">Habilitar</button></td>
             `;
             }else{
                 row.innerHTML = `
                 <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0);">${json[i].id_producto}</td>
-                <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0);">${json[i].id_empresa}</td>
-                <td style="border: 1px solid #ddd; background-color: rgb(255, 106, 0)">${json[i].titulo}</td>
+                <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0);">${json[i].id_empresa_producto}</td>
+                <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0);">${json[i].titulo}</td>
                 <td><button onclick="toggleStatus(this)" style="background-color: rgb(184, 77, 0); color: #fff; padding: 6px 25px; border: none; cursor: pointer;">Deshabilitar</button></td>
             `;
             }
@@ -68,13 +69,19 @@ function proveedores() {
             if (json[i].habilitacion_empresa == "Deshabilitado") {
                 row.innerHTML = `
                 <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0);">${json[i].id_empresa}</td>
-                <td style="border: 1px solid #ddd; background-color: rgb(255, 106, 0)">${json[i].nombre_empresa}</td>
+                <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0);">${json[i].nombre_empresa}</td>
+                <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0);">${json[i].mail_empresa}</td>
+                <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0);">${json[i].telefono_empresa}</td>
+                <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0);">${json[i].ubicacion_fisica}</td>
                 <td><button onclick="toggleStatus(this)" style="background-color: rgb(136, 57, 0); color: #fff; padding: 6px 25px; border: none; cursor: pointer;" class="deshabilitado">Habilitar</button></td>
             `;
             }else{
                 row.innerHTML = `
                 <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0);">${json[i].id_empresa}</td>
-                <td style="border: 1px solid #ddd; background-color: rgb(255, 106, 0)">${json[i].nombre_empresa}</td>
+                <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0);">${json[i].nombre_empresa}</td>
+                <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0);">${json[i].mail_empresa}</td>
+                <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0);">${json[i].telefono_empresa}</td>
+                <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0);">${json[i].ubicacion_fisica}</td>
                 <td><button onclick="toggleStatus(this)" style="background-color: rgb(184, 77, 0); color: #fff; padding: 6px 25px; border: none; cursor: pointer;">Deshabilitar</button></td>
             `;
             }
@@ -100,13 +107,19 @@ function usuarios() {
             if (json[i].habilitacion_usu == "Deshabilitado") {
                 row.innerHTML = `
                     <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0);">${json[i].id_usu}</td>
-                    <td style="border: 1px solid #ddd; background-color: rgb(255, 106, 0)">${json[i].nombre_usu}</td>
+                    <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0);">${json[i].nombre_usu}</td>
+                    <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0);">${json[i].mail_usu}</td>
+                    <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0);">${json[i].telefono_usu}</td>
+                    <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0);">${json[i].direccion_usu}</td>
                     <td><button onclick="toggleStatus(this)" style="background-color: rgb(136, 57, 0); color: #fff; padding: 6px 25px; border: none; cursor: pointer;" class="deshabilitado">Habilitar</button></td>
             `;
             }else{
                 row.innerHTML = `
                     <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0);">${json[i].id_usu}</td>
-                    <td style="border: 1px solid #ddd; background-color: rgb(255, 106, 0)">${json[i].nombre_usu}</td>
+                    <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0);">${json[i].nombre_usu}</td>
+                    <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0);">${json[i].mail_usu}</td>
+                    <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0);">${json[i].telefono_usu}</td>
+                    <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0);">${json[i].direccion_usu}</td>
                     <td><button onclick="toggleStatus(this)" style="background-color: rgb(184, 77, 0); color: #fff; padding: 6px 25px; border: none; cursor: pointer;">Deshabilitar</button></td>
             `;
             }
@@ -132,12 +145,12 @@ function denuncias() {
             row.setAttribute('data-id', json[i].id_denuncia);
             row.innerHTML = `
                 <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0);">${json[i].id_denuncia}</td>
-                <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0)">${json[i].tipo_denunciante}</td>
-                <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0)">${json[i].id_denunciante}</td>
-                <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0)">${json[i].tipo_denunciado}</td>
-                <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0)">${json[i].id_denunciado}</td>
-                <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0)">${json[i].fecha_denuncia}</td>
-                <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0)">
+                <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0);">${json[i].tipo_denunciante}</td>
+                <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0);">${json[i].id_denunciante}</td>
+                <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0);">${json[i].tipo_denunciado}</td>
+                <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0);">${json[i].id_denunciado}</td>
+                <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0);">${json[i].fecha_denuncia}</td>
+                <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0);">
                     <select style="padding: 5px 10px; font-size: 14px; background-color: rgb(184, 77, 0); border: 1px solid #ddd; border-radius: 5px; outline: none; cursor: pointer; transition: all 0.3s ease;" onchange="updateDenunciaStatus(this)">
                         <option value="Solucionada" ${json[i].estado_denuncia === 'Solucionada' ? 'selected' : ''}>Solucionada</option>
                         <option value="Pendiente" ${json[i].estado_denuncia === 'Pendiente' ? 'selected' : ''}>Pendiente</option>
@@ -168,6 +181,9 @@ function admin() {
             row.innerHTML = `
                 <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0);">${json[i].id_staff}</td>
                 <td style="border: 1px solid #ddd; background-color: rgb(255, 106, 0)">${json[i].nombre_staff}</td>
+                <td style="border: 1px solid #ddd; background-color: rgb(255, 106, 0)">${json[i].mail_staff}</td>
+                <td style="border: 1px solid #ddd; background-color: rgb(255, 106, 0)">${json[i].telefono_staff}</td>
+                <td style="border: 1px solid #ddd; background-color: rgb(255, 106, 0)">${json[i].ubicacion_staff}</td>
                 <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0)">
                     <select style="padding: 5px 10px; font-size: 14px; background-color: rgb(184, 77, 0); border: 1px solid #ddd; border-radius: 5px; outline: none; cursor: pointer; transition: all 0.3s ease;" onchange="updateModStatus(this)">
                         <option value="Moderador" ${json[i].tipo_staff === "Moderador" ? "selected" : ""}>Moderador</option>
@@ -198,7 +214,10 @@ function staff() {
             row.setAttribute('data-id', json[i].id_staff);
             row.innerHTML = `
                 <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0);">${json[i].id_staff}</td>
-                <td style="border: 1px solid #ddd; background-color: rgb(255, 106, 0)">${json[i].nombre_staff}</td>
+                <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0);">${json[i].nombre_staff}</td>
+                <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0);">${json[i].mail_staff}</td>
+                <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0);">${json[i].telefono_staff}</td>
+                <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0);">${json[i].ubicacion_staff}</td>
                 <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0)">
                     <select style="padding: 5px 10px; font-size: 14px; background-color: rgb(184, 77, 0); border: 1px solid #ddd; border-radius: 5px; outline: none; cursor: pointer; transition: all 0.3s ease;" onchange="updateStaffStatus(this)">
                         <option value="Admin" ${json[i].tipo_staff === "Admin" ? "selected" : ""}>Admin</option>
@@ -229,10 +248,10 @@ function carrito() {
             row.setAttribute('data-id', json[i].id_carrito);
             row.innerHTML = `
                 <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0);">${json[i].id_carrito}</td>
-                <td style="border: 1px solid #ddd; background-color: rgb(255, 106, 0)">${json[i].id_usu}</td>
-                <td style="border: 1px solid #ddd; background-color: rgb(255, 106, 0)">${json[i].fecha_peticion}</td>
-                <td style="border: 1px solid #ddd; background-color: rgb(255, 106, 0)">${json[i].envio}</td>
-                <td style="border: 1px solid #ddd; background-color: rgb(255, 106, 0)">${json[i].precio_carrito}$</td>
+                <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0);">${json[i].id_usu_carrito}</td>
+                <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0);">${json[i].fecha_peticion}</td>
+                <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0);">${json[i].envio}</td>
+                <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0);">${json[i].precio_carrito}$</td>
                 <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0)">
                     <select style="padding: 5px 10px; font-size: 14px; background-color: rgb(184, 77, 0); border: 1px solid #ddd; border-radius: 5px; outline: none; cursor: pointer; transition: all 0.3s ease;" onchange="updateCarritoStatus(this)">
                         <option value="empaquetando" ${json[i].estado === "empaquetando" ? "selected" : ""}>Empaquetando</option>
@@ -243,6 +262,33 @@ function carrito() {
                         <option value="entregado_devolucion" ${json[i].estado === "entregado_devolucion" ? "selected" : ""}>Devuelto</option>
                     </select>
                 </td>
+            `;
+            articlesTableBody.appendChild(row);
+        };
+    });
+}
+
+function venta() {
+    let articlesTableBody = document.getElementById('carritoTabla');
+    if (!articlesTableBody) {
+        // Si la tabla no existe, termina la función
+        return;
+    }
+    fetch('http://localhost/bytewizards/API/todosVentas.php')
+    .then(res => res.json())
+    .then(json => {
+        listProducts = json;      
+        let articlesTableBody = document.getElementById('ventaTabla').querySelector('tbody');
+        for (let i = 0; i < json.length; i++) {
+            let row = document.createElement('tr');
+            row.setAttribute('data-id', json[i].id_carrito);
+            row.innerHTML = `
+                <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0);">${json[i].id_contiene}</td>
+                <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0);">${json[i].id_carrito_contiene}</td>
+                <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0);">${json[i].id_empresa_contiene}</td>
+                <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0);">${json[i].id_producto_contiene}</td>
+                <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0);">${json[i].fecha_contiene}</td>
+                <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0);">${json[i].precio_contiene}$</td>
             `;
             articlesTableBody.appendChild(row);
         };
