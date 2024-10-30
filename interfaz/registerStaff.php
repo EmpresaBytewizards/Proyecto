@@ -37,6 +37,7 @@
             <input type="password" id="password" name="password" required>
             <label for="password">Repita su contraseña:</label>
             <input type="password" id="password2" name="password2" required>
+            <p> ¡No se registre si no tiene un contrato de trabajo con nosotros! </p>
             <button type="submit">Registrarse</button>
             <h5> En caso de que no funcione, intente poner otro nombre </h5>
             <p><a href="index.php">¿Quieres volver a la pagina principal? ¡Clickea aquí!</a></p>
