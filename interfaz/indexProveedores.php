@@ -151,16 +151,16 @@ if ($_SESSION['empresas'][0]['habilitacion'] == "Deshabilitado"){
             </div>
             
             <form action id="perfilUsu">
-                
+                        <!-- zona de actualizacion -->
                 <br>
-                <h3 style="color: black;"> Su id de empresa es: <?php echo $_SESSION['empresas'][0]['id']; ?></h3>
-                <label for="cambiarNombre" style="color: black;"> nombre de empresa es: <?php echo $_SESSION['empresas'][0]['nombre']; ?> </label>
+                <h3 style="color: black;"> Su id de empresa: <?php echo $_SESSION['empresas'][0]['id']; ?></h3>
+                <label for="cambiarNombre" style="color: black;"> Nombre: <?php echo $_SESSION['empresas'][0]['nombre']; ?> </label>
                 <input type="text" id="cambiarNombre" name="cambiarNombre" required placeholder="Cambiar nombre..." value="<?php echo $_SESSION['empresas'][0]['nombre']; ?>">
                 <label for="cambiarEmail" style="color: black;">Email: <?php echo $_SESSION['empresas'][0]['correo']; ?></label>
                 <input type="text" id="cambiarEmail" name="cambiarEmail" required placeholder="Cambiar correo..." value="<?php echo $_SESSION['empresas'][0]['correo']; ?>">
-                <label for="cambiarDirection">Direccion: <?php echo $_SESSION['empresas'][0]['direccion']; ?></label>
+                <label for="cambiarDirection">Dirección: <?php echo $_SESSION['empresas'][0]['direccion']; ?></label>
                 <input type="text" id="cambiarDirection" name="cambiarDirection" required placeholder="Cambiar direccion..." value="<?php echo $_SESSION['empresas'][0]['direccion']; ?>">
-                <label for="cambiarNumero">Número de Telefono: <?php echo $_SESSION['empresas'][0]['numero']; ?></label>
+                <label for="cambiarNumero">Número de Teléfono: <?php echo $_SESSION['empresas'][0]['numero']; ?></label>
                 <input type="number" id="cambiarNumero" name="cambiarNumero" required placeholder="Cambiar telefono..." value="<?php echo $_SESSION['empresas'][0]['numero']; ?>">
                 
                 <label for="cambiarPassword">Contraseña:</label>
@@ -214,6 +214,7 @@ if ($_SESSION['empresas'][0]['habilitacion'] == "Deshabilitado"){
                 <br>
                 <h4 style="text-align: center; color:black;"> COMENTARIOS </h4>
                 <div class="comments">
+                    <!-- el ! espara reportar comentarios -->
                     <div class="comment" style="border: 2px solid darkgrey;">
                         <button class="denunciaComentario" style="border:none; background:none; float: right;">❗</button>
                         <h3 class="nombreComentario" style="color:black"> Nombre: Pedro </h3>

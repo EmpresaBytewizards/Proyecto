@@ -281,14 +281,14 @@ if ($_SESSION['staffs'][0]['tipo'] == "Deshabilitado"){
             <form action id="perfilUsu">
                 
                 <br>
-                <h3 style="color: black;"> Su id de STAFF es: <?php echo $_SESSION['staffs'][0]['id']; ?></h3>
-                <label for="cambiarNombre" style="color: black;">Su nombre de STAFF es: <?php echo $_SESSION['staffs'][0]['nombre']; ?> </label> 
+                <h3 style="color: black;"> Su id de STAFF: <?php echo $_SESSION['staffs'][0]['id']; ?></h3>
+                <label for="cambiarNombre" style="color: black;">Nombre: <?php echo $_SESSION['staffs'][0]['nombre']; ?> </label> 
                 <input type="text" id="cambiarNombre" name="cambiarNombre" required placeholder="Cambiar nombre..." value="<?php echo $_SESSION['staffs'][0]['nombre']; ?>">
                 <label for="cambiarEmail" style="color: black;">Email: <?php echo $_SESSION['staffs'][0]['correo']; ?></label>
                 <input type="text" id="cambiarEmail" name="cambiarEmail" required placeholder="Cambiar correo..." value="<?php echo $_SESSION['staffs'][0]['correo']; ?>">
-                <label for="cambiarDirection">Direccion: <?php echo $_SESSION['staffs'][0]['direccion']; ?></label>
+                <label for="cambiarDirection">Dirección: <?php echo $_SESSION['staffs'][0]['direccion']; ?></label>
                 <input type="text" id="cambiarDirection" name="cambiarDirection" required placeholder="Cambiar direccion..." value="<?php echo $_SESSION['staffs'][0]['direccion']; ?>">
-                <label for="cambiarNumero">Número de Telefono: <?php echo $_SESSION['staffs'][0]['numero']; ?></label>
+                <label for="cambiarNumero">Número de Teléfono: <?php echo $_SESSION['staffs'][0]['numero']; ?></label>
                 <input type="number" id="cambiarNumero" name="cambiarNumero" required placeholder="Cambiar telefono..." value="<?php echo $_SESSION['staffs'][0]['numero']; ?>">
                 
                 <label for="cambiarPassword">Contraseña:</label>

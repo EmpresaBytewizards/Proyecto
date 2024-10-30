@@ -185,16 +185,17 @@ if (!isset($_SESSION['usuarios']) || empty($_SESSION['usuarios'])) {
             </button>      
             <h1 id="logintitulo">Perfil</h1>
         </div>
+        <!-- zona de actualizacion -->
         <form action id="perfilUsu">
             <br>
-            <h3 style="color: black;"> Su id de usuario es: <?php echo $_SESSION['usuarios'][0]['id']; ?></h3> 
+            <h3 style="color: black;"> Su id de usuario: <?php echo $_SESSION['usuarios'][0]['id']; ?></h3> 
             <label for="cambiarEmail" style="color: black;">Email: <?php echo $_SESSION['usuarios'][0]['correo']; ?></label>
             <input type="text" id="cambiarEmail" name="cambiarEmail" required placeholder="Cambiar correo..." value="<?php echo $_SESSION['usuarios'][0]['correo']; ?>">
-            <label for="cambiarName">Nombre: <?php echo $_SESSION['usuarios'][0]['nombre']; ?></label>
+            <label for="cambiarName"> Nombre: <?php echo $_SESSION['usuarios'][0]['nombre']; ?></label>
             <input type="text" id="cambiarName" name="cambiarName" required placeholder="Cambiar nombre..." value="<?php echo $_SESSION['usuarios'][0]['nombre']; ?>">
-            <label for="cambiarDirection">Direccion: <?php echo $_SESSION['usuarios'][0]['direccion']; ?></label>
+            <label for="cambiarDirection">Dirección: <?php echo $_SESSION['usuarios'][0]['direccion']; ?></label>
             <input type="text" id="cambiarDirection" name="cambiarDirection" required placeholder="Cambiar direccion..." value="<?php echo $_SESSION['usuarios'][0]['direccion']; ?>">
-            <label for="cambiarNumero">Número de Telefono: <?php echo $_SESSION['usuarios'][0]['numero']; ?></label>
+            <label for="cambiarNumero">Número de Teléfono: <?php echo $_SESSION['usuarios'][0]['numero']; ?></label>
             <input type="number" id="cambiarNumero" name="cambiarNumero" required placeholder="Cambiar telefono..." value="<?php echo $_SESSION['usuarios'][0]['numero']; ?>">
             
             <label for="cambiarPassword">Contraseña:</label>
