@@ -248,7 +248,7 @@ function carrito() {
             row.setAttribute('data-id', json[i].id_carrito);
             row.innerHTML = `
                 <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0);">${json[i].id_carrito}</td>
-                <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0);">${json[i].id_usu_carrito}</td>
+                <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0);">${json[i].id_usu}</td>
                 <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0);">${json[i].fecha_peticion}</td>
                 <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0);">${json[i].envio}</td>
                 <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0);">${json[i].precio_carrito}$</td>
@@ -284,9 +284,9 @@ function venta() {
             row.setAttribute('data-id', json[i].id_carrito);
             row.innerHTML = `
                 <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0);">${json[i].id_contiene}</td>
-                <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0);">${json[i].id_carrito_contiene}</td>
-                <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0);">${json[i].id_empresa_contiene}</td>
-                <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0);">${json[i].id_producto_contiene}</td>
+                <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0);">${json[i].id_carrito}</td>
+                <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0);">${json[i].id_empresa}</td>
+                <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0);">${json[i].id_producto}</td>
                 <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0);">${json[i].fecha_contiene}</td>
                 <td style="text-align: center; border: 1px solid #ddd; background-color: rgb(255, 106, 0);">${json[i].precio_contiene}$</td>
             `;

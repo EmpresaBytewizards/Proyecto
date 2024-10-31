@@ -37,7 +37,7 @@ try {
         $id_usu = $_SESSION['usuarios'][0]['id'];
 
         // Insertar en la tabla carrito
-        $stmt = $pdo->prepare("INSERT INTO carrito (id_carrito, envio, id_usu_carrito, precio_carrito) VALUES (?, ?, ?, ?)");
+        $stmt = $pdo->prepare("INSERT INTO carrito (id_carrito, envio, id_usu, precio_carrito) VALUES (?, ?, ?, ?)");
         $stmt->execute([$nuevoIdCarrito, $envio, $id_usu, $precioCarrito]);
 
         // Insertar cada artículo en la base de datos
@@ -52,7 +52,7 @@ try {
             $id_empresa = $stmtEmpresa->fetchColumn();
             
             // Insertar en la tabla 'contiene'
-            $stmt = $pdo->prepare("INSERT INTO contiene (id_producto_contiene, id_carrito_contiene, precio_contiene, nombre_contiene, id_empresa_contiene) VALUES (?, ?, ?, ?, ?)");
+            $stmt = $pdo->prepare("INSERT INTO contiene (id_producto, id_carrito, precio_contiene, nombre_contiene, id_empresa) VALUES (?, ?, ?, ?, ?)");
             $stmt->execute([$id_producto, $nuevoIdCarrito, $precio_contiene, $nombre_contiene, $id_empresa]);
             
             // Obtener el stock actual del producto

@@ -18,7 +18,7 @@ try {
         $id_usu = $_SESSION['usuarios'][0]['id'];
 
         // Consultar carritos del usuario
-        $stmt = $pdo->prepare("SELECT * FROM carrito WHERE id_usu_carrito = ?");
+        $stmt = $pdo->prepare("SELECT * FROM carrito WHERE id_usu = ?");
         $stmt->execute([$id_usu]);
         $carritos = $stmt->fetchAll(PDO::FETCH_ASSOC);
     } else {
@@ -87,7 +87,7 @@ try {
                     <p>Estado del Pedido: <span><?php echo htmlspecialchars($estado); ?></span></p>
                     <?php
                     // Obtener artículos en el carrito
-                    $stmt = $pdo->prepare("SELECT * FROM contiene WHERE id_carrito_contiene = ?");
+                    $stmt = $pdo->prepare("SELECT * FROM contiene WHERE id_carrito = ?");
                     $stmt->execute([$carrito['id_carrito']]);
                     $articulos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     ?>

@@ -20,7 +20,7 @@ try {
         $id_usu = $_SESSION['empresas'][0]['id'];
 
         // Consultar carritos del usuario
-        $stmt = $pdo->prepare("SELECT * FROM contiene WHERE id_empresa_contiene = ?");
+        $stmt = $pdo->prepare("SELECT * FROM contiene WHERE id_empresa = ?");
         $stmt->execute([$id_usu]);
         $ventas = $stmt->fetchAll(PDO::FETCH_ASSOC);
     } else {
@@ -63,7 +63,7 @@ try {
             <?php foreach ($ventas as $venta): ?>
                 <div class="carrito">
                     <h2>ID de la venta: <?php echo htmlspecialchars($venta['id_contiene']); ?></h2>
-                    <p>ID del producto: <?php echo htmlspecialchars($venta['id_producto_contiene']); ?></p>
+                    <p>ID del producto: <?php echo htmlspecialchars($venta['id_producto']); ?></p>
                     <p>Nombre del producto: <span class="nombre"><?php echo htmlspecialchars($venta['nombre_contiene']); ?></span></p>
                     <p>Precio Total: <span class="precio"><?php echo htmlspecialchars($venta['precio_contiene']); ?> $</span></p>
                     <p>Fecha: <span class="fecha"><?php echo htmlspecialchars($venta['fecha_contiene']); ?></span></p>
