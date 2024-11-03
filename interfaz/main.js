@@ -93,9 +93,11 @@ function renderAll(titulo, imagen, precio_base, id_producto, habilitacion_produc
     addCart.classList.add("addCart");
     addCart.textContent = "Añadir al Carrito";
     addCart.id = `${id_producto}`; 
-    addCart.disabled = stock === 0; // Deshabilita si el stock es igual a 0
-    if(addCart.disabled) {
+    if (stock === 0) {
+        addCart.disabled = true;
         addCart.textContent = "No hay STOCK";
+    } else {
+        addCart.disabled = false;
     }
     productWrap.classList.add("productWrap");
     productWrap.append(photoContainer);
@@ -209,10 +211,13 @@ function renderCartItem(titulo, precio_base, id_producto) {
     productQuantities[id_producto] = (productQuantities[id_producto] || 0) + 1;
     const product = listProducts.find(item => item.id_producto == id_producto);
     if (productQuantities[id_producto] >= product.stock) {
-        document.querySelector('.buyItem').disabled = true;
-        document.querySelector('.buyItem').innerText = "No hay STOCK";
-        document.querySelector('.addCart').disabled = true;
-        document.querySelector('.addCart').innerText = "No hay STOCK";
+        const buyItemButton = document.querySelector(`.buyItem[id="${id_producto}"]`);
+        if (buyItemButton) {
+            buyItemButton.disabled = true;
+            buyItemButton.innerText = "No hay STOCK";
+        }
+        document.querySelector(`.addCart[id="${id_producto}"]`).disabled = true;
+        document.querySelector(`.addCart[id="${id_producto}"]`).innerText = "No hay STOCK";
     }
 
     const productCart = document.createElement("div");
@@ -250,8 +255,8 @@ function removeCartItem(id_producto, productCart) {
     if (productQuantities[id_producto] < product.stock) {
         document.querySelector('.buyItem').disabled = false;
         document.querySelector('.buyItem').innerText = "Añadir al carrito";
-        document.querySelector('.addCart').disabled = false;
-        document.querySelector('.addCart').innerText = "Añadir al carrito";
+        document.querySelector(`.addCart[id="${id_producto}"]`).disabled = false;
+        document.querySelector(`.addCart[id="${id_producto}"]`).innerText = "Añadir al carrito";
     }
 }
 
@@ -295,18 +300,22 @@ function renderArticleItem(titulo, precio_base, image, id_producto, descripcion,
 document.querySelector('.paybtn').addEventListener('click', function() {
     const cartItems = document.querySelectorAll('.product__cart');
     let itemsArray = [];
+    let totalAmount = 0; // Variable para almacenar el total a pagar
 
     cartItems.forEach(item => {
-        const titulo = item.querySelector('.cart__name').textContent;
-        const precio_base = parseFloat(item.querySelector('.cart__price').textContent.replace('$', ''));
         const id_producto = item.id; // Usamos el id del elemento
+        const product = listProducts.find(product => product.id_producto == id_producto); 
+        const precio_base = parseFloat(product.precio_base); // Obtener el precio del producto
+        totalAmount += precio_base; // Sumar el precio al total
+        //alert(totalAmount);
         // Empujar cada artículo al array
         itemsArray.push({
-            titulo: titulo,
+            titulo: product.titulo,
             precio_base: precio_base,
             id_producto: id_producto
         });
     });
+    totalAmount = parseFloat(totalAmount.toFixed(2));
     fetch('../API/articulosCarrito.php', {
         method: 'POST',
         headers: {
@@ -325,7 +334,7 @@ document.querySelector('.paybtn').addEventListener('click', function() {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            amount: document.getElementById("cantidad").value, // Monto a pagar
+            amount: totalAmount, // Monto a pagar
             currency: 'USD', // Moneda
             description: 'Compra de prueba'
         })
