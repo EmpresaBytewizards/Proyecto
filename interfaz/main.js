@@ -67,6 +67,8 @@ function renderAll(titulo, imagen, precio_base, id_producto, habilitacion_produc
 
     const productWrap = document.createElement("div");
 
+    stock = parseFloat(stock);
+
     const photoContainer = document.createElement("div");
     photoContainer.classList.add("photoContainer");
 
@@ -91,13 +93,14 @@ function renderAll(titulo, imagen, precio_base, id_producto, habilitacion_produc
 
     const addCart = document.createElement("button");
     addCart.classList.add("addCart");
-    addCart.textContent = "Añadir al Carrito";
+    
     addCart.id = `${id_producto}`; 
-    if (stock === 0) {
+    if (stock === 0 ) {
         addCart.disabled = true;
         addCart.textContent = "No hay STOCK";
     } else {
         addCart.disabled = false;
+        addCart.textContent = "Añadir al Carrito";
     }
     productWrap.classList.add("productWrap");
     productWrap.append(photoContainer);
