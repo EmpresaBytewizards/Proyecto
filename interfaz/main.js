@@ -253,8 +253,11 @@ function removeCartItem(id_producto, productCart) {
     // Rehabilita los botones si la cantidad en el carrito es menor que el stock
     const product = listProducts.find(item => item.id_producto == id_producto);
     if (productQuantities[id_producto] < product.stock) {
-        document.querySelector('.buyItem').disabled = false;
-        document.querySelector('.buyItem').innerText = "Añadir al carrito";
+        const buyItemButton = document.querySelector(`.buyItem[id="${id_producto}"]`);
+        if (buyItemButton) {
+            buyItemButton.disabled = true;
+            buyItemButton.innerText = "No hay STOCK";
+        }
         document.querySelector(`.addCart[id="${id_producto}"]`).disabled = false;
         document.querySelector(`.addCart[id="${id_producto}"]`).innerText = "Añadir al carrito";
     }
