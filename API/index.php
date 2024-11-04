@@ -109,6 +109,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
+    if ($nombreProducto != strip_tags($nombreProducto) || $descripcionProducto != strip_tags($descripcionProducto)) {
+        echo json_encode(['message' => 'Error: el nombre o la descripción contienen etiquetas HTML no permitidas.']);
+        exit;
+    }
+
     // Si todos los datos están presentes, continúa con la lógica para insertar en la base de datos
     $idEmpresa = $_SESSION['empresas'][0]['id'];
     $habilitacion_producto = 'Habilitado';
@@ -183,6 +188,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
         echo json_encode(['message' => 'Faltan datos del formulario', 'fields' => $missingFields]);
         exit;
     }
+
+    if ($nombreProducto != strip_tags($nombreProducto) || $descripcionProducto != strip_tags($descripcionProducto)) {
+        echo json_encode(['message' => 'Error: el nombre o la descripción contienen etiquetas HTML no permitidas.']);
+        exit;
+    }
+    
 
     $idEmpresa = $_SESSION['empresas'][0]['nombre'];
 

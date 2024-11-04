@@ -24,6 +24,16 @@ class ApiUsuarios
 
     public function editarPerfil($name, $email, $password, $direction, $numero)
     {
+        if ($name != strip_tags($name)) {
+            echo json_encode(['message' => 'Error: el nombre contiene etiquetas HTML no permitidas.']);
+            exit;
+        }
+
+        if ($email != strip_tags($email)) {
+            echo json_encode(['message' => 'Error: el correo contiene etiquetas HTML no permitidas.']);
+            exit;
+        }
+
         // Hash de la contraseña antes de almacenar
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT); // Solo recibir la contraseña del usuario que inicia sesión
 

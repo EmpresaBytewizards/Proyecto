@@ -28,6 +28,16 @@ class ApiUsuarios
         $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM staff WHERE mail_staff = ?");
         $stmt->execute([$email]);
         $emailExists = $stmt->fetchColumn() > 0;
+
+        if ($nombre != strip_tags($nombre)) {
+            echo json_encode(['message' => 'Error: el nombre contiene etiquetas HTML no permitidas.']);
+            exit;
+        }
+
+        if ($email != strip_tags($email)) {
+            echo json_encode(['message' => 'Error: el correo contiene etiquetas HTML no permitidas.']);
+            exit;
+        }
         
         // Verificar si el nombre ya está en uso por otro usuario
         $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM staff WHERE nombre_staff = ?");

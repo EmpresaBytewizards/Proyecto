@@ -33,6 +33,16 @@ class ApiUsuarios
         //    echo "¡Contraseña incorrecta!";
         //}
 
+        if ($name != strip_tags($name)) {
+            echo json_encode(['message' => 'Error: el nombre contiene etiquetas HTML no permitidas.']);
+            exit;
+        }
+
+        if ($email != strip_tags($email)) {
+            echo json_encode(['message' => 'Error: el correo contiene etiquetas HTML no permitidas.']);
+            exit;
+        }
+
         $stmt = $this->pdo->query("SELECT MAX(id_empresa) FROM empresa");
         $ultimoIdEmpresa = $stmt->fetchColumn();
         $nuevoIdEmpresa = $ultimoIdEmpresa ? $ultimoIdEmpresa + 1 : 1;

@@ -28,6 +28,16 @@ class ApiUsuarios
         $stmt->execute([$email]);
         $emailExists = $stmt->fetchColumn() > 0;
 
+        if ($nombreEmpresa != strip_tags($nombreEmpresa)) {
+            echo json_encode(['message' => 'Error: el nombre contiene etiquetas HTML no permitidas.']);
+            exit;
+        }
+
+        if ($email != strip_tags($email)) {
+            echo json_encode(['message' => 'Error: el correo contiene etiquetas HTML no permitidas.']);
+            exit;
+        }
+
         // Verificar si el nombre de empresa ya existe
         $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM empresa WHERE nombre_empresa = ?");
         $stmt->execute([$nombreEmpresa]);

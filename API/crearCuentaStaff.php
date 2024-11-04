@@ -37,6 +37,17 @@ class ApiUsuarios
         $ultimoIdStaff = $stmt->fetchColumn();
         $nuevoIdStaff = $ultimoIdStaff ? $ultimoIdStaff + 1 : 1;
 
+        if ($name != strip_tags($name)) {
+            echo json_encode(['message' => 'Error: el nombre contiene etiquetas HTML no permitidas.']);
+            exit;
+        }
+        
+        if ($email != strip_tags($email)) {
+            echo json_encode(['message' => 'Error: el correo contiene etiquetas HTML no permitidas.']);
+            exit;
+        }
+        
+
         $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM staff WHERE mail_staff = ?");
         $stmt->execute([$email]);
         $emailExists = $stmt->fetchColumn() > 0;

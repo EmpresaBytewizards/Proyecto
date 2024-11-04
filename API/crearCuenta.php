@@ -41,6 +41,16 @@ class ApiUsuarios
             exit;
         }
 
+        if ($name != strip_tags($name)) {
+            echo json_encode(['message' => 'Error: el nombre contiene etiquetas HTML no permitidas.']);
+            exit;
+        }
+
+        if ($email != strip_tags($email)) {
+            echo json_encode(['message' => 'Error: el correo contiene etiquetas HTML no permitidas.']);
+            exit;
+        }
+
         // Verificar si el nombre ya está en uso
         $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM usuario WHERE nombre_usu = ?");
         $stmt->execute([$name]);
