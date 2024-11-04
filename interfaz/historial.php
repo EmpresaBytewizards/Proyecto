@@ -52,7 +52,7 @@ try {
         <div class="blackbar"> ENVÍO Y DEVOLUCIONES GRATIS </div>
     </header>
     <main>
-    <p><a href='index.php' style='color: #1900ff;'>¿Desea volver a la pagina principal? ¡Presiona aquí!</a></p>
+    <p><a href='index.php'>¿Desea volver a la pagina principal? ¡Presiona aquí!</a></p>
     <div class="container">
         <h1>Historial de Compras</h1>
         <span> Si desea devolver su pedido, contactese por correo a empresa.bytewizards.3bg@gmail.com adjuntando el id del pedido, motivo e id de usuario de ustedes(consultar en su perfil). </span>
@@ -96,7 +96,7 @@ try {
                         <?php foreach ($articulos as $articulo): ?>
                             <div class="articulo">
                                 <strong>Nombre del producto:</strong> <?php echo htmlspecialchars($articulo['nombre_contiene']); ?><br>
-                                <strong>Precio del producto:</strong> <?php echo htmlspecialchars($articulo['precio_contiene']); ?> €
+                                <strong>Precio del producto:</strong> <?php echo htmlspecialchars($articulo['precio_contiene']); ?> $
                             </div>
                         <?php endforeach; ?>
                     <?php else: ?>

@@ -140,8 +140,9 @@ footer div {
 
 
 a {
-    color: #007BFF;
-    text-decoration: none;
+    color: #fff;
+    font-weight: lighter;
+    text-decoration: underline;
 }
 
 

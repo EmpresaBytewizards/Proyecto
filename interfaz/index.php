@@ -89,7 +89,7 @@ if (isset($_SESSION['usuarios'])) {
         
     
         <script src="carrusel.js"></script>
-        <?php if (isset($_SESSION['usuarios'])) { ?> <p><a href="historial.php" style='color: #007BFF;'>¿Desea ver su historial de compras? ¡Presione aquí!</a></p> <?php } ?>
+        <?php if (isset($_SESSION['usuarios'])) { ?> <p><a href="historial.php" style='color: #fff;font-weight: lighter;text-decoration: underline;'>¿Desea ver su historial de compras? ¡Presione aquí!</a></p> <?php } ?>
 
         <div class="flexCenter">
             <h1 class="categoryName">CATALOGO</h1>

@@ -87,7 +87,7 @@ if ($_SESSION['empresas'][0]['habilitacion'] == "Deshabilitado"){
         <div class="blackbar"> ENVÍO Y DEVOLUCIONES GRATIS </div>
     </header>
     <main>
-        <p><a href="historialProveedores.php" style='color: #007BFF;'>¿Desea ver su historial de ventas? ¡Presione aquí!</a></p>
+        <p><a href="historialProveedores.php" style='color: #fff;font-weight: lighter;text-decoration: underline;'>¿Desea ver su historial de ventas? ¡Presione aquí!</a></p>
         <!--<Añadir Productos>-->
            <br>
             <div class="entradaProducto">

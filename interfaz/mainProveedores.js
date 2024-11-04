@@ -79,8 +79,8 @@ function renderAll(titulo, imagen, precio_base, id_producto, habilitacion_produc
     const productName = document.createElement("span");
     productName.classList.add("titulo");
 
-    if(titulo.length > 11) {
-        productName.textContent = `${titulo.slice(0, 11)}...`;
+    if(titulo.length > 40) {
+        productName.textContent = `${titulo.slice(0, 40)}...`;
     } else {
         productName.textContent = titulo;
     }

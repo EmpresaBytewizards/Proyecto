@@ -54,7 +54,7 @@ try {
         <div class="blackbar"> ENVÍO Y DEVOLUCIONES GRATIS </div>
     </header>
     <main>
-    <p><a href='indexProveedores.php' style='color: #1900ff;'>¿Desea volver a la pagina principal? ¡Presiona aquí!</a></p>
+    <p><a href='indexProveedores.php'>¿Desea volver a la pagina principal? ¡Presiona aquí!</a></p>
     <div class="container">
         <h1>Historial de Ventas</h1>
         <span> Si desea discutir una venta, contactese por correo a empresa.bytewizards.3bg@gmail.com adjuntando el id del pedido, motivo e id de usuario de ustedes(consultar en su perfil). </span>

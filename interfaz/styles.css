@@ -184,7 +184,7 @@ main{
     border-radius: 20px;
     padding: 1rem;
     border: 3px solid rgb(255, 106, 0);
-    width: 150px;
+    width: 190px;
     height: 250px;
     display: flex;
     flex-direction: column;
@@ -193,7 +193,7 @@ main{
     gap: 5px;
 }
 .productWrap span{
-    font-weight: bolder;
+    font-weight: lighter;
     color: black;
 }
 
@@ -609,7 +609,8 @@ button {
 
 .login-container a {
     color: #007BFF;
-    text-decoration: none;
+    font-weight: lighter;
+    text-decoration: underline;
 }
 
 .login-container a:hover {

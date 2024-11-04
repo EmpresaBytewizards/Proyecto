@@ -86,7 +86,8 @@ header {
 
 .login-container a {
     color: #007BFF;
-    text-decoration: none;
+    font-weight: lighter;
+    text-decoration: underline;
 }
 
 .login-container a:hover {
