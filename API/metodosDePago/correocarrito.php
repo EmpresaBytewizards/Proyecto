@@ -93,12 +93,7 @@ function executePayPalPayment($paymentId, $payerId)
 $paymentId = $_GET['paymentId']; // ID del pago obtenido de la URL
 $payerId = $_GET['PayerID']; // ID del pagador obtenido de la URL
 $accessToken = getPayPalAccessToken();
-// $emailSender = new EmailSender();
-// $emailSender->setFrom('empresa.bytewizards.3bg@gmail.com', 'ByteWizards');
-// $emailSender->addRecipient($_SESSION['usuarios'][0]['correo'], $_SESSION['usuarios'][0]['nombre']);
-// // paymentId=$paymentId&payerId=$payerId
-// $result = $emailSender->sendEmail('Rastreo de su pedido', 'Este es el enlace para el rastreo de su paquete: http://localhost/bytewizards/interfaz/confirmacionPago.php?paymentId=' . $paymentId . '&token=' . $accessToken . '&PayerID=' . $payerId);
-// echo $result;
+
 include("../subirDatosCarrito.php");
 header('Location: /../bytewizards/interfaz/confirmacionPago.php?paymentId=' . $paymentId . '&token=' . $accessToken . '&PayerID=' . $payerId);
 ?>

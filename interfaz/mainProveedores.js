@@ -219,38 +219,6 @@ function renderArticleItem(titulo, precio_base, image, id_producto, descripcion,
     document.querySelector('.stockTexto').innerText = 'STOCK: '+stock;
 }
 
-
-/*document.getElementById('productForm').addEventListener('submit', function(event) {
-    event.preventDefault();
-
-    // Recolectar los datos del formulario
-    const formData = new FormData(this);
-    const data = {};
-    formData.forEach((value, key) => {
-        data[key] = value;
-    });
-
-    // Enviar los datos al servidor
-    fetch('http://localhost/bytewizards/API/index.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log(data.message);
-        alert("¡Articulo creado exitosamente!");
-        location.reload();
-    })
-    .catch(error => {
-        alert('Error al crear el articulo:', error);
-        location.reload();
-    });
-});
-*/
-
 document.getElementById('productForm').addEventListener('submit', function(event) {
     event.preventDefault();
 

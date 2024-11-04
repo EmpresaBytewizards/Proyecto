@@ -121,13 +121,6 @@ session_start();
             try {
                 // Intentar ejecutar el pago
                 if (executePayPalPayment($paymentId, $payerId)) {
-                    // $emailSender = new EmailSender();
-                    // $accessToken = getPayPalAccessToken();
-                    // $emailSender->setFrom('empresa.bytewizards.3bg@gmail.com', 'ByteWizards');
-                    // $emailSender->addRecipient($_SESSION['usuarios'][0]['correo'], $_SESSION['usuarios'][0]['nombre']);
-                    // paymentId=$paymentId&payerId=$payerId
-                    // $result = $emailSender->sendEmail('Rastreo de su pedido', 'Este es el enlace para el rastreo de su paquete: http://localhost/bytewizards/interfaz/rastreo.php?paymentId=' . $paymentId . '&token=' . $accessToken . '&PayerID=' . $payerId);
-                    // echo $result;
                     echo "<h1 class='exitoPago'>Pago confirmado con éxito</h1>"; // Mensaje de éxito
                     echo "<p><a href='index.php' style='color: #1900ff;'>¿Desea volver a la pagina principal? ¡Presiona aquí!</a></p>";
                 }
@@ -178,10 +171,3 @@ session_start();
 
 </html>
 
-<!-- <div class="">
-    <a href="#"><span class="material-symbols-outlined">passkey</span></a>
-    <a href="#"><span class="material-symbols-outlined">shopping_cart</span></a>
-</div> -->
-
-
-<!-- <span class="material-symbols-outlined">menu</span> -->

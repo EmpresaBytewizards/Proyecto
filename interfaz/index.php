@@ -332,10 +332,3 @@ if (!isset($_SESSION['usuarios']) || empty($_SESSION['usuarios'])) {
 <script src="jquery-3.7.1.min.js"></script>
 </html>
 
-<!-- <div class="">
-    <a href="#"><span class="material-symbols-outlined">passkey</span></a>
-    <a href="#"><span class="material-symbols-outlined">shopping_cart</span></a>
-</div> -->
-
-
-<!-- <span class="material-symbols-outlined">menu</span> -->
