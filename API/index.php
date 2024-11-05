@@ -141,7 +141,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo json_encode(['message' => 'Error: No se subió la imagen o hubo un problema durante la subida.']);
         exit; // Terminar la ejecución
     }
-    $urlImagen = "../api/assets/" . $urlImagen;
+    $urlImagen = "../API/assets/" . $urlImagen;
     // Este método ya maneja el JSON
     $producto->agregar($nuevoIdProducto, $nombreProducto, $urlImagen, $precioProducto, $condicionProducto, $stockProducto, $idEmpresa, $descripcionProducto, $categoriaProducto, $habilitacion_producto);
 }
